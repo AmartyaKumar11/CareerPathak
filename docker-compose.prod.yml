@@ -1,0 +1,16 @@
+services:
+  careerpathak-web:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - careerpathak-network
+    restart: unless-stopped
+
+networks:
+  careerpathak-network:
+    driver: bridge

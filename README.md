@@ -26,25 +26,45 @@ CareerPathak is a comprehensive web application designed to help students in Jam
 
 ## 📋 Prerequisites
 
-- Node.js 16+ or Bun
+### Local Development
+- Node.js 18+ or Bun
+- Google Cloud Console account (for OAuth setup)
+
+### Docker Development (Recommended for Teams)
+- Docker and Docker Compose
 - Google Cloud Console account (for OAuth setup)
 
 ## 🛠️ Setup Instructions
 
-### 1. Clone the Repository
+### Option 1: Docker Setup (Recommended for Teams)
+
+**Quick Start:**
+```bash
+git clone https://github.com/AmartyaKumar11/CareerPathak.git
+cd CareerPathak
+docker-compose up --build
+```
+
+The application will be available at `http://localhost:8080`
+
+For detailed Docker setup instructions, troubleshooting, and production deployment, see [DOCKER_SETUP.md](./DOCKER_SETUP.md).
+
+### Option 2: Local Development Setup
+
+#### 1. Clone the Repository
 ```bash
 git clone https://github.com/AmartyaKumar11/CareerPathak.git
 cd CareerPathak
 ```
 
-### 2. Install Dependencies
+#### 2. Install Dependencies
 ```bash
 npm install
 # or
 bun install
 ```
 
-### 3. Environment Configuration
+#### 3. Environment Configuration
 1. Copy the environment example file:
    ```bash
    cp .env.example .env
@@ -58,7 +78,7 @@ bun install
    - Add `http://localhost:8080` to authorized origins
    - Copy your client ID to `.env` file
 
-### 4. Run Development Server
+#### 4. Run Development Server
 ```bash
 npm run dev
 # or

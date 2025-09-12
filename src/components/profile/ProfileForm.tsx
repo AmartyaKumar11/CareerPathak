@@ -44,8 +44,8 @@ const profileSchema = z.object({
   }),
   academicBackground: z.object({
     currentClass: z.string().min(1, 'Current class is required'),
-    school: z.string().min(5, 'School name must be at least 5 characters'),
-    board: z.string().min(1, 'Board is required'),
+    school: z.string().min(5, 'School/College name must be at least 5 characters'),
+    board: z.string().optional(), // Made optional since UG/PG don't have boards
     subjects: z.array(z.string()).min(1, 'Select at least one subject'),
     percentage: z.number().min(0).max(100, 'Percentage must be between 0 and 100'),
     aspirations: z.array(z.string()).min(1, 'Select at least one aspiration'),
@@ -76,10 +76,21 @@ const BOARDS = [
   'JKBOSE', 'CBSE', 'ICSE', 'Other'
 ];
 
-const SUBJECTS = [
+const SCHOOL_SUBJECTS = [
   'Mathematics', 'Physics', 'Chemistry', 'Biology', 'Computer Science',
   'English', 'Hindi', 'Urdu', 'History', 'Geography', 'Political Science',
-  'Economics', 'Psychology', 'Sociology', 'Philosophy', 'Arts', 'Commerce'
+  'Economics', 'Psychology', 'Sociology', 'Philosophy', 'Physical Education',
+  'Fine Arts', 'Music', 'Home Science', 'Agriculture'
+];
+
+const COLLEGE_SUBJECTS = [
+  'Engineering', 'Medicine', 'Business Administration', 'Commerce', 'Law',
+  'Journalism', 'Mass Communication', 'Literature', 'Linguistics', 
+  'Biotechnology', 'Environmental Science', 'Social Work', 'Education',
+  'Architecture', 'Design', 'Hotel Management', 'Tourism', 'Pharmacy',
+  'Nursing', 'Physiotherapy', 'Veterinary Science', 'Forestry', 'Agriculture',
+  'Computer Science', 'Information Technology', 'Mathematics', 'Statistics',
+  'Economics', 'Psychology', 'Political Science', 'History', 'Geography'
 ];
 
 const ASPIRATIONS = [
@@ -364,47 +375,91 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
                   )}
                 />
 
-                <FormField
-                  control={form.control}
-                  name="academicBackground.board"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Education Board</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                {/* Dynamic second field based on education level */}
+                {['9th', '10th', '11th', '12th'].includes(form.watch('academicBackground.currentClass')) && (
+                  <FormField
+                    control={form.control}
+                    name="academicBackground.board"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Education Board</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select your board" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {BOARDS.map((board) => (
+                              <SelectItem key={board} value={board}>
+                                {board}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
+
+                {/* For UG/PG students, combine university and college into one field */}
+                {['Undergraduate', 'Postgraduate'].includes(form.watch('academicBackground.currentClass')) && (
+                  <FormField
+                    control={form.control}
+                    name="academicBackground.board"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>University/College</FormLabel>
                         <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select your board" />
-                          </SelectTrigger>
+                          <Input 
+                            placeholder="e.g., University of Kashmir, NIT Srinagar, Government College" 
+                            {...field} 
+                          />
                         </FormControl>
-                        <SelectContent>
-                          {BOARDS.map((board) => (
-                            <SelectItem key={board} value={board}>
-                              {board}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                        <FormDescription>
+                          Enter your university or college name
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
               </div>
 
+              {/* Institution Name - Dynamic based on level */}
               <FormField
                 control={form.control}
                 name="academicBackground.school"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>School/College Name</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="Enter your school or college name" 
-                        {...field} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                render={({ field }) => {
+                  const currentClass = form.watch('academicBackground.currentClass');
+                  const isHigherEd = ['Undergraduate', 'Postgraduate'].includes(currentClass);
+                  
+                  return (
+                    <FormItem>
+                      <FormLabel>
+                        {isHigherEd ? 'Course/Program Name' : 'School Name'}
+                      </FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder={
+                            isHigherEd
+                              ? "e.g., Bachelor of Engineering, Master of Business Administration"
+                              : "e.g., Delhi Public School, Kendriya Vidyalaya"
+                          }
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        {isHigherEd 
+                          ? "Enter your degree/course name"
+                          : "Enter your school name"
+                        }
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
               />
 
               <FormField
@@ -412,19 +467,26 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
                 name="academicBackground.percentage"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Current Percentage/CGPA</FormLabel>
+                    <FormLabel>Academic Performance</FormLabel>
                     <FormControl>
                       <Input 
                         type="number" 
                         min="0" 
                         max="100" 
-                        placeholder="85"
+                        placeholder={
+                          ['Undergraduate', 'Postgraduate'].includes(form.watch('academicBackground.currentClass'))
+                            ? "CGPA (e.g., 8.5) or Percentage (e.g., 85)"
+                            : "Percentage (e.g., 85)"
+                        }
                         {...field}
                         onChange={(e) => field.onChange(Number(e.target.value))}
                       />
                     </FormControl>
                     <FormDescription>
-                      Enter percentage (0-100) or equivalent CGPA
+                      {['Undergraduate', 'Postgraduate'].includes(form.watch('academicBackground.currentClass'))
+                        ? "Enter CGPA (0-10) or percentage (0-100)"
+                        : "Enter percentage (0-100) or equivalent CGPA"
+                      }
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -435,30 +497,41 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
               <FormField
                 control={form.control}
                 name="academicBackground.subjects"
-                render={() => (
-                  <FormItem>
-                    <FormLabel>Subjects</FormLabel>
-                    <FormDescription>
-                      Select all subjects you are currently studying
-                    </FormDescription>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {SUBJECTS.map((subject) => {
-                        const isSelected = form.watch('academicBackground.subjects').includes(subject);
-                        return (
-                          <Badge
-                            key={subject}
-                            variant={isSelected ? "default" : "outline"}
-                            className="cursor-pointer"
-                            onClick={() => toggleArrayField('subjects', subject)}
-                          >
-                            {subject}
-                          </Badge>
-                        );
-                      })}
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                render={() => {
+                  const currentClass = form.watch('academicBackground.currentClass');
+                  const isHigherEd = ['Undergraduate', 'Postgraduate'].includes(currentClass);
+                  const availableSubjects = isHigherEd ? COLLEGE_SUBJECTS : SCHOOL_SUBJECTS;
+                  
+                  return (
+                    <FormItem>
+                      <FormLabel>
+                        {isHigherEd ? 'Subjects/Specializations' : 'Subjects'}
+                      </FormLabel>
+                      <FormDescription>
+                        {isHigherEd 
+                          ? 'Select your major subjects or areas of specialization'
+                          : 'Select all subjects you are currently studying'
+                        }
+                      </FormDescription>
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        {availableSubjects.map((subject) => {
+                          const isSelected = form.watch('academicBackground.subjects').includes(subject);
+                          return (
+                            <Badge
+                              key={subject}
+                              variant={isSelected ? "default" : "outline"}
+                              className="cursor-pointer"
+                              onClick={() => toggleArrayField('subjects', subject)}
+                            >
+                              {subject}
+                            </Badge>
+                          );
+                        })}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
               />
 
               {/* Aspirations */}

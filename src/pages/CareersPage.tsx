@@ -11,7 +11,8 @@ import {
   Calendar, 
   TrendingUp,
   LogOut,
-  User
+  User,
+  Settings
 } from 'lucide-react';
 
 const CareersPage = () => {
@@ -78,6 +79,10 @@ const CareersPage = () => {
               )}
               <span className="text-sm font-medium">{user.name}</span>
             </div>
+            <Button variant="outline" size="sm" onClick={() => navigate('/profile')}>
+              <Settings className="mr-2 h-4 w-4" />
+              Profile
+            </Button>
             <Button variant="outline" size="sm" onClick={handleSignOut}>
               <LogOut className="mr-2 h-4 w-4" />
               Sign Out

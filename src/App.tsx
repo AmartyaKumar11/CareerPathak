@@ -12,6 +12,9 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import Index from "./pages/Index";
 import AuthPage from "./pages/AuthPage";
 import CareersPage from "./pages/CareersPage";
+import { ProfilePage } from "./pages/ProfilePage";
+import { CreateProfilePage } from "./pages/CreateProfilePage";
+import { EditProfilePage } from "./pages/EditProfilePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -39,6 +42,21 @@ const App = () => (
               <Route path="/careers" element={
                 <ProtectedRoute>
                   <CareersPage />
+                </ProtectedRoute>
+              } />
+              <Route path="/profile" element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              } />
+              <Route path="/profile/create" element={
+                <ProtectedRoute>
+                  <CreateProfilePage />
+                </ProtectedRoute>
+              } />
+              <Route path="/profile/edit" element={
+                <ProtectedRoute>
+                  <EditProfilePage />
                 </ProtectedRoute>
               } />
               {/* Additional routes will be added as components are created */}

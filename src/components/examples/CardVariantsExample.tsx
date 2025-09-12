@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -6,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 /**
  * Example component demonstrating standard shadcn card components
  */
-export const CardVariantsExample: React.FC = () => {
+export const CardVariantsExample = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
       {/* Default Card */}

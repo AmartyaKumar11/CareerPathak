@@ -1,6 +1,7 @@
-import React from 'react';
+// This file doesn't need React import - it's just a Zustand store
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import { useEffect } from 'react';
 import { ProfileDB } from '../services/profileDatabase';
 // import { SyncService } from '../services/syncService';
 
@@ -270,7 +271,7 @@ export const useOnlineStatus = () => {
   const { isOnline, setOnlineStatus } = useProfileStore();
   
   // Set up online/offline listeners
-  React.useEffect(() => {
+  useEffect(() => {
     const handleOnline = () => setOnlineStatus(true);
     const handleOffline = () => setOnlineStatus(false);
     

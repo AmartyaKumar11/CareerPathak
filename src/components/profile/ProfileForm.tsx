@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -113,7 +112,7 @@ const LANGUAGES = [
   { value: 'dg', label: 'डोगरी (Dogri)' },
 ];
 
-export const ProfileForm: React.FC<ProfileFormProps> = ({
+export const ProfileForm = ({
   initialData,
   onSubmit,
   onCancel,

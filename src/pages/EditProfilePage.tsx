@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ProfileForm } from '@/components/profile/ProfileForm';
 import { useProfileStore } from '@/stores/profileStore';
@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Edit, Wifi, WifiOff, ArrowLeft } from 'lucide-react';
 
-export const EditProfilePage: React.FC = () => {
+export const EditProfilePage = () => {
   const navigate = useNavigate();
   const { currentProfile, updateProfile, isLoading, isOnline } = useProfileStore();
   const [isEditing, setIsEditing] = useState(false);

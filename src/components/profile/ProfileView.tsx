@@ -1,4 +1,3 @@
-import React from 'react';
 import { UserProfile } from '@/stores/profileStore';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -68,7 +67,7 @@ const getSyncStatusText = (syncStatus: UserProfile['metadata']['syncStatus']) =>
   }
 };
 
-export const ProfileView: React.FC<ProfileViewProps> = ({
+export const ProfileView = ({
   profile,
   onEdit,
   isEditable = true,

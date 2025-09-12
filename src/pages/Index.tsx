@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/SimpleAuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -32,6 +33,7 @@ import alumniData from '@/data/alumni.json';
 const Index = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const { user, loading } = useAuth();
   const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
   const [studentsCount, setStudentsCount] = useState(0);
   const [collegesCount, setCollegesCount] = useState(0);
@@ -41,6 +43,14 @@ const Index = () => {
   // Government advantage calculator state
   const [income, setIncome] = useState([300000]);
   const [studyDuration, setStudyDuration] = useState([4]);
+
+  // Redirect authenticated users to dashboard
+  useEffect(() => {
+    if (!loading && user) {
+      console.log('Index page - User is authenticated, redirecting to dashboard');
+      navigate('/dashboard');
+    }
+  }, [user, loading, navigate]);
 
   // Animate counters on mount
   useEffect(() => {

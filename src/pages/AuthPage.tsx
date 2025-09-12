@@ -1,6 +1,6 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from '@/contexts/SimpleAuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import GoogleSignIn from '@/components/auth/GoogleSignIn';
 import { GraduationCap } from 'lucide-react';
@@ -9,15 +9,17 @@ const AuthPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  // If user is already authenticated, redirect to careers page
-  React.useEffect(() => {
+  // If user is already authenticated, redirect to dashboard
+  useEffect(() => {
     if (user) {
-      navigate('/careers');
+      console.log('AuthPage useEffect - User already authenticated, redirecting to dashboard');
+      navigate('/dashboard');
     }
   }, [user, navigate]);
 
   const handleSignInSuccess = () => {
-    navigate('/careers');
+    console.log('handleSignInSuccess called - user state should update and trigger redirect');
+    // The useEffect below will handle the redirect when user state updates
   };
 
   return (

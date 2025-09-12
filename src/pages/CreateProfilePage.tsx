@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ProfileForm } from '@/components/profile/ProfileForm';
 import { useProfileStore } from '@/stores/profileStore';
@@ -6,7 +5,7 @@ import { toast } from '@/hooks/use-toast';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { UserPlus, Wifi, WifiOff } from 'lucide-react';
 
-export const CreateProfilePage: React.FC = () => {
+export const CreateProfilePage = () => {
   const navigate = useNavigate();
   const { createProfile, isLoading, isOnline } = useProfileStore();
 
@@ -64,6 +63,7 @@ export const CreateProfilePage: React.FC = () => {
       </div>
 
       <ProfileForm
+        initialData={{}}
         mode="create"
         onSubmit={handleSubmit}
         onCancel={handleCancel}

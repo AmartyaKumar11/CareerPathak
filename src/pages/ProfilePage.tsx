@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ProfileView } from '@/components/profile/ProfileView';
 import { useProfileStore } from '@/stores/profileStore';
@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { UserPlus, RefreshCw, Wifi, WifiOff, AlertCircle } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 
-export const ProfilePage: React.FC = () => {
+export const ProfilePage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { 

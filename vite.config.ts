@@ -9,11 +9,20 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
     strictPort: true,
+    hmr: {
+      port: 8080,
+    },
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  optimizeDeps: {
+    include: ["react", "react-dom"],
+  },
+  define: {
+    'process.env': {},
   },
 }));

@@ -16,7 +16,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const useAuth = () => {
+export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
   if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');
@@ -30,29 +30,25 @@ interface AuthProviderProps {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     // Check if user is already logged in
     const savedUser = localStorage.getItem('user');
-    console.log('AuthContext: Checking saved user:', savedUser);
-    
-    // Clear any old redirect preferences that might interfere
-    localStorage.removeItem('redirectTo');
-    localStorage.removeItem('lastRoute');
-    sessionStorage.removeItem('redirectTo');
-    sessionStorage.removeItem('lastRoute');
-    
     if (savedUser) {
-      setUser(JSON.parse(savedUser));
+      try {
+        setUser(JSON.parse(savedUser));
+      } catch (error) {
+        console.error('Error parsing saved user:', error);
+        localStorage.removeItem('user');
+      }
     }
     setLoading(false);
   }, []);
 
-  const signIn = async (credential: string) => {
+  const signIn = async (credential: string): Promise<void> => {
     try {
       setLoading(true);
-      console.log('AuthContext - signIn called with credential');
       let userData: User;
 
       if (credential.startsWith('mock.')) {
@@ -64,7 +60,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           name: payload.name,
           picture: payload.picture,
         };
-        console.log('AuthContext - Mock user created:', userData);
       } else {
         // Handle real JWT credential from Google
         const payload = JSON.parse(atob(credential.split('.')[1]));
@@ -74,13 +69,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           name: payload.name,
           picture: payload.picture,
         };
-        console.log('AuthContext - Real user created:', userData);
       }
       
       setUser(userData);
       localStorage.setItem('user', JSON.stringify(userData));
-      console.log('AuthContext - User signed in successfully and stored:', userData);
-      console.log('AuthContext - localStorage now contains:', localStorage.getItem('user'));
     } catch (error) {
       console.error('Sign in error:', error);
       throw error;
@@ -89,12 +81,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  const signOut = () => {
+  const signOut = (): void => {
     setUser(null);
     localStorage.removeItem('user');
   };
 
-  const value = {
+  const value: AuthContextType = {
     user,
     signIn,
     signOut,

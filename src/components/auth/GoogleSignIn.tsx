@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
+import { useEffect } from 'react';
+import { useAuth } from '@/contexts/SimpleAuthContext';
 
 declare global {
   interface Window {
@@ -19,7 +19,9 @@ const GoogleSignIn: React.FC<GoogleSignInProps> = ({ onSuccess }) => {
     // Create a global callback function
     window.handleGoogleCallback = async (response: any) => {
       try {
+        console.log('Google sign-in callback triggered');
         await signIn(response.credential);
+        console.log('Sign-in successful, calling onSuccess');
         onSuccess?.();
       } catch (error) {
         console.error('Google sign-in error:', error);

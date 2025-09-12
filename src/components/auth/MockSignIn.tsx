@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { User } from 'lucide-react';
@@ -7,7 +6,7 @@ interface MockSignInProps {
   onSuccess?: () => void;
 }
 
-const MockSignIn: React.FC<MockSignInProps> = ({ onSuccess }) => {
+const MockSignIn = ({ onSuccess }: MockSignInProps) => {
   const { signIn } = useAuth();
 
   const handleMockSignIn = async () => {

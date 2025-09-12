@@ -1,0 +1,78 @@
+{
+  "common": {
+    "welcome": "خوش آمدید",
+    "loading": "لوڈ گۄژھ...",
+    "error": "خرابی",
+    "success": "کامیابی",
+    "submit": "جمع کریں",
+    "cancel": "منسوخ کریں",
+    "continue": "جاری تھالیو",
+    "back": "واپس",
+    "next": "اگلا",
+    "finish": "ختم",
+    "save": "محفوظ کریں",
+    "close": "بند کریں",
+    "search": "تلاش کریں",
+    "filter": "فلٹر",
+    "download": "ڈاؤن لوڈ",
+    "share": "شیئر کریں"
+  },
+  "navigation": {
+    "home": "گھر",
+    "dashboard": "ڈیش بورڈ",
+    "colleges": "کالج",
+    "quiz": "قابلیت امتحان",
+    "timeline": "ویلا فریم",
+    "resources": "وسائل",
+    "support": "مدد",
+    "register": "رجسٹر",
+    "login": "لاگ ان"
+  },
+  "languages": {
+    "english": "English",
+    "hindi": "हिंदी",
+    "urdu": "اردو",
+    "kashmiri": "کٲشُر",
+    "dogri": "डोगरी"
+  },
+  "hero": {
+    "title": "CareerPathak سٲتؠ پننہٕ مستقبل بنٲویو",
+    "subtitle": "جموں کشمیر کؠن طالب علموں کؠ لئی ذاتی رہنمائی کؠ سٲتؠ پننہٕ مثالی کیریر راستہ دریافت کریں",
+    "cta_quiz": "قابلیت امتحان دیو",
+    "cta_explore": "کیریر دریافت کریں",
+    "success_counter": "طلباء کی کامیاب رہنمائی",
+    "colleges_counter": "سرکاری کالجز",
+    "careers_counter": "کیریر راستے"
+  },
+  "registration": {
+    "title": "پننہٕ پروفائل بنٲویو",
+    "subtitle": "ہزاروں جموں کشمیر طلباء سٲتؠ شامل گژھیو",
+    "name": "پورا نام",
+    "age": "عمر",
+    "class": "موجودہ کلاس",
+    "district": "ضلع",
+    "gender": "جنس",
+    "mobile": "موبائل نمبر",
+    "otp": "OTP درج کریں",
+    "otp_sent": "OTP بھیجمت",
+    "verify": "تصدیق کریں",
+    "male": "نر",
+    "female": "مادہ",
+    "other": "دیگر"
+  },
+  "quiz": {
+    "title": "کیریر قابلیت جائزہ",
+    "subtitle": "پننۍ صلاحیات تؠ مثالی کیریر دریافت کریو",
+    "question": "سوال",
+    "of": "کا",
+    "select_answer": "جواب منتخب کریں",
+    "results": {
+      "title": "تہنز کیریر سفارشات",
+      "subtitle": "تہنز جوابات مطابق موزوں دھارائیں",
+      "match": "میچ",
+      "recommended": "تجویز کردہ",
+      "good_fit": "موزوں",
+      "consider": "غور کریں"
+    }
+  }
+}

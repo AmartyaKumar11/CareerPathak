@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "question": "Which subject interests you the most?",
+    "options": [
+      { "text": "Mathematics & Problem Solving", "weight": { "engineering": 3, "science": 2, "commerce": 1, "arts": 0 } },
+      { "text": "Literature & Writing", "weight": { "arts": 3, "commerce": 1, "science": 1, "engineering": 0 } },
+      { "text": "Business & Economics", "weight": { "commerce": 3, "arts": 2, "science": 1, "engineering": 1 } },
+      { "text": "Physics & Chemistry", "weight": { "science": 3, "engineering": 2, "commerce": 0, "arts": 0 } }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "What type of activities do you enjoy?",
+    "options": [
+      { "text": "Building & Creating Things", "weight": { "engineering": 3, "science": 2, "arts": 1, "commerce": 1 } },
+      { "text": "Reading & Research", "weight": { "arts": 3, "science": 2, "commerce": 1, "engineering": 1 } },
+      { "text": "Managing & Organizing", "weight": { "commerce": 3, "arts": 2, "engineering": 1, "science": 1 } },
+      { "text": "Experimenting & Analyzing", "weight": { "science": 3, "engineering": 2, "arts": 1, "commerce": 1 } }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Which career path appeals to you most?",
+    "options": [
+      { "text": "Software Developer/Engineer", "weight": { "engineering": 3, "science": 1, "commerce": 0, "arts": 0 } },
+      { "text": "Teacher/Writer/Journalist", "weight": { "arts": 3, "commerce": 1, "science": 1, "engineering": 0 } },
+      { "text": "Business Owner/Manager", "weight": { "commerce": 3, "arts": 1, "engineering": 1, "science": 0 } },
+      { "text": "Research Scientist/Doctor", "weight": { "science": 3, "engineering": 1, "arts": 0, "commerce": 0 } }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "How do you prefer to solve problems?",
+    "options": [
+      { "text": "Using logical reasoning and formulas", "weight": { "engineering": 3, "science": 2, "commerce": 1, "arts": 0 } },
+      { "text": "Through creative thinking and discussion", "weight": { "arts": 3, "commerce": 2, "science": 1, "engineering": 0 } },
+      { "text": "By analyzing data and market trends", "weight": { "commerce": 3, "science": 2, "engineering": 1, "arts": 1 } },
+      { "text": "Through systematic experimentation", "weight": { "science": 3, "engineering": 2, "arts": 0, "commerce": 1 } }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "What motivates you the most?",
+    "options": [
+      { "text": "Innovation and technology", "weight": { "engineering": 3, "science": 2, "commerce": 1, "arts": 0 } },
+      { "text": "Helping society and people", "weight": { "arts": 3, "science": 2, "commerce": 1, "engineering": 1 } },
+      { "text": "Financial success and growth", "weight": { "commerce": 3, "engineering": 2, "arts": 1, "science": 1 } },
+      { "text": "Discovery and knowledge", "weight": { "science": 3, "arts": 2, "engineering": 1, "commerce": 0 } }
+    ]
+  },
+  {
+    "id": 6,
+    "question": "Which work environment suits you?",
+    "options": [
+      { "text": "Tech companies and labs", "weight": { "engineering": 3, "science": 2, "commerce": 1, "arts": 0 } },
+      { "text": "Schools, media, and cultural centers", "weight": { "arts": 3, "commerce": 1, "science": 1, "engineering": 0 } },
+      { "text": "Offices, banks, and businesses", "weight": { "commerce": 3, "arts": 1, "engineering": 1, "science": 1 } },
+      { "text": "Research institutes and hospitals", "weight": { "science": 3, "engineering": 1, "arts": 1, "commerce": 0 } }
+    ]
+  },
+  {
+    "id": 7,
+    "question": "What are your strongest skills?",
+    "options": [
+      { "text": "Mathematical calculations and coding", "weight": { "engineering": 3, "science": 2, "commerce": 1, "arts": 0 } },
+      { "text": "Communication and creativity", "weight": { "arts": 3, "commerce": 2, "science": 1, "engineering": 0 } },
+      { "text": "Leadership and negotiation", "weight": { "commerce": 3, "arts": 2, "engineering": 1, "science": 1 } },
+      { "text": "Analysis and critical thinking", "weight": { "science": 3, "engineering": 2, "arts": 1, "commerce": 1 } }
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Which future trend excites you?",
+    "options": [
+      { "text": "Artificial Intelligence and Robotics", "weight": { "engineering": 3, "science": 2, "commerce": 1, "arts": 0 } },
+      { "text": "Digital media and content creation", "weight": { "arts": 3, "commerce": 2, "engineering": 1, "science": 0 } },
+      { "text": "E-commerce and startups", "weight": { "commerce": 3, "engineering": 2, "arts": 1, "science": 1 } },
+      { "text": "Biotechnology and space exploration", "weight": { "science": 3, "engineering": 2, "arts": 0, "commerce": 1 } }
+    ]
+  },
+  {
+    "id": 9,
+    "question": "How do you learn best?",
+    "options": [
+      { "text": "Hands-on projects and coding", "weight": { "engineering": 3, "science": 1, "commerce": 1, "arts": 0 } },
+      { "text": "Reading, writing, and discussions", "weight": { "arts": 3, "commerce": 1, "science": 1, "engineering": 0 } },
+      { "text": "Case studies and practical examples", "weight": { "commerce": 3, "arts": 2, "engineering": 1, "science": 1 } },
+      { "text": "Experiments and observations", "weight": { "science": 3, "engineering": 2, "arts": 0, "commerce": 1 } }
+    ]
+  },
+  {
+    "id": 10,
+    "question": "What impact do you want to make?",
+    "options": [
+      { "text": "Build technology solutions", "weight": { "engineering": 3, "science": 1, "commerce": 1, "arts": 0 } },
+      { "text": "Educate and inspire people", "weight": { "arts": 3, "science": 2, "commerce": 1, "engineering": 0 } },
+      { "text": "Create jobs and economic growth", "weight": { "commerce": 3, "engineering": 2, "arts": 1, "science": 1 } },
+      { "text": "Advance human knowledge", "weight": { "science": 3, "arts": 2, "engineering": 1, "commerce": 0 } }
+    ]
+  },
+  {
+    "id": 11,
+    "question": "Which subjects did you enjoy most in school?",
+    "options": [
+      { "text": "Mathematics and Computer Science", "weight": { "engineering": 3, "science": 2, "commerce": 2, "arts": 0 } },
+      { "text": "English and Social Studies", "weight": { "arts": 3, "commerce": 1, "science": 0, "engineering": 0 } },
+      { "text": "Economics and Business Studies", "weight": { "commerce": 3, "arts": 1, "engineering": 1, "science": 1 } },
+      { "text": "Physics, Chemistry, Biology", "weight": { "science": 3, "engineering": 2, "arts": 0, "commerce": 0 } }
+    ]
+  },
+  {
+    "id": 12,
+    "question": "What type of challenges excite you?",
+    "options": [
+      { "text": "Solving complex technical problems", "weight": { "engineering": 3, "science": 2, "commerce": 1, "arts": 0 } },
+      { "text": "Understanding human behavior and society", "weight": { "arts": 3, "commerce": 2, "science": 1, "engineering": 0 } },
+      { "text": "Managing resources and teams", "weight": { "commerce": 3, "arts": 2, "engineering": 2, "science": 1 } },
+      { "text": "Discovering new phenomena", "weight": { "science": 3, "engineering": 1, "arts": 1, "commerce": 0 } }
+    ]
+  },
+  {
+    "id": 13,
+    "question": "Which role model inspires you?",
+    "options": [
+      { "text": "Tech entrepreneurs like Elon Musk", "weight": { "engineering": 3, "commerce": 2, "science": 1, "arts": 0 } },
+      { "text": "Writers and activists like Malala", "weight": { "arts": 3, "commerce": 1, "science": 1, "engineering": 0 } },
+      { "text": "Business leaders like Ratan Tata", "weight": { "commerce": 3, "arts": 1, "engineering": 2, "science": 1 } },
+      { "text": "Scientists like A.P.J. Abdul Kalam", "weight": { "science": 3, "engineering": 2, "arts": 1, "commerce": 0 } }
+    ]
+  },
+  {
+    "id": 14,
+    "question": "What kind of projects interest you?",
+    "options": [
+      { "text": "Building apps and websites", "weight": { "engineering": 3, "science": 1, "commerce": 2, "arts": 1 } },
+      { "text": "Writing stories and organizing events", "weight": { "arts": 3, "commerce": 2, "science": 0, "engineering": 0 } },
+      { "text": "Planning business strategies", "weight": { "commerce": 3, "arts": 2, "engineering": 2, "science": 1 } },
+      { "text": "Conducting research and surveys", "weight": { "science": 3, "arts": 2, "engineering": 1, "commerce": 2 } }
+    ]
+  },
+  {
+    "id": 15,
+    "question": "What matters most to you in a career?",
+    "options": [
+      { "text": "Innovation and cutting-edge technology", "weight": { "engineering": 3, "science": 2, "commerce": 1, "arts": 0 } },
+      { "text": "Making a difference in people's lives", "weight": { "arts": 3, "science": 2, "commerce": 1, "engineering": 1 } },
+      { "text": "Leadership opportunities and growth", "weight": { "commerce": 3, "arts": 2, "engineering": 2, "science": 1 } },
+      { "text": "Contributing to scientific advancement", "weight": { "science": 3, "engineering": 2, "arts": 1, "commerce": 0 } }
+    ]
+  }
+]

@@ -1,0 +1,166 @@
+{
+  "engineering": {
+    "title": "Engineering & Technology",
+    "description": "Build the future with innovative technology solutions",
+    "color": "primary",
+    "careers": [
+      {
+        "title": "Software Engineer",
+        "description": "Develop applications, websites, and software systems",
+        "averageSalary": "₹8-25 LPA",
+        "growth": "High",
+        "skills": ["Programming", "Problem Solving", "System Design"],
+        "education": "B.Tech Computer Science, BCA, M.Tech"
+      },
+      {
+        "title": "Civil Engineer",
+        "description": "Design and construct infrastructure projects",
+        "averageSalary": "₹5-15 LPA",
+        "growth": "Stable",
+        "skills": ["AutoCAD", "Project Management", "Structural Analysis"],
+        "education": "B.Tech Civil Engineering, Diploma in Civil"
+      },
+      {
+        "title": "Mechanical Engineer",
+        "description": "Design machines, engines, and mechanical systems",
+        "averageSalary": "₹6-18 LPA",
+        "growth": "Moderate",
+        "skills": ["CAD Design", "Manufacturing", "Thermodynamics"],
+        "education": "B.Tech Mechanical, Diploma in Mechanical"
+      },
+      {
+        "title": "Electronics Engineer",
+        "description": "Work with electronic circuits and communication systems",
+        "averageSalary": "₹7-20 LPA",
+        "growth": "High",
+        "skills": ["Circuit Design", "Embedded Systems", "Signal Processing"],
+        "education": "B.Tech ECE, Electronics Diploma"
+      }
+    ],
+    "topColleges": ["NIT Srinagar", "IIIT Jammu", "Government Polytechnic"],
+    "jobMarket": "Excellent opportunities in IT, manufacturing, and infrastructure sectors"
+  },
+  "science": {
+    "title": "Science & Research",
+    "description": "Explore and advance human knowledge through research",
+    "color": "secondary",
+    "careers": [
+      {
+        "title": "Medical Doctor",
+        "description": "Provide healthcare and medical treatment",
+        "averageSalary": "₹10-40 LPA",
+        "growth": "Very High",
+        "skills": ["Clinical Knowledge", "Patient Care", "Diagnosis"],
+        "education": "MBBS, MD, MS"
+      },
+      {
+        "title": "Research Scientist",
+        "description": "Conduct research in various scientific fields",
+        "averageSalary": "₹6-25 LPA",
+        "growth": "High",
+        "skills": ["Research Methods", "Data Analysis", "Critical Thinking"],
+        "education": "M.Sc, Ph.D in respective field"
+      },
+      {
+        "title": "Pharmacist",
+        "description": "Dispense medications and provide pharmaceutical care",
+        "averageSalary": "₹4-12 LPA",
+        "growth": "Stable",
+        "skills": ["Drug Knowledge", "Patient Counseling", "Quality Control"],
+        "education": "B.Pharmacy, PharmD"
+      },
+      {
+        "title": "Biotechnologist",
+        "description": "Apply biology to develop products and technologies",
+        "averageSalary": "₹5-18 LPA",
+        "growth": "High",
+        "skills": ["Molecular Biology", "Genetics", "Lab Techniques"],
+        "education": "B.Tech/M.Tech Biotechnology, M.Sc Biotechnology"
+      }
+    ],
+    "topColleges": ["Government Medical College Jammu", "Kashmir University", "SKUAST"],
+    "jobMarket": "Growing demand in healthcare, research, and pharmaceutical industries"
+  },
+  "commerce": {
+    "title": "Commerce & Business",
+    "description": "Drive economic growth through business and finance",
+    "color": "accent",
+    "careers": [
+      {
+        "title": "Chartered Accountant (CA)",
+        "description": "Manage financial records, auditing, and taxation",
+        "averageSalary": "₹8-30 LPA",
+        "growth": "Very High",
+        "skills": ["Accounting", "Taxation", "Financial Analysis"],
+        "education": "CA Intermediate, CA Final"
+      },
+      {
+        "title": "Business Analyst",
+        "description": "Analyze business processes and recommend improvements",
+        "averageSalary": "₹6-20 LPA",
+        "growth": "High",
+        "skills": ["Data Analysis", "Process Mapping", "Communication"],
+        "education": "MBA, B.Com, BBA"
+      },
+      {
+        "title": "Investment Banker",
+        "description": "Help companies and governments raise capital",
+        "averageSalary": "₹10-50 LPA",
+        "growth": "Very High",
+        "skills": ["Financial Modeling", "Market Analysis", "Deal Structuring"],
+        "education": "MBA Finance, CFA"
+      },
+      {
+        "title": "Digital Marketing Manager",
+        "description": "Develop and execute online marketing strategies",
+        "averageSalary": "₹5-18 LPA",
+        "growth": "Very High",
+        "skills": ["SEO/SEM", "Social Media", "Content Strategy"],
+        "education": "MBA Marketing, Digital Marketing Certification"
+      }
+    ],
+    "topColleges": ["University of Jammu", "Kashmir University", "IIIM Jammu"],
+    "jobMarket": "Excellent opportunities in banking, consulting, e-commerce, and startups"
+  },
+  "arts": {
+    "title": "Arts & Humanities",
+    "description": "Shape society through education, culture, and communication",
+    "color": "muted",
+    "careers": [
+      {
+        "title": "Civil Services Officer (IAS/IPS)",
+        "description": "Serve the public through government administration",
+        "averageSalary": "₹8-25 LPA",
+        "growth": "Stable + Prestige",
+        "skills": ["Leadership", "Public Policy", "Administration"],
+        "education": "Any Graduate + UPSC Preparation"
+      },
+      {
+        "title": "Teacher/Professor",
+        "description": "Educate and inspire the next generation",
+        "averageSalary": "₹4-15 LPA",
+        "growth": "Stable",
+        "skills": ["Subject Knowledge", "Communication", "Pedagogy"],
+        "education": "B.Ed, M.Ed, NET/SET"
+      },
+      {
+        "title": "Journalist/Content Writer",
+        "description": "Report news and create engaging content",
+        "averageSalary": "₹3-12 LPA",
+        "growth": "Moderate",
+        "skills": ["Writing", "Research", "Communication"],
+        "education": "Journalism, Mass Communication, English Literature"
+      },
+      {
+        "title": "Psychologist/Counselor",
+        "description": "Help people with mental health and behavioral issues",
+        "averageSalary": "₹4-15 LPA",
+        "growth": "High",
+        "skills": ["Counseling", "Empathy", "Psychology"],
+        "education": "M.A Psychology, M.Phil Clinical Psychology"
+      }
+    ],
+    "topColleges": ["Kashmir University", "University of Jammu", "Central University Kashmir"],
+    "jobMarket": "Opportunities in education, media, government, and social sector"
+  }
+}

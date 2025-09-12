@@ -1,0 +1,221 @@
+[
+  {
+    "id": "nit-srinagar",
+    "name": "National Institute of Technology Srinagar",
+    "type": "Engineering",
+    "location": "Srinagar",
+    "district": "Srinagar",
+    "established": 1960,
+    "affiliation": "NIT System",
+    "courses": [
+      "B.Tech Computer Science",
+      "B.Tech Electronics & Communication",
+      "B.Tech Mechanical",
+      "B.Tech Civil",
+      "M.Tech",
+      "MBA"
+    ],
+    "fees": {
+      "tuition": "₹1,50,000/year",
+      "hostel": "₹25,000/year"
+    },
+    "facilities": [
+      "Central Library",
+      "WiFi Campus",
+      "Sports Complex",
+      "Medical Centre",
+      "Hostels",
+      "Laboratories"
+    ],
+    "placements": {
+      "averagePackage": "₹8.5 LPA",
+      "highestPackage": "₹24 LPA",
+      "placementRate": "92%"
+    },
+    "scholarships": [
+      "Merit-based Scholarship",
+      "Need-based Financial Aid",
+      "SC/ST/OBC Fee Waiver"
+    ],
+    "coordinates": [34.0837, 74.7973],
+    "image": "/images/nit-srinagar.jpg",
+    "rating": 4.3,
+    "website": "https://nitsri.ac.in"
+  },
+  {
+    "id": "kashmir-university",
+    "name": "University of Kashmir",
+    "type": "University",
+    "location": "Srinagar",
+    "district": "Srinagar",
+    "established": 1948,
+    "affiliation": "UGC",
+    "courses": [
+      "B.A",
+      "B.Sc",
+      "B.Com",
+      "BBA",
+      "M.A",
+      "M.Sc",
+      "M.Com",
+      "MBA",
+      "Ph.D"
+    ],
+    "fees": {
+      "tuition": "₹25,000/year",
+      "hostel": "₹15,000/year"
+    },
+    "facilities": [
+      "Multiple Libraries",
+      "Research Centers",
+      "Sports Facilities",
+      "Cultural Centers",
+      "Hostels",
+      "Computer Labs"
+    ],
+    "placements": {
+      "averagePackage": "₹4.5 LPA",
+      "highestPackage": "₹12 LPA",
+      "placementRate": "75%"
+    },
+    "scholarships": [
+      "University Merit Scholarship",
+      "Minority Scholarship",
+      "Research Fellowships"
+    ],
+    "coordinates": [34.1208, 74.8370],
+    "image": "/images/ku-srinagar.jpg",
+    "rating": 4.1,
+    "website": "https://kashmiruniversity.ac.in"
+  },
+  {
+    "id": "jammu-university",
+    "name": "University of Jammu",
+    "type": "University",
+    "location": "Jammu",
+    "district": "Jammu",
+    "established": 1969,
+    "affiliation": "UGC",
+    "courses": [
+      "B.A",
+      "B.Sc",
+      "B.Com",
+      "BCA",
+      "M.A",
+      "M.Sc",
+      "MCA",
+      "MBA",
+      "Law"
+    ],
+    "fees": {
+      "tuition": "₹30,000/year",
+      "hostel": "₹20,000/year"
+    },
+    "facilities": [
+      "Central Library",
+      "IT Center",
+      "Sports Complex",
+      "Medical Facility",
+      "Hostels",
+      "Auditoriums"
+    ],
+    "placements": {
+      "averagePackage": "₹5.2 LPA",
+      "highestPackage": "₹15 LPA",
+      "placementRate": "78%"
+    },
+    "scholarships": [
+      "Merit Scholarship",
+      "Sports Scholarship",
+      "Economic Weaker Section Aid"
+    ],
+    "coordinates": [32.7266, 74.8570],
+    "image": "/images/ju-jammu.jpg",
+    "rating": 4.0,
+    "website": "https://jammuuniversity.ac.in"
+  },
+  {
+    "id": "government-medical-jammu",
+    "name": "Government Medical College Jammu",
+    "type": "Medical",
+    "location": "Jammu",
+    "district": "Jammu",
+    "established": 1973,
+    "affiliation": "Medical Council of India",
+    "courses": [
+      "MBBS",
+      "MD",
+      "MS",
+      "Nursing",
+      "Paramedical"
+    ],
+    "fees": {
+      "tuition": "₹75,000/year",
+      "hostel": "₹30,000/year"
+    },
+    "facilities": [
+      "Teaching Hospital",
+      "Medical Library",
+      "Research Labs",
+      "Anatomy Museum",
+      "Hostels",
+      "Emergency Services"
+    ],
+    "placements": {
+      "averagePackage": "₹12 LPA",
+      "highestPackage": "₹30 LPA",
+      "placementRate": "95%"
+    },
+    "scholarships": [
+      "Government Medical Scholarship",
+      "Merit-based Aid",
+      "Rural Service Bond"
+    ],
+    "coordinates": [32.7181, 74.8571],
+    "image": "/images/gmc-jammu.jpg",
+    "rating": 4.5,
+    "website": "https://gmcjammu.nic.in"
+  },
+  {
+    "id": "skuast-kashmir",
+    "name": "SKUAST Kashmir",
+    "type": "Agriculture",
+    "location": "Srinagar",
+    "district": "Srinagar",
+    "established": 1982,
+    "affiliation": "ICAR",
+    "courses": [
+      "B.Sc Agriculture",
+      "B.Tech Food Technology",
+      "Veterinary Science",
+      "Forestry",
+      "M.Sc Agriculture"
+    ],
+    "fees": {
+      "tuition": "₹40,000/year",
+      "hostel": "₹18,000/year"
+    },
+    "facilities": [
+      "Research Farms",
+      "Laboratories",
+      "Library",
+      "Hostels",
+      "Experimental Fields",
+      "Veterinary Hospital"
+    ],
+    "placements": {
+      "averagePackage": "₹6 LPA",
+      "highestPackage": "₹18 LPA",
+      "placementRate": "85%"
+    },
+    "scholarships": [
+      "Agricultural Merit Scholarship",
+      "Research Assistantships",
+      "Government Aid"
+    ],
+    "coordinates": [34.0837, 74.7973],
+    "image": "/images/skuast-kashmir.jpg",
+    "rating": 4.2,
+    "website": "https://skuastkashmir.ac.in"
+  }
+]

@@ -1,0 +1,134 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "back": "Back",
+    "next": "Next",
+    "finish": "Finish",
+    "save": "Save",
+    "close": "Close",
+    "search": "Search",
+    "filter": "Filter",
+    "download": "Download",
+    "share": "Share"
+  },
+  "navigation": {
+    "home": "Home",
+    "dashboard": "Dashboard", 
+    "colleges": "Colleges",
+    "quiz": "Aptitude Quiz",
+    "timeline": "Timeline",
+    "resources": "Resources",
+    "support": "Support",
+    "register": "Register",
+    "login": "Login"
+  },
+  "languages": {
+    "english": "English",
+    "hindi": "हिंदी",
+    "urdu": "اردو",
+    "kashmiri": "कॉशुर", 
+    "dogri": "डोगरी"
+  },
+  "hero": {
+    "title": "Shape Your Future with CareerPathak",
+    "subtitle": "Discover your ideal career path with personalized guidance tailored for Jammu & Kashmir students",
+    "cta_quiz": "Take Aptitude Quiz",
+    "cta_explore": "Explore Careers",
+    "success_counter": "Students Guided Successfully",
+    "colleges_counter": "Government Colleges Listed",
+    "careers_counter": "Career Paths Available"
+  },
+  "registration": {
+    "title": "Create Your Profile",
+    "subtitle": "Join thousands of J&K students finding their perfect career path",
+    "name": "Full Name",
+    "age": "Age",
+    "class": "Current Class",
+    "district": "District",
+    "gender": "Gender",
+    "mobile": "Mobile Number (Optional)",
+    "otp": "Enter OTP",
+    "otp_sent": "OTP sent to your mobile number",
+    "verify": "Verify OTP",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other"
+  },
+  "quiz": {
+    "title": "Career Aptitude Assessment",
+    "subtitle": "Discover your strengths and ideal career streams",
+    "question": "Question",
+    "of": "of",
+    "select_answer": "Select your answer",
+    "results": {
+      "title": "Your Career Recommendations",
+      "subtitle": "Based on your responses, here are your best-matched streams",
+      "match": "Match",
+      "recommended": "Recommended",
+      "good_fit": "Good Fit",
+      "consider": "Consider"
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "recommended_streams": "Recommended Career Streams",
+    "nearby_colleges": "Top Colleges Near You",
+    "upcoming_deadlines": "Upcoming Deadlines",
+    "notifications": "Notifications",
+    "view_all": "View All"
+  },
+  "colleges": {
+    "title": "College Explorer",
+    "subtitle": "Find the perfect college for your career goals",
+    "search_placeholder": "Search colleges...",
+    "filters": {
+      "location": "Location",
+      "type": "College Type",
+      "courses": "Courses",
+      "fees": "Fee Range"
+    },
+    "details": {
+      "about": "About",
+      "courses": "Courses Offered",
+      "facilities": "Facilities",
+      "placements": "Placements",
+      "scholarships": "Scholarships",
+      "contact": "Contact Information"
+    }
+  },
+  "timeline": {
+    "title": "Academic Calendar",
+    "subtitle": "Stay updated with important dates and deadlines",
+    "entrance_exams": "Entrance Exams",
+    "scholarships": "Scholarships",
+    "admissions": "Admissions",
+    "government_jobs": "Government Jobs",
+    "set_reminder": "Set Reminder"
+  },
+  "resources": {
+    "title": "Study Resources",
+    "subtitle": "Download study materials and prepare for your future",
+    "categories": {
+      "engineering": "Engineering",
+      "medical": "Medical",
+      "commerce": "Commerce", 
+      "arts": "Arts & Humanities"
+    },
+    "download_offline": "Available Offline"
+  },
+  "support": {
+    "title": "Help & Support",
+    "subtitle": "Get answers to your questions and feedback",
+    "faq": "Frequently Asked Questions",
+    "contact": "Contact Us",
+    "feedback": "Send Feedback",
+    "feedback_placeholder": "Share your experience or suggestions...",
+    "send_feedback": "Send Feedback"
+  }
+}

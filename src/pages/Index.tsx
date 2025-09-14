@@ -47,7 +47,6 @@ const Index = () => {
   // Redirect authenticated users to dashboard
   useEffect(() => {
     if (!loading && user) {
-      console.log('Index page - User is authenticated, redirecting to dashboard');
       navigate('/dashboard');
     }
   }, [user, loading, navigate]);

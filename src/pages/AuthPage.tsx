@@ -12,7 +12,8 @@ const AuthPage = () => {
   // If user is already authenticated, redirect to dashboard
   useEffect(() => {
     if (user) {
-      console.log('AuthPage useEffect - User already authenticated, redirecting to dashboard');
+      console.log('AuthPage useEffect - User already authenticated:', user);
+      console.log('Redirecting to dashboard...');
       navigate('/dashboard');
     }
   }, [user, navigate]);

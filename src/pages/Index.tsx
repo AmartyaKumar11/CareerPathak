@@ -34,6 +34,10 @@ const Index = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { user, loading } = useAuth();
+  // Handler for Authenticate button
+  const handleAuthenticate = () => {
+    navigate('/auth');
+  };
   const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
   const [studentsCount, setStudentsCount] = useState(0);
   const [collegesCount, setCollegesCount] = useState(0);
@@ -85,6 +89,18 @@ const Index = () => {
     setCurrentLanguage(lng);
   };
 
+  const handleGetStarted = () => {
+    console.log('🔄 handleGetStarted called');
+    console.log('🔄 Current user:', user);
+    if (user) {
+      console.log('✅ User authenticated, navigating to /dashboard');
+      navigate('/dashboard');
+    } else {
+      console.log('❌ No user, navigating to /auth');
+      navigate('/auth');
+    }
+  };
+
   const calculateSavings = () => {
     const privateFees = 400000; // Average private college fees
     const governmentFees = 50000; // Average government college fees
@@ -101,20 +117,22 @@ const Index = () => {
             <GraduationCap className="h-8 w-8 text-primary" />
             <span className="text-2xl font-bold text-primary">CareerPathak</span>
           </div>
-          
-          <Select value={currentLanguage} onValueChange={changeLanguage}>
-            <SelectTrigger className="w-40">
-              <Globe className="mr-2 h-4 w-4" />
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="en">{t('languages.english')}</SelectItem>
-              <SelectItem value="hi">{t('languages.hindi')}</SelectItem>
-              <SelectItem value="ur">{t('languages.urdu')}</SelectItem>
-              <SelectItem value="ks">{t('languages.kashmiri')}</SelectItem>
-              <SelectItem value="dg">{t('languages.dogri')}</SelectItem>
-            </SelectContent>
-          </Select>
+          <div className="flex items-center gap-4">
+            <Select value={currentLanguage} onValueChange={changeLanguage}>
+              <SelectTrigger className="w-40">
+                <Globe className="mr-2 h-4 w-4" />
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="en">{t('languages.english')}</SelectItem>
+                <SelectItem value="hi">{t('languages.hindi')}</SelectItem>
+                <SelectItem value="ur">{t('languages.urdu')}</SelectItem>
+                <SelectItem value="ks">{t('languages.kashmiri')}</SelectItem>
+                <SelectItem value="dg">{t('languages.dogri')}</SelectItem>
+              </SelectContent>
+            </Select>
+            <Button variant="outline" onClick={handleAuthenticate} className="ml-2">Authenticate</Button>
+          </div>
         </div>
       </header>
 
@@ -136,7 +154,11 @@ const Index = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <Button size="lg" className="text-lg px-8 py-4">
+              <Button 
+                size="lg" 
+                className="text-lg px-8 py-4"
+                onClick={handleGetStarted}
+              >
                 <TrendingUp className="mr-2 h-5 w-5" />
                 {t('hero.cta_quiz')}
               </Button>
@@ -144,7 +166,7 @@ const Index = () => {
                 variant="outline" 
                 size="lg" 
                 className="text-lg px-8 py-4"
-                onClick={() => navigate('/auth')}
+                onClick={handleGetStarted}
               >
                 <Briefcase className="mr-2 h-5 w-5" />
                 {t('hero.cta_explore')}
@@ -318,7 +340,11 @@ const Index = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="text-lg px-8 py-4">
+            <Button 
+              size="lg" 
+              className="text-lg px-8 py-4"
+              onClick={handleGetStarted}
+            >
               <TrendingUp className="mr-2 h-5 w-5" />
               Take Aptitude Quiz
             </Button>
@@ -326,7 +352,7 @@ const Index = () => {
               variant="outline" 
               size="lg" 
               className="text-lg px-8 py-4"
-              onClick={() => navigate('/auth')}
+              onClick={handleGetStarted}
             >
               <Building className="mr-2 h-5 w-5" />
               Explore Colleges
@@ -356,17 +382,17 @@ const Index = () => {
             <div>
               <h4 className="font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><button onClick={() => navigate('/auth')} className="hover:text-primary">Colleges</button></li>
-                <li><button onClick={() => navigate('/auth')} className="hover:text-primary">Aptitude Quiz</button></li>
-                <li><button onClick={() => navigate('/auth')} className="hover:text-primary">Timeline</button></li>
-                <li><button onClick={() => navigate('/auth')} className="hover:text-primary">Resources</button></li>
+                <li><button onClick={handleGetStarted} className="hover:text-primary">Colleges</button></li>
+                <li><button onClick={handleGetStarted} className="hover:text-primary">Aptitude Quiz</button></li>
+                <li><button onClick={handleGetStarted} className="hover:text-primary">Timeline</button></li>
+                <li><button onClick={handleGetStarted} className="hover:text-primary">Resources</button></li>
               </ul>
             </div>
             
             <div>
               <h4 className="font-semibold mb-4">Support</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><button onClick={() => navigate('/auth')} className="hover:text-primary">Help Center</button></li>
+                <li><button onClick={handleGetStarted} className="hover:text-primary">Help Center</button></li>
                 <li><a href="#" className="hover:text-primary">Contact Us</a></li>
                 <li><a href="#" className="hover:text-primary">Privacy Policy</a></li>
                 <li><a href="#" className="hover:text-primary">Terms of Service</a></li>

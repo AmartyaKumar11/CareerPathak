@@ -150,25 +150,13 @@ export class SyncService {
   }
 
   // Background sync functionality (using Service Worker)
+  // Background sync functionality removed (no service worker)
   static async registerBackgroundSync(): Promise<void> {
-    if ('serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype) {
-      try {
-        const registration = await navigator.serviceWorker.ready;
-        // @ts-ignore - Background Sync API might not be in TS definitions
-        await registration.sync.register('profile-sync');
-        console.log('Background sync registered');
-      } catch (error) {
-        console.error('Failed to register background sync:', error);
-      }
-    } else {
-      console.log('Background sync not supported');
-      
-      // Fallback: sync when coming online
-      window.addEventListener('online', () => {
-        console.log('Online detected, starting sync...');
-        this.syncAllPending();
-      });
-    }
+    // Only fallback: sync when coming online
+    window.addEventListener('online', () => {
+      console.log('Online detected, starting sync...');
+      this.syncAllPending();
+    });
   }
 
   // Manual conflict resolution

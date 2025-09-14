@@ -391,6 +391,15 @@ export const PersonalizedDashboard = () => {
                         </div>
                       ))}
                     </div>
+                    <div className="mt-6 pt-4 border-t">
+                      <Button 
+                        onClick={() => navigate('/recommendations')} 
+                        variant="outline" 
+                        className="w-full"
+                      >
+                        View All Personalized Recommendations
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </TabsContent>

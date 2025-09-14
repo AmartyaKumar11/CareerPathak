@@ -1,0 +1,229 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User management
+model User {
+  id            String @id @default(cuid())
+  email         String @unique
+  name          String
+  googleId      String @unique
+  avatar        String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  // User preferences for recommendations
+  profile       UserProfile?
+  applications  Application[]
+  scholarships  UserScholarship[]
+  @@map("users")
+}
+
+model UserProfile {
+  id                String @id @default(cuid())
+  userId            String @unique
+  user              User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Academic info
+  currentClass      String?
+  subjects          String[] // Array of subject interests
+  academicPerformance String? // "excellent", "good", "average", "below_average"
+  
+  // Career interests
+  careerInterests   String[] // Array of career field interests
+  skillLevel        String? // "beginner", "intermediate", "advanced"
+  preferredLocation String?
+  
+  // Personal preferences
+  workStyle         String? // "individual", "team", "hybrid"
+  personalityType   String? // MBTI or similar
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  @@map("user_profiles")
+}
+
+// Career paths and colleges (from existing JSON data)
+model CareerPath {
+  id               String @id @default(cuid())
+  title            String
+  description      String
+  category         String
+  requiredSkills   String[]
+  averageSalary    String?
+  jobOutlook       String?
+  education        String?
+  
+  recommendations  Recommendation[]
+  applications     Application[]
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  @@map("career_paths")
+}
+
+model College {
+  id               String @id @default(cuid())
+  name             String
+  location         String
+  type             String // "government", "private", "deemed"
+  ranking          Int?
+  fees             String?
+  courses          String[]
+  
+  recommendations  Recommendation[]
+  applications     Application[]
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  @@map("colleges")
+}
+
+// Recommendation system
+model Recommendation {
+  id            String @id @default(cuid())
+  userId        String
+  type          String // "career", "college", "scholarship", "skill"
+  
+  // Career recommendation
+  careerPathId  String?
+  careerPath    CareerPath? @relation(fields: [careerPathId], references: [id])
+  
+  // College recommendation  
+  collegeId     String?
+  college       College? @relation(fields: [collegeId], references: [id])
+  
+  // Scholarship recommendation
+  scholarshipId String?
+  scholarship   Scholarship? @relation(fields: [scholarshipId], references: [id])
+  
+  // Matching score and reasoning
+  score         Float // 0-100 matching score
+  reasoning     String // Why this was recommended
+  
+  // Engagement tracking
+  viewed        Boolean @default(false)
+  liked         Boolean @default(false)
+  applied       Boolean @default(false)
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@map("recommendations")
+}
+
+// Application tracking
+model Application {
+  id            String @id @default(cuid())
+  userId        String
+  user          User @relation(fields: [userId], references: [id])
+  
+  type          String // "college", "job", "internship", "scholarship"
+  title         String
+  organization  String
+  
+  // Related entities
+  careerPathId  String?
+  careerPath    CareerPath? @relation(fields: [careerPathId], references: [id])
+  
+  collegeId     String?
+  college       College? @relation(fields: [collegeId], references: [id])
+  
+  // Application details
+  status        String // "draft", "submitted", "under_review", "accepted", "rejected"
+  deadline      DateTime?
+  appliedAt     DateTime?
+  notes         String?
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@map("applications")
+}
+
+// Scholarships
+model Scholarship {
+  id               String @id @default(cuid())
+  title            String
+  provider         String
+  amount           String
+  eligibility      String[]
+  deadline         DateTime
+  category         String
+  description      String
+  
+  recommendations  Recommendation[]
+  userScholarships UserScholarship[]
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  @@map("scholarships")
+}
+
+model UserScholarship {
+  id            String @id @default(cuid())
+  userId        String
+  user          User @relation(fields: [userId], references: [id])
+  
+  scholarshipId String
+  scholarship   Scholarship @relation(fields: [scholarshipId], references: [id])
+  
+  status        String // "interested", "applied", "awarded", "rejected"
+  appliedAt     DateTime?
+  notes         String?
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@unique([userId, scholarshipId])
+  @@map("user_scholarships")
+}
+
+// Skills and resources tracking
+model Skill {
+  id          String @id @default(cuid())
+  name        String @unique
+  category    String
+  description String?
+  
+  resources   SkillResource[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("skills")
+}
+
+model SkillResource {
+  id          String @id @default(cuid())
+  skillId     String
+  skill       Skill @relation(fields: [skillId], references: [id])
+  
+  title       String
+  type        String // "course", "book", "video", "article", "practice"
+  url         String?
+  provider    String
+  difficulty  String // "beginner", "intermediate", "advanced"
+  duration    String?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("skill_resources")
+}

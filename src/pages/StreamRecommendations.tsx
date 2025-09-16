@@ -1,3 +1,22 @@
+// Custom subject types
+interface CustomSubject {
+  name: string;
+  stream: 'science' | 'commerce' | 'arts';
+}
+
+// Utility to load/save custom subjects from localStorage (or backend if needed)
+const getSavedCustomSubjects = () => {
+  try {
+    const raw = localStorage.getItem('customSubjects');
+    return raw ? JSON.parse(raw) : { science: [], commerce: [], arts: [] };
+  } catch {
+    return { science: [], commerce: [], arts: [] };
+  }
+};
+
+const saveCustomSubjects = (subjects) => {
+  localStorage.setItem('customSubjects', JSON.stringify(subjects));
+};
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -93,6 +112,27 @@ export default function StreamRecommendations() {
   const [totalQuestions, setTotalQuestions] = useState(15);
   const [recommendations, setRecommendations] = useState<StreamRecommendation[]>([]);
   const { toast } = useToast();
+
+  // Custom subjects state
+  const [customSubjects, setCustomSubjects] = useState(getSavedCustomSubjects());
+  const [newCustomSubject, setNewCustomSubject] = useState({ science: '', commerce: '', arts: '' });
+
+  // Persist custom subjects on change
+  useEffect(() => {
+    saveCustomSubjects(customSubjects);
+  }, [customSubjects]);
+
+  // Add custom subject handler
+  const handleAddCustomSubject = (stream: 'science' | 'commerce' | 'arts') => {
+    const name = newCustomSubject[stream].trim();
+    if (!name) return;
+    if (customSubjects[stream].some((s: CustomSubject) => s.name.toLowerCase() === name.toLowerCase())) return;
+    setCustomSubjects(prev => ({
+      ...prev,
+      [stream]: [...prev[stream], { name, stream }]
+    }));
+    setNewCustomSubject(prev => ({ ...prev, [stream]: '' }));
+  };
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -396,7 +436,7 @@ export default function StreamRecommendations() {
                       <div key={index} className="flex items-center justify-between p-3 bg-green-50 rounded-lg border">
                         <div className="flex items-center space-x-2">
                           <FileText className="h-4 w-4 text-green-600" />
-                          <span className="text-sm text-green-700 truncate max-w-48">
+                          <span className="text-sm font-bold text-green-700 truncate max-w-48">
                             {file.name}
                           </span>
                         </div>
@@ -485,6 +525,33 @@ export default function StreamRecommendations() {
 
                   <TabsContent value="science" className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {/* Custom Subject Entry for Science */}
+                      {customSubjects.science.map((subject: CustomSubject, idx: number) => (
+                        <div key={subject.name + idx}>
+                          <Label htmlFor={subject.name} className="flex items-center gap-2">
+                            {subject.name}
+                            <Badge variant="outline" className="text-xs">Custom</Badge>
+                          </Label>
+                          <Input
+                            id={subject.name}
+                            type="number"
+                            placeholder="Enter marks (0-100)"
+                            value={subjectMarks[subject.name] || ''}
+                            onChange={(e) => setSubjectMarks(prev => ({ ...prev, [subject.name]: Number(e.target.value) }))}
+                          />
+                        </div>
+                      ))}
+                      <div className="col-span-2 flex gap-2 items-center mt-2">
+                        <Input
+                          type="text"
+                          placeholder="Add custom subject"
+                          value={newCustomSubject.science}
+                          onChange={e => setNewCustomSubject(prev => ({ ...prev, science: e.target.value }))}
+                        />
+                        <Button size="sm" variant="secondary" onClick={() => handleAddCustomSubject('science')}>
+                          Add Subject
+                        </Button>
+                      </div>
                       <div>
                         <Label htmlFor="physics" className="flex items-center gap-2">
                           Physics
@@ -546,6 +613,33 @@ export default function StreamRecommendations() {
 
                   <TabsContent value="commerce" className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {/* Custom Subject Entry for Commerce */}
+                      {customSubjects.commerce.map((subject: CustomSubject, idx: number) => (
+                        <div key={subject.name + idx}>
+                          <Label htmlFor={subject.name} className="flex items-center gap-2">
+                            {subject.name}
+                            <Badge variant="outline" className="text-xs">Custom</Badge>
+                          </Label>
+                          <Input
+                            id={subject.name}
+                            type="number"
+                            placeholder="Enter marks (0-100)"
+                            value={subjectMarks[subject.name] || ''}
+                            onChange={(e) => setSubjectMarks(prev => ({ ...prev, [subject.name]: Number(e.target.value) }))}
+                          />
+                        </div>
+                      ))}
+                      <div className="col-span-2 flex gap-2 items-center mt-2">
+                        <Input
+                          type="text"
+                          placeholder="Add custom subject"
+                          value={newCustomSubject.commerce}
+                          onChange={e => setNewCustomSubject(prev => ({ ...prev, commerce: e.target.value }))}
+                        />
+                        <Button size="sm" variant="secondary" onClick={() => handleAddCustomSubject('commerce')}>
+                          Add Subject
+                        </Button>
+                      </div>
                       <div>
                         <Label htmlFor="accountancy" className="flex items-center gap-2">
                           Accountancy
@@ -607,6 +701,33 @@ export default function StreamRecommendations() {
 
                   <TabsContent value="arts" className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {/* Custom Subject Entry for Arts */}
+                      {customSubjects.arts.map((subject: CustomSubject, idx: number) => (
+                        <div key={subject.name + idx}>
+                          <Label htmlFor={subject.name} className="flex items-center gap-2">
+                            {subject.name}
+                            <Badge variant="outline" className="text-xs">Custom</Badge>
+                          </Label>
+                          <Input
+                            id={subject.name}
+                            type="number"
+                            placeholder="Enter marks (0-100)"
+                            value={subjectMarks[subject.name] || ''}
+                            onChange={(e) => setSubjectMarks(prev => ({ ...prev, [subject.name]: Number(e.target.value) }))}
+                          />
+                        </div>
+                      ))}
+                      <div className="col-span-2 flex gap-2 items-center mt-2">
+                        <Input
+                          type="text"
+                          placeholder="Add custom subject"
+                          value={newCustomSubject.arts}
+                          onChange={e => setNewCustomSubject(prev => ({ ...prev, arts: e.target.value }))}
+                        />
+                        <Button size="sm" variant="secondary" onClick={() => handleAddCustomSubject('arts')}>
+                          Add Subject
+                        </Button>
+                      </div>
                       <div>
                         <Label htmlFor="history" className="flex items-center gap-2">
                           History

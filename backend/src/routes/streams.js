@@ -1,9 +1,9 @@
 const express = require('express');
-const { PrismaClient } = require('../../generated/prisma');
+const Marksheet = require('../models/Marksheet');
 const multer = require('multer');
 const ocrService = require('../services/ocrService');
 const router = express.Router();
-const prisma = new PrismaClient();
+
 
 // Configure multer for file uploads
 const storage = multer.memoryStorage();
@@ -62,76 +62,68 @@ router.post('/test-ocr', upload.single('marksheet'), async (req, res) => {
 // Upload multiple marksheets with OCR processing
 router.post('/upload-marksheets', upload.array('marksheets', 5), async (req, res) => {
   try {
-    const userId = req.user?.id || 'demo-user-id';
+    const googleId = req.body.googleId || req.user?.id || 'demo-user-id';
     const files = req.files;
 
     if (!files || files.length === 0) {
       return res.status(400).json({ error: 'No files uploaded' });
     }
 
-    // Process each file with OCR
+    // Process and save each file
     const processedFiles = [];
-    
+
     for (const file of files) {
       console.log(`Processing file: ${file.originalname}`);
-      
       // Extract text using OCR
       const ocrResult = await ocrService.extractTextFromFile(
-        file.buffer, 
-        file.mimetype, 
+        file.buffer,
+        file.mimetype,
         file.originalname
       );
 
       let parsedMarks = null;
       if (ocrResult.success && ocrResult.extractedText) {
-        // Parse marks from extracted text using AI
         const parseResult = await ocrService.parseMarksFromText(ocrResult.extractedText);
         if (parseResult.success) {
           parsedMarks = parseResult.parsedMarks;
         }
       }
 
+      // Log parsed marks before saving
+      console.log('Parsed marks for file:', file.originalname, JSON.stringify(parsedMarks));
+
+      // Save to MongoDB
+      try {
+        const saved = await Marksheet.create({
+          googleId,
+          filename: file.originalname,
+          subjects: parsedMarks?.subjects || [],
+          totalMarks: parsedMarks?.totalMarks,
+          totalMaxMarks: parsedMarks?.totalMaxMarks,
+          percentage: parsedMarks?.percentage,
+          confidence: parsedMarks?.confidence || 0,
+          uploadedAt: new Date()
+        });
+        console.log('Marksheet saved:', saved);
+      } catch (err) {
+        console.error('Error saving marksheet:', err);
+      }
+
       processedFiles.push({
-        originalName: file.originalname,
+        name: file.originalname,
         size: file.size,
-        mimetype: file.mimetype,
-        uploadedAt: new Date(),
-        ocrExtractedText: ocrResult.extractedText || '',
         ocrSuccess: ocrResult.success,
-        ocrError: ocrResult.error || null,
         parsedMarks: parsedMarks,
-        confidenceScore: parsedMarks?.confidence || 0
+        confidenceScore: parsedMarks?.confidence || 0,
+        requiresManualEntry: !parsedMarks || (parsedMarks.confidence || 0) < 0.7
       });
     }
 
-    // Store file metadata and extracted data
-    await prisma.userStreamProfile.upsert({
-      where: { userId },
-      update: {
-        uploadedFiles: processedFiles,
-        updatedAt: new Date()
-      },
-      create: {
-        userId,
-        uploadedFiles: processedFiles
-      }
-    });
-
-    // Return results with extracted marks
-    const responseFiles = processedFiles.map(f => ({
-      name: f.originalName,
-      size: f.size,
-      ocrSuccess: f.ocrSuccess,
-      parsedMarks: f.parsedMarks,
-      confidenceScore: f.confidenceScore,
-      requiresManualEntry: !f.parsedMarks || f.confidenceScore < 0.7
-    }));
-
-    res.json({ 
-      success: true, 
+    res.json({
+      success: true,
       message: `${files.length} marksheet(s) uploaded and processed`,
-      files: responseFiles,
-      autoExtractedCount: responseFiles.filter(f => !f.requiresManualEntry).length
+      files: processedFiles,
+      autoExtractedCount: processedFiles.filter(f => !f.requiresManualEntry).length
     });
 
   } catch (error) {
@@ -141,25 +133,47 @@ router.post('/upload-marksheets', upload.array('marksheets', 5), async (req, res
 });
 
 // Store subject marks
+const User = require('../models/User');
+
+// Store subject marks (including custom subjects) for user
 router.post('/marks', async (req, res) => {
   try {
-    const userId = req.user?.id || 'demo-user-id';
+    // Use googleId from frontend or session (update as needed)
+    const googleId = req.body.googleId || req.user?.googleId || 'demo-google-id';
     const { marks } = req.body;
 
-    // Store or update user's subject marks
-    const userStreamProfile = await prisma.userStreamProfile.upsert({
-      where: { userId },
-      update: {
-        subjectMarks: marks,
-        updatedAt: new Date()
-      },
-      create: {
-        userId,
-        subjectMarks: marks
-      }
-    });
+    // Convert marks object to array of subjects for storage
+    const subjectsArr = Object.entries(marks).map(([name, value]) => ({
+      name,
+      marks: typeof value === 'number' ? value : Number(value),
+      maxMarks: 100,
+      confidence: 1 // manual entry is always confident
+    }));
 
-    res.json({ success: true, profile: userStreamProfile });
+    // Upsert marksheet for user (can extend to store multiple marksheets if needed)
+    let marksheet = await Marksheet.findOne({ googleId, manualEntry: true });
+    if (marksheet) {
+      marksheet.subjects = subjectsArr;
+      marksheet.totalMarks = subjectsArr.reduce((sum, s) => sum + s.marks, 0);
+      marksheet.totalMaxMarks = subjectsArr.length * 100;
+      marksheet.percentage = subjectsArr.length ? (marksheet.totalMarks / marksheet.totalMaxMarks) * 100 : null;
+      marksheet.confidence = 1;
+      marksheet.uploadedAt = new Date();
+      await marksheet.save();
+    } else {
+      marksheet = await Marksheet.create({
+        googleId,
+        subjects: subjectsArr,
+        totalMarks: subjectsArr.reduce((sum, s) => sum + s.marks, 0),
+        totalMaxMarks: subjectsArr.length * 100,
+        percentage: subjectsArr.length ? (subjectsArr.reduce((sum, s) => sum + s.marks, 0) / (subjectsArr.length * 100)) * 100 : null,
+        confidence: 1,
+        manualEntry: true,
+        uploadedAt: new Date()
+      });
+    }
+
+    res.json({ success: true, profile: marksheet });
   } catch (error) {
     console.error('Store marks error:', error);
     res.status(500).json({ error: 'Failed to store marks' });

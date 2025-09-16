@@ -19,6 +19,9 @@ dist-ssr
 .env.test.local
 .env.production.local
 
+# MongoDB Atlas connection string
+backend/.env
+
 # Backend environment files
 backend/.env
 backend/.env.local

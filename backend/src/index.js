@@ -1,11 +1,21 @@
 const express = require('express');
 const cors = require('cors');
-const { PrismaClient } = require('../generated/prisma');
+
 require('dotenv').config();
+const mongoose = require('mongoose');
 
 const app = express();
-const prisma = new PrismaClient();
+
 const PORT = process.env.PORT || 3001;
+
+
+// Connect to MongoDB Atlas
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log('✅ Connected to MongoDB Atlas'))
+  .catch((err) => console.error('❌ MongoDB connection error:', err));
 
 // Middleware
 app.use(cors({
@@ -48,9 +58,10 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
+
 // Graceful shutdown
 process.on('SIGINT', async () => {
-  await prisma.$disconnect();
+  await mongoose.disconnect();
   process.exit(0);
 });
 

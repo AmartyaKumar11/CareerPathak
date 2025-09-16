@@ -1,97 +1,34 @@
 const express = require('express');
-const { PrismaClient } = require('../../generated/prisma');
+
 const router = express.Router();
-const prisma = new PrismaClient();
 
-// Get user profile
-router.get('/profile', async (req, res) => {
+const User = require('../models/User');
+
+
+// Register or get user on Google Auth
+router.post('/register', async (req, res) => {
   try {
-    const userId = req.user?.id || 'demo-user-id';
-    
-    let user = await prisma.user.findUnique({
-      where: { id: userId },
-      include: { profile: true }
-    });
-
-    // Create demo user if doesn't exist
-    if (!user) {
-      user = await prisma.user.create({
-        data: {
-          id: userId,
-          email: req.user?.email || 'demo@example.com',
-          name: req.user?.name || 'Demo User',
-          googleId: 'demo-google-id'
-        },
-        include: { profile: true }
-      });
+    console.log('Register request body:', req.body);
+    const { googleId, email, name } = req.body;
+    if (!googleId || !email) {
+      return res.status(400).json({ error: 'Missing googleId or email' });
     }
-
+    let user = await User.findOne({ googleId });
+    if (!user) {
+      user = await User.create({ googleId, email, name });
+      console.log('New user created:', user);
+    } else {
+      console.log('User already exists:', user);
+    }
     res.json(user);
   } catch (error) {
-    console.error('Get profile error:', error);
-    res.status(500).json({ error: 'Failed to get user profile' });
+    console.error('Register user error:', error);
+    res.status(500).json({ error: 'Failed to register user' });
   }
 });
 
-// Create or update user profile
-router.post('/profile', async (req, res) => {
-  try {
-    const userId = req.user?.id || 'demo-user-id';
-    const {
-      currentClass,
-      subjects,
-      academicPerformance,
-      careerInterests,
-      skillLevel,
-      preferredLocation,
-      workStyle,
-      personalityType
-    } = req.body;
 
-    // Ensure user exists
-    await prisma.user.upsert({
-      where: { id: userId },
-      update: {},
-      create: {
-        id: userId,
-        email: req.user?.email || 'demo@example.com',
-        name: req.user?.name || 'Demo User',
-        googleId: 'demo-google-id'
-      }
-    });
-
-    // Create or update profile
-    const profile = await prisma.userProfile.upsert({
-      where: { userId },
-      update: {
-        currentClass,
-        subjects,
-        academicPerformance,
-        careerInterests,
-        skillLevel,
-        preferredLocation,
-        workStyle,
-        personalityType
-      },
-      create: {
-        userId,
-        currentClass,
-        subjects,
-        academicPerformance,
-        careerInterests,
-        skillLevel,
-        preferredLocation,
-        workStyle,
-        personalityType
-      }
-    });
-
-    res.json(profile);
-  } catch (error) {
-    console.error('Update profile error:', error);
-    res.status(500).json({ error: 'Failed to update profile' });
-  }
-});
+// ...existing code for profile and recommendations (to be refactored for MongoDB)
 
 // Get user's recommendations history
 router.get('/recommendations', async (req, res) => {

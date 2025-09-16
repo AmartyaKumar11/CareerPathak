@@ -71,8 +71,26 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         };
       }
       
+      console.log('🔑 User data after Google sign-in:', userData);
       setUser(userData);
       localStorage.setItem('user', JSON.stringify(userData));
+      // Register user in backend
+      console.log('📡 Sending registration request to backend...');
+      fetch('http://localhost:3001/api/users/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          googleId: userData.id,
+          email: userData.email,
+          name: userData.name
+        })
+      })
+        .then(res => {
+          console.log('📡 Backend response status:', res.status);
+          return res.json();
+        })
+        .then(data => console.log('✅ Backend registration response:', data))
+        .catch(err => console.error('❌ Backend registration error:', err));
     } catch (error) {
       console.error('Sign in error:', error);
       throw error;

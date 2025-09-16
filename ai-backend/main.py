@@ -5,7 +5,9 @@ from typing import List, Optional
 import pytesseract
 from PIL import Image
 import io
+
 import os
+from db import users_collection, marksheets_collection, answers_collection
 
 app = FastAPI()
 
@@ -98,13 +100,22 @@ def generate_psychometric(marks: List[SubjectMark]):
     return questions
 
 # Store answers (placeholder)
+
 class AnswersPayload(BaseModel):
     user_id: str
     answers: List[PsychometricAnswer]
 
+
 @app.post("/submit-answers")
 def submit_answers(payload: AnswersPayload):
-    # TODO: Store in database
+    # Store answers in MongoDB
+    for ans in payload.answers:
+        answers_collection.insert_one({
+            "user_id": payload.user_id,
+            "question_id": ans.question_id,
+            "answer": ans.answer,
+            "question_text": ans.question_text
+        })
     return {"success": True, "message": "Answers stored"}
 
 # Recommend streams (placeholder)

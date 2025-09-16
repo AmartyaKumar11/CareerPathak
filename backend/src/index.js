@@ -32,6 +32,7 @@ app.use('/api/recommendations', require('./routes/recommendations'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/applications', require('./routes/applications'));
 app.use('/api/scholarships', require('./routes/scholarships'));
+app.use('/api/streams', require('./routes/streams'));
 
 // Error handling
 app.use((error, req, res, next) => {

@@ -26,6 +26,7 @@ model User {
   
   // User preferences for recommendations
   profile       UserProfile?
+  streamProfile UserStreamProfile?
   applications  Application[]
   scholarships  UserScholarship[]
   @@map("users")
@@ -54,6 +55,57 @@ model UserProfile {
   updatedAt         DateTime @updatedAt
   
   @@map("user_profiles")
+}
+
+// Stream-specific user profile for psychometric analysis
+model UserStreamProfile {
+  id                   String @id @default(cuid())
+  userId               String @unique
+  user                 User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Subject marks from 12th grade
+  subjectMarks         Json? // Store marks as flexible JSON
+  
+  // Psychometric test results
+  psychometricAnswers  Json? // Store AI-generated Q&A pairs
+  
+  // AI-generated traits and analysis
+  personalityTraits    String[] // Extracted traits from psychometric test
+  recommendedStreams   String[] // AI-recommended stream IDs
+  
+  // Metadata
+  testCompletedAt      DateTime?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  
+  @@map("user_stream_profiles")
+}
+
+// Academic streams dataset
+model Stream {
+  id                   String @id @default(cuid())
+  name                 String
+  category             String // "Science", "Commerce", "Arts", "Vocational"
+  description          String?
+  
+  // Eligibility criteria
+  eligibilityCriteria  Json // Subject-wise minimum marks required
+  
+  // Career information
+  entranceExams        String[]
+  careers              String[]
+  personalityTraits    String[] // Required personality traits
+  
+  // College and salary info
+  topColleges          String[]
+  salaryRange          String?
+  
+  // Metadata
+  isActive             Boolean @default(true)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  
+  @@map("streams")
 }
 
 // Career paths and colleges (from existing JSON data)

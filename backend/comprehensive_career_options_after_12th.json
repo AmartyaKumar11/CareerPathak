@@ -1,0 +1,883 @@
+{
+  "career_options_after_12th_comprehensive": {
+    "science_stream": {
+      "pcm_traditional": [
+        {
+          "course": "B.Tech/B.E",
+          "full_form": "Bachelor of Technology/Bachelor of Engineering",
+          "duration": "4 years",
+          "specializations": [
+            "Computer Science",
+            "Mechanical",
+            "Civil",
+            "Electrical",
+            "Electronics",
+            "Chemical",
+            "Aerospace",
+            "Biotechnology",
+            "AI & ML",
+            "Data Science",
+            "Cybersecurity"
+          ],
+          "career_focus": "Engineering and Technology",
+          "salary_range": "\u20b94-25 LPA"
+        },
+        {
+          "course": "B.Sc",
+          "full_form": "Bachelor of Science",
+          "duration": "3 years",
+          "specializations": [
+            "Physics",
+            "Chemistry",
+            "Mathematics",
+            "Computer Science",
+            "Statistics",
+            "Data Science",
+            "Forensic Science",
+            "Food Technology"
+          ],
+          "career_focus": "Science and Research",
+          "salary_range": "\u20b93-12 LPA"
+        },
+        {
+          "course": "BCA",
+          "full_form": "Bachelor of Computer Applications",
+          "duration": "3 years",
+          "career_focus": "Information Technology",
+          "salary_range": "\u20b93-15 LPA"
+        },
+        {
+          "course": "B.Arch",
+          "full_form": "Bachelor of Architecture",
+          "duration": "5 years",
+          "entrance_exam": "NATA/JEE Main Paper 2",
+          "career_focus": "Architecture and Design",
+          "salary_range": "\u20b94-20 LPA"
+        },
+        {
+          "course": "B.Des",
+          "full_form": "Bachelor of Design",
+          "duration": "4 years",
+          "specializations": [
+            "Product Design",
+            "Industrial Design",
+            "Communication Design",
+            "Fashion Design",
+            "Interior Design"
+          ],
+          "career_focus": "Design and Creativity",
+          "salary_range": "\u20b93-18 LPA"
+        },
+        {
+          "course": "B.Tech in AI & ML",
+          "full_form": "Bachelor of Technology in Artificial Intelligence & Machine Learning",
+          "duration": "4 years",
+          "career_focus": "Artificial Intelligence",
+          "salary_range": "\u20b96-30 LPA"
+        },
+        {
+          "course": "B.Tech Data Science",
+          "full_form": "Bachelor of Technology in Data Science",
+          "duration": "4 years",
+          "career_focus": "Data Analytics",
+          "salary_range": "\u20b95-25 LPA"
+        },
+        {
+          "course": "B.Sc Forensic Science",
+          "full_form": "Bachelor of Science in Forensic Science",
+          "duration": "3 years",
+          "career_focus": "Criminal Investigation",
+          "salary_range": "\u20b94-15 LPA"
+        },
+        {
+          "course": "B.Sc Food Technology",
+          "full_form": "Bachelor of Science in Food Technology",
+          "duration": "3 years",
+          "career_focus": "Food Industry",
+          "salary_range": "\u20b93-12 LPA"
+        },
+        {
+          "course": "B.Sc Actuarial Science",
+          "full_form": "Bachelor of Science in Actuarial Science",
+          "duration": "3 years",
+          "career_focus": "Risk Assessment",
+          "salary_range": "\u20b96-25 LPA"
+        }
+      ],
+      "pcb_medical": [
+        {
+          "course": "MBBS",
+          "full_form": "Bachelor of Medicine & Bachelor of Surgery",
+          "duration": "5.5 years (including internship)",
+          "entrance_exam": "NEET",
+          "career_focus": "Medicine",
+          "salary_range": "\u20b96-50+ LPA"
+        },
+        {
+          "course": "BDS",
+          "full_form": "Bachelor of Dental Surgery",
+          "duration": "5 years",
+          "entrance_exam": "NEET",
+          "career_focus": "Dentistry",
+          "salary_range": "\u20b94-25 LPA"
+        },
+        {
+          "course": "BAMS",
+          "full_form": "Bachelor of Ayurvedic Medicine and Surgery",
+          "duration": "5.5 years",
+          "entrance_exam": "NEET",
+          "career_focus": "Ayurveda",
+          "salary_range": "\u20b93-15 LPA"
+        },
+        {
+          "course": "BHMS",
+          "full_form": "Bachelor of Homeopathic Medicine and Surgery",
+          "duration": "5.5 years",
+          "entrance_exam": "NEET",
+          "career_focus": "Homeopathy",
+          "salary_range": "\u20b93-12 LPA"
+        },
+        {
+          "course": "B.Pharm",
+          "full_form": "Bachelor of Pharmacy",
+          "duration": "4 years",
+          "career_focus": "Pharmaceutical Sciences",
+          "salary_range": "\u20b93-15 LPA"
+        },
+        {
+          "course": "B.Sc Nursing",
+          "full_form": "Bachelor of Science in Nursing",
+          "duration": "4 years",
+          "career_focus": "Healthcare Nursing",
+          "salary_range": "\u20b93-12 LPA"
+        },
+        {
+          "course": "BPT",
+          "full_form": "Bachelor of Physiotherapy",
+          "duration": "4.5 years",
+          "career_focus": "Physical Therapy",
+          "salary_range": "\u20b93-15 LPA"
+        },
+        {
+          "course": "BMLT",
+          "full_form": "Bachelor of Medical Laboratory Technology",
+          "duration": "3 years",
+          "career_focus": "Medical Diagnostics",
+          "salary_range": "\u20b92.5-8 LPA"
+        },
+        {
+          "course": "B.Optom",
+          "full_form": "Bachelor of Optometry",
+          "duration": "4 years",
+          "career_focus": "Eye Care",
+          "salary_range": "\u20b93-12 LPA"
+        },
+        {
+          "course": "B.Sc Biotechnology",
+          "full_form": "Bachelor of Science in Biotechnology",
+          "duration": "3 years",
+          "career_focus": "Biotechnology",
+          "salary_range": "\u20b93-15 LPA"
+        },
+        {
+          "course": "B.Sc Microbiology",
+          "full_form": "Bachelor of Science in Microbiology",
+          "duration": "3 years",
+          "career_focus": "Microbiology Research",
+          "salary_range": "\u20b93-12 LPA"
+        },
+        {
+          "course": "B.Sc Agriculture",
+          "full_form": "Bachelor of Science in Agriculture",
+          "duration": "4 years",
+          "career_focus": "Agricultural Sciences",
+          "salary_range": "\u20b93-15 LPA"
+        },
+        {
+          "course": "B.V.Sc",
+          "full_form": "Bachelor of Veterinary Science",
+          "duration": "5 years",
+          "career_focus": "Veterinary Medicine",
+          "salary_range": "\u20b93-18 LPA"
+        }
+      ]
+    },
+    "commerce_stream": [
+      {
+        "course": "B.Com",
+        "full_form": "Bachelor of Commerce",
+        "duration": "3 years",
+        "variants": [
+          "B.Com General",
+          "B.Com (Hons)"
+        ],
+        "specializations": [
+          "Accounting",
+          "Finance",
+          "Banking",
+          "Taxation",
+          "Business Economics"
+        ],
+        "career_focus": "Commerce and Finance",
+        "salary_range": "\u20b93-12 LPA"
+      },
+      {
+        "course": "BBA",
+        "full_form": "Bachelor of Business Administration",
+        "duration": "3 years",
+        "specializations": [
+          "Marketing",
+          "Finance",
+          "HR",
+          "Operations",
+          "International Business",
+          "Digital Marketing"
+        ],
+        "career_focus": "Business Management",
+        "salary_range": "\u20b93-15 LPA"
+      },
+      {
+        "course": "BMS",
+        "full_form": "Bachelor of Management Studies",
+        "duration": "3 years",
+        "career_focus": "Management",
+        "salary_range": "\u20b93-12 LPA"
+      },
+      {
+        "course": "CA",
+        "full_form": "Chartered Accountant",
+        "duration": "3-5 years",
+        "career_focus": "Accounting and Auditing",
+        "salary_range": "\u20b96-50+ LPA"
+      },
+      {
+        "course": "CS",
+        "full_form": "Company Secretary",
+        "duration": "3 years",
+        "conducting_body": "ICSI",
+        "career_focus": "Corporate Law",
+        "salary_range": "\u20b94-20 LPA"
+      },
+      {
+        "course": "CMA",
+        "full_form": "Cost and Management Accountant",
+        "duration": "3 years",
+        "career_focus": "Cost Accounting",
+        "salary_range": "\u20b94-18 LPA"
+      },
+      {
+        "course": "B.Econ",
+        "full_form": "Bachelor of Economics",
+        "duration": "3 years",
+        "career_focus": "Economic Analysis",
+        "salary_range": "\u20b93-15 LPA"
+      },
+      {
+        "course": "BFM",
+        "full_form": "Bachelor of Financial Markets",
+        "duration": "3 years",
+        "career_focus": "Financial Markets",
+        "salary_range": "\u20b94-20 LPA"
+      },
+      {
+        "course": "BBE",
+        "full_form": "Bachelor of Business Economics",
+        "duration": "3 years",
+        "career_focus": "Business Economics",
+        "salary_range": "\u20b93-15 LPA"
+      },
+      {
+        "course": "B.Com (Financial Planning)",
+        "full_form": "Bachelor of Commerce in Financial Planning",
+        "duration": "3 years",
+        "career_focus": "Financial Planning",
+        "salary_range": "\u20b94-18 LPA"
+      }
+    ],
+    "arts_humanities_stream": [
+      {
+        "course": "BA",
+        "full_form": "Bachelor of Arts",
+        "duration": "3 years",
+        "specializations": [
+          "English",
+          "History",
+          "Political Science",
+          "Psychology",
+          "Sociology",
+          "Philosophy",
+          "Geography",
+          "Economics"
+        ],
+        "career_focus": "Liberal Arts",
+        "salary_range": "\u20b92.5-12 LPA"
+      },
+      {
+        "course": "BA (Hons)",
+        "full_form": "Bachelor of Arts Honours",
+        "duration": "3 years",
+        "specializations": [
+          "English Literature",
+          "History",
+          "Political Science",
+          "Psychology",
+          "Sociology"
+        ],
+        "career_focus": "Specialized Liberal Arts",
+        "salary_range": "\u20b93-15 LPA"
+      },
+      {
+        "course": "BJMC",
+        "full_form": "Bachelor of Journalism and Mass Communication",
+        "duration": "3 years",
+        "career_focus": "Media and Journalism",
+        "salary_range": "\u20b93-20 LPA"
+      },
+      {
+        "course": "BFA",
+        "full_form": "Bachelor of Fine Arts",
+        "duration": "3-4 years",
+        "specializations": [
+          "Painting",
+          "Sculpture",
+          "Applied Arts",
+          "Photography"
+        ],
+        "career_focus": "Fine Arts",
+        "salary_range": "\u2083-18 LPA"
+      },
+      {
+        "course": "BSW",
+        "full_form": "Bachelor of Social Work",
+        "duration": "3 years",
+        "career_focus": "Social Work",
+        "salary_range": "\u20b92.5-10 LPA"
+      },
+      {
+        "course": "B.Lib",
+        "full_form": "Bachelor of Library Science",
+        "duration": "1 year",
+        "career_focus": "Library Science",
+        "salary_range": "\u20b92.5-8 LPA"
+      },
+      {
+        "course": "BEd",
+        "full_form": "Bachelor of Education",
+        "duration": "2 years",
+        "career_focus": "Teaching",
+        "salary_range": "\u20b93-12 LPA"
+      },
+      {
+        "course": "BA Psychology",
+        "full_form": "Bachelor of Arts in Psychology",
+        "duration": "3 years",
+        "career_focus": "Psychology",
+        "salary_range": "\u20b93-15 LPA"
+      },
+      {
+        "course": "BA Foreign Language",
+        "full_form": "Bachelor of Arts in Foreign Language",
+        "duration": "3 years",
+        "specializations": [
+          "French",
+          "German",
+          "Spanish",
+          "Japanese",
+          "Chinese",
+          "Korean"
+        ],
+        "career_focus": "Language Studies",
+        "salary_range": "\u20b93-18 LPA"
+      }
+    ],
+    "creative_design_fields": [
+      {
+        "course": "B.Des Fashion Design",
+        "full_form": "Bachelor of Design in Fashion Design",
+        "duration": "4 years",
+        "career_focus": "Fashion Industry",
+        "salary_range": "\u20b93-25 LPA"
+      },
+      {
+        "course": "B.Des Interior Design",
+        "full_form": "Bachelor of Design in Interior Design",
+        "duration": "4 years",
+        "career_focus": "Interior Design",
+        "salary_range": "\u20b93-20 LPA"
+      },
+      {
+        "course": "B.Des Graphic Design",
+        "full_form": "Bachelor of Design in Graphic Design",
+        "duration": "4 years",
+        "career_focus": "Graphic Design",
+        "salary_range": "\u20b93-18 LPA"
+      },
+      {
+        "course": "Animation & Multimedia",
+        "full_form": "Bachelor in Animation and Multimedia",
+        "duration": "3-4 years",
+        "specializations": [
+          "2D Animation",
+          "3D Animation",
+          "VFX",
+          "Game Design"
+        ],
+        "career_focus": "Animation Industry",
+        "salary_range": "\u20b93-20 LPA"
+      },
+      {
+        "course": "Game Design & Development",
+        "full_form": "Bachelor in Game Design and Development",
+        "duration": "4 years",
+        "career_focus": "Gaming Industry",
+        "salary_range": "\u20b94-25 LPA"
+      },
+      {
+        "course": "Film Making & Production",
+        "full_form": "Bachelor in Film Making and Production",
+        "duration": "3-4 years",
+        "career_focus": "Film Industry",
+        "salary_range": "\u20b93-30 LPA"
+      },
+      {
+        "course": "Photography",
+        "full_form": "Bachelor in Photography",
+        "duration": "3 years",
+        "career_focus": "Photography",
+        "salary_range": "\u20b92.5-15 LPA"
+      }
+    ],
+    "law_legal_studies": [
+      {
+        "course": "BA LLB",
+        "full_form": "Bachelor of Arts and Bachelor of Laws",
+        "duration": "5 years",
+        "entrance_exams": [
+          "CLAT",
+          "LSAT",
+          "AILET"
+        ],
+        "career_focus": "Legal Practice",
+        "salary_range": "\u20b93-50+ LPA"
+      },
+      {
+        "course": "BBA LLB",
+        "full_form": "Bachelor of Business Administration and Bachelor of Laws",
+        "duration": "5 years",
+        "career_focus": "Corporate Law",
+        "salary_range": "\u20b94-50+ LPA"
+      },
+      {
+        "course": "B.Com LLB",
+        "full_form": "Bachelor of Commerce and Bachelor of Laws",
+        "duration": "5 years",
+        "career_focus": "Commercial Law",
+        "salary_range": "\u20b94-50+ LPA"
+      },
+      {
+        "course": "LLB",
+        "full_form": "Bachelor of Laws",
+        "duration": "3 years (after graduation)",
+        "career_focus": "Legal Practice",
+        "salary_range": "\u20b93-50+ LPA"
+      }
+    ],
+    "hospitality_tourism": [
+      {
+        "course": "BHM",
+        "full_form": "Bachelor of Hotel Management",
+        "duration": "4 years",
+        "career_focus": "Hotel Industry",
+        "salary_range": "\u20b93-20 LPA"
+      },
+      {
+        "course": "BTTM",
+        "full_form": "Bachelor of Travel and Tourism Management",
+        "duration": "3 years",
+        "career_focus": "Tourism Industry",
+        "salary_range": "\u20b93-15 LPA"
+      },
+      {
+        "course": "BHM & CT",
+        "full_form": "Bachelor of Hotel Management and Catering Technology",
+        "duration": "4 years",
+        "career_focus": "Hospitality",
+        "salary_range": "\u20b93-18 LPA"
+      },
+      {
+        "course": "Culinary Arts",
+        "full_form": "Bachelor in Culinary Arts",
+        "duration": "3-4 years",
+        "career_focus": "Culinary Industry",
+        "salary_range": "\u20b93-25 LPA"
+      },
+      {
+        "course": "Event Management",
+        "full_form": "Bachelor in Event Management",
+        "duration": "3 years",
+        "career_focus": "Event Industry",
+        "salary_range": "\u20b93-20 LPA"
+      }
+    ],
+    "emerging_new_age_fields": [
+      {
+        "course": "Digital Marketing",
+        "full_form": "Bachelor in Digital Marketing",
+        "duration": "3 years",
+        "specializations": [
+          "SEO",
+          "SEM",
+          "Social Media Marketing",
+          "Content Marketing",
+          "Email Marketing"
+        ],
+        "career_focus": "Digital Marketing",
+        "salary_range": "\u20b93-20 LPA"
+      },
+      {
+        "course": "Data Science & Analytics",
+        "full_form": "Bachelor in Data Science and Analytics",
+        "duration": "3-4 years",
+        "career_focus": "Data Analytics",
+        "salary_range": "\u20b95-30 LPA"
+      },
+      {
+        "course": "Cybersecurity",
+        "full_form": "Bachelor in Cybersecurity",
+        "duration": "4 years",
+        "career_focus": "Information Security",
+        "salary_range": "\u20b95-25 LPA"
+      },
+      {
+        "course": "Blockchain Technology",
+        "full_form": "Bachelor in Blockchain Technology",
+        "duration": "4 years",
+        "career_focus": "Blockchain Development",
+        "salary_range": "\u20b96-30 LPA"
+      },
+      {
+        "course": "Social Media Management",
+        "full_form": "Bachelor in Social Media Management",
+        "duration": "3 years",
+        "career_focus": "Social Media",
+        "salary_range": "\u20b93-15 LPA"
+      },
+      {
+        "course": "Content Creation & Influencer Marketing",
+        "full_form": "Bachelor in Content Creation and Influencer Marketing",
+        "duration": "3 years",
+        "career_focus": "Content Industry",
+        "salary_range": "\u20b93-25 LPA"
+      },
+      {
+        "course": "E-commerce Management",
+        "full_form": "Bachelor in E-commerce Management",
+        "duration": "3 years",
+        "career_focus": "E-commerce",
+        "salary_range": "\u20b93-20 LPA"
+      },
+      {
+        "course": "UX/UI Design",
+        "full_form": "Bachelor in User Experience/User Interface Design",
+        "duration": "3-4 years",
+        "career_focus": "User Experience Design",
+        "salary_range": "\u20b94-25 LPA"
+      }
+    ],
+    "defense_aviation": [
+      {
+        "course": "NDA",
+        "full_form": "National Defence Academy",
+        "duration": "3 years + service academy",
+        "entrance_exam": "NDA & NA Exam",
+        "career_focus": "Defense Forces",
+        "salary_range": "\u20b96-30+ LPA"
+      },
+      {
+        "course": "Merchant Navy",
+        "full_form": "Bachelor of Nautical Science",
+        "duration": "3-4 years",
+        "career_focus": "Maritime Industry",
+        "salary_range": "\u20b98-50+ LPA"
+      },
+      {
+        "course": "Aviation",
+        "full_form": "Bachelor in Aviation",
+        "duration": "3-4 years",
+        "specializations": [
+          "Pilot Training",
+          "Aircraft Maintenance",
+          "Airport Management"
+        ],
+        "career_focus": "Aviation Industry",
+        "salary_range": "\u20b96-50+ LPA"
+      },
+      {
+        "course": "B.Sc Aviation",
+        "full_form": "Bachelor of Science in Aviation",
+        "duration": "3 years",
+        "career_focus": "Aviation Technology",
+        "salary_range": "\u20b95-25 LPA"
+      }
+    ],
+    "vocational_skill_based": [
+      {
+        "course": "B.Voc",
+        "full_form": "Bachelor of Vocation",
+        "duration": "3-4 years",
+        "specializations": [
+          "Software Development",
+          "Banking & Finance",
+          "Retail Management",
+          "Healthcare",
+          "Agriculture"
+        ],
+        "career_focus": "Skill-based Employment",
+        "salary_range": "\u20b93-15 LPA"
+      },
+      {
+        "course": "Polytechnic Diploma",
+        "full_form": "Diploma in Engineering",
+        "duration": "3 years",
+        "specializations": [
+          "Mechanical",
+          "Electrical",
+          "Civil",
+          "Computer Science",
+          "Electronics"
+        ],
+        "career_focus": "Technical Skills",
+        "salary_range": "\u20b92.5-12 LPA"
+      },
+      {
+        "course": "ITI",
+        "full_form": "Industrial Training Institute",
+        "duration": "1-2 years",
+        "specializations": [
+          "Electrician",
+          "Fitter",
+          "Welder",
+          "Mechanic",
+          "Electronics"
+        ],
+        "career_focus": "Technical Trades",
+        "salary_range": "\u20b92-8 LPA"
+      }
+    ],
+    "government_job_preparation": [
+      {
+        "course": "SSC Preparation",
+        "full_form": "Staff Selection Commission",
+        "exams": [
+          "SSC CGL",
+          "SSC CHSL",
+          "SSC MTS",
+          "SSC GD",
+          "SSC Stenographer"
+        ],
+        "career_focus": "Central Government Jobs",
+        "salary_range": "\u20b93-15 LPA"
+      },
+      {
+        "course": "Railway Preparation",
+        "full_form": "Railway Recruitment Board",
+        "exams": [
+          "RRB NTPC",
+          "RRB Group D",
+          "RRB ALP",
+          "RRB JE"
+        ],
+        "career_focus": "Railway Jobs",
+        "salary_range": "\u20b93-20 LPA"
+      },
+      {
+        "course": "Banking Preparation",
+        "full_form": "Banking Sector Exams",
+        "exams": [
+          "IBPS PO",
+          "IBPS Clerk",
+          "SBI PO",
+          "SBI Clerk",
+          "RBI Assistant"
+        ],
+        "career_focus": "Banking Sector",
+        "salary_range": "\u20b94-25 LPA"
+      },
+      {
+        "course": "UPSC Preparation",
+        "full_form": "Union Public Service Commission",
+        "exams": [
+          "Civil Services",
+          "Engineering Services",
+          "Forest Services"
+        ],
+        "career_focus": "Civil Services",
+        "salary_range": "\u20b98-50+ LPA"
+      },
+      {
+        "course": "State PSC Preparation",
+        "full_form": "State Public Service Commission",
+        "career_focus": "State Government Jobs",
+        "salary_range": "\u20b94-20 LPA"
+      }
+    ],
+    "entrepreneurship_startup": [
+      {
+        "course": "BBA Entrepreneurship",
+        "full_form": "Bachelor of Business Administration in Entrepreneurship",
+        "duration": "3 years",
+        "career_focus": "Business Creation",
+        "salary_range": "\u20b93-50+ LPA"
+      },
+      {
+        "course": "B.Com Entrepreneurship",
+        "full_form": "Bachelor of Commerce in Entrepreneurship",
+        "duration": "3 years",
+        "career_focus": "Commercial Entrepreneurship",
+        "salary_range": "\u20b93-50+ LPA"
+      },
+      {
+        "course": "Startup Incubation Programs",
+        "full_form": "Various Startup Programs",
+        "duration": "6 months - 2 years",
+        "career_focus": "Startup Development",
+        "salary_range": "Variable"
+      }
+    ],
+    "diploma_certificate_courses": [
+      {
+        "course": "Diploma in Engineering",
+        "duration": "3 years",
+        "specializations": [
+          "Computer Science",
+          "Mechanical",
+          "Civil",
+          "Electrical",
+          "Electronics"
+        ]
+      },
+      {
+        "course": "Diploma in Medical Laboratory Technology",
+        "duration": "2 years",
+        "career_focus": "Medical Diagnostics"
+      },
+      {
+        "course": "Diploma in Pharmacy",
+        "duration": "2 years",
+        "career_focus": "Pharmaceutical"
+      },
+      {
+        "course": "Diploma in Nursing",
+        "duration": "3 years",
+        "career_focus": "Healthcare"
+      },
+      {
+        "course": "Diploma in Hotel Management",
+        "duration": "2-3 years",
+        "career_focus": "Hospitality"
+      },
+      {
+        "course": "Diploma in Fashion Design",
+        "duration": "1-2 years",
+        "career_focus": "Fashion Industry"
+      },
+      {
+        "course": "Diploma in Interior Design",
+        "duration": "1-2 years",
+        "career_focus": "Interior Design"
+      },
+      {
+        "course": "Diploma in Animation & VFX",
+        "duration": "1-2 years",
+        "career_focus": "Animation Industry"
+      },
+      {
+        "course": "Diploma in Digital Marketing",
+        "duration": "6 months - 1 year",
+        "career_focus": "Digital Marketing"
+      },
+      {
+        "course": "Diploma in Computer Applications",
+        "duration": "1 year",
+        "career_focus": "IT Skills"
+      },
+      {
+        "course": "Certificate in Yoga",
+        "duration": "6 months",
+        "career_focus": "Wellness"
+      },
+      {
+        "course": "Certificate in Banking",
+        "duration": "6 months - 1 year",
+        "career_focus": "Banking Skills"
+      },
+      {
+        "course": "Certificate in Financial Accounting",
+        "duration": "6 months - 1 year",
+        "career_focus": "Accounting"
+      },
+      {
+        "course": "Certificate in Industrial Safety",
+        "duration": "6 months - 1 year",
+        "career_focus": "Safety Management"
+      },
+      {
+        "course": "Certificate in Business Management",
+        "duration": "6 months - 1 year",
+        "career_focus": "Management Skills"
+      },
+      {
+        "course": "Certificate in Physical Education",
+        "duration": "1 year",
+        "career_focus": "Sports and Fitness"
+      },
+      {
+        "course": "Certificate in Acting and Anchoring",
+        "duration": "3-6 months",
+        "career_focus": "Entertainment"
+      }
+    ],
+    "international_study_options": [
+      {
+        "course": "International Foundation Programs",
+        "duration": "1 year",
+        "description": "Preparation for overseas undergraduate programs"
+      },
+      {
+        "course": "SAT/ACT Preparation",
+        "duration": "6 months - 1 year",
+        "description": "For US university admissions"
+      },
+      {
+        "course": "A-Levels",
+        "duration": "2 years",
+        "description": "British curriculum for international admissions"
+      },
+      {
+        "course": "IB Diploma",
+        "duration": "2 years",
+        "description": "International Baccalaureate for global universities"
+      }
+    ],
+    "research_academia": [
+      {
+        "course": "B.Sc Research",
+        "full_form": "Bachelor of Science Research",
+        "duration": "4 years",
+        "career_focus": "Research and Development"
+      },
+      {
+        "course": "Integrated MS",
+        "full_form": "Integrated Master of Science",
+        "duration": "5 years",
+        "career_focus": "Advanced Research"
+      },
+      {
+        "course": "PhD (Direct Entry)",
+        "full_form": "Doctor of Philosophy",
+        "duration": "5-6 years",
+        "career_focus": "Academic Research"
+      }
+    ]
+  }
+}

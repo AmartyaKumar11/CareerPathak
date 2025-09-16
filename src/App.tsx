@@ -5,6 +5,7 @@ import Auth from './pages/Auth';
 import { PersonalizedDashboard as Dashboard } from './pages/PersonalizedDashboardClean';
 import CareersPage from './pages/CareersPage';
 import Recommendations from './pages/Recommendations';
+import StreamRecommendations from './pages/StreamRecommendations';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/careers" element={<CareersPage />} />
         <Route path="/recommendations" element={<Recommendations />} />
+        <Route path="/stream-recommendations" element={<StreamRecommendations />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

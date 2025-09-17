@@ -6,6 +6,7 @@ import { PersonalizedDashboard as Dashboard } from './pages/PersonalizedDashboar
 import CareersPage from './pages/CareersPage';
 import Recommendations from './pages/Recommendations';
 import StreamRecommendations from './pages/StreamRecommendations';
+import NearbyCollegesMap from './pages/NearbyCollegesMap';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/careers" element={<CareersPage />} />
         <Route path="/recommendations" element={<Recommendations />} />
         <Route path="/stream-recommendations" element={<StreamRecommendations />} />
+        <Route path="/nearby-colleges-map" element={<NearbyCollegesMap />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

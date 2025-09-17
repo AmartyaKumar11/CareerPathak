@@ -68,7 +68,7 @@ const QuickActions = () => {
       label: 'Find Colleges', 
       description: 'Near You',
       color: 'bg-green-500',
-      onClick: () => navigate('/colleges')
+      onClick: () => navigate('/nearby-colleges-map')
     },
     { 
       icon: BarChart3, 
@@ -283,7 +283,7 @@ export const PersonalizedDashboard = () => {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate('/nearby-colleges-map')}>
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -297,7 +297,7 @@ export const PersonalizedDashboard = () => {
                 <MapPin className="h-8 w-8 text-green-500" />
               </div>
               <Badge variant="secondary" className="mt-2">
-                Government colleges
+                View on Map
               </Badge>
             </CardContent>
           </Card>

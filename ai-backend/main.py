@@ -6,7 +6,7 @@ import pytesseract
 from PIL import Image
 import io
 import json
-from datetime import datetime
+from datetime import datetime, timezone, timezone
 
 import os
 from dotenv import load_dotenv
@@ -151,7 +151,7 @@ def analyze_psychometric_responses(submission: AssessmentSubmission):
         # Comprehensive profile data for MongoDB storage
         profile_data = {
             "user_id": submission.user_id,
-            "assessment_date": datetime.utcnow(),
+            "assessment_date": datetime.now(timezone.utc),
             "assessment_type": "comprehensive_psychometric",
             
             # Academic Performance Data
@@ -189,8 +189,8 @@ def analyze_psychometric_responses(submission: AssessmentSubmission):
             "avg_response_time": sum(r.response_time for r in submission.responses) / len(submission.responses),
             
             # Metadata
-            "created_at": datetime.utcnow(),
-            "updated_at": datetime.utcnow(),
+            "created_at": datetime.now(timezone.utc),
+            "updated_at": datetime.now(timezone.utc),
             "version": "2.0_ai_enhanced"
         }
         
@@ -220,7 +220,7 @@ def analyze_psychometric_responses(submission: AssessmentSubmission):
         # Store stream recommendations separately with versioning
         recommendations_data = {
             "user_id": submission.user_id,
-            "assessment_id": submission.user_id + "_" + datetime.utcnow().strftime("%Y%m%d_%H%M%S"),
+            "assessment_id": submission.user_id + "_" + datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S"),
             "recommended_streams": profile.recommended_streams,
             "recommendation_method": recommendation_method,
             "recommendation_quality": "high" if has_ai_insights else "good",
@@ -265,6 +265,8 @@ def analyze_psychometric_responses(submission: AssessmentSubmission):
 def get_user_profile(user_id: str):
     """Get user's latest psychometric profile"""
     try:
+        print(f"Getting profile for user: {user_id}")
+        
         # Find latest assessment for user
         profile = answers_collection.find_one(
             {"user_id": user_id},
@@ -272,20 +274,32 @@ def get_user_profile(user_id: str):
         )
         
         if not profile:
-            raise HTTPException(status_code=404, detail="No assessment found for user")
+            print(f"No profile found for user: {user_id}")
+            return {
+                "success": False,
+                "message": "No assessment found for user",
+                "profile": None,
+                "has_profile": False
+            }
         
         # Remove MongoDB ObjectId for JSON serialization
         profile.pop("_id", None)
         
+        print(f"Profile found for user: {user_id}")
         return {
             "success": True,
-            "profile": profile
+            "profile": profile,
+            "has_profile": True
         }
         
-    except HTTPException:
-        raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to retrieve profile: {str(e)}")
+        print(f"Error getting profile for {user_id}: {str(e)}")
+        return {
+            "success": False,
+            "message": f"Failed to retrieve profile: {str(e)}",
+            "profile": None,
+            "has_profile": False
+        }
 
 @app.post("/get-stream-recommendations", response_model=Dict[str, Any])
 def get_stream_recommendations(request: Dict[str, Any]):
@@ -591,6 +605,8 @@ def search_streams_by_profile(request: Dict[str, Any]):
 def get_user_stream_recommendations(user_id: str):
     """Get user's latest stream recommendations"""
     try:
+        print(f"Getting recommendations for user: {user_id}")
+        
         # Get latest recommendations
         latest_recommendations = db["stream_recommendations"].find_one(
             {"user_id": user_id, "is_latest": True},
@@ -598,11 +614,18 @@ def get_user_stream_recommendations(user_id: str):
         )
         
         if not latest_recommendations:
-            raise HTTPException(status_code=404, detail="No recommendations found for user")
+            print(f"No recommendations found for user: {user_id}")
+            return {
+                "success": False,
+                "message": "No recommendations found for user",
+                "recommendations": None,
+                "has_recommendations": False
+            }
         
         # Remove MongoDB ObjectId for JSON serialization
         latest_recommendations.pop("_id", None)
         
+        print(f"Recommendations found for user: {user_id}")
         return {
             "success": True,
             "recommendations": latest_recommendations,
@@ -611,10 +634,14 @@ def get_user_stream_recommendations(user_id: str):
             "generated_at": latest_recommendations.get("generated_at")
         }
         
-    except HTTPException:
-        raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to retrieve recommendations: {str(e)}")
+        print(f"Error getting recommendations for {user_id}: {str(e)}")
+        return {
+            "success": False,
+            "message": f"Failed to retrieve recommendations: {str(e)}",
+            "recommendations": None,
+            "has_recommendations": False
+        }
 
 @app.get("/get-user-recommendation-history/{user_id}", response_model=Dict[str, Any])
 def get_user_recommendation_history(user_id: str):

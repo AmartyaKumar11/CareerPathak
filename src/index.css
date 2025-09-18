@@ -1,9 +1,9 @@
+/* Import dashboard improvements */
+@import './styles/dashboard-improvements.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import dashboard improvements */
-@import './styles/dashboard-improvements.css';
 
 @layer base {
   :root {

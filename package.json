@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node start-dev.js",
+    "dev": "node start-services-sequential.js",
     "dev:simple": "concurrently \"npm run dev --prefix backend\" \"python ai-backend/main.py\" \"vite\" --names \"Backend,AI-Backend,Frontend\" --prefix-colors \"green,yellow,blue\"",
     "dev:frontend": "vite",
     "dev:backend": "npm run dev --prefix backend",
@@ -15,7 +15,9 @@
     "preview": "vite preview",
     "setup:ai": "cd ai-backend && python setup.py",
     "test:ai": "python test_gemini_integration.py",
-    "install:all": "npm install && npm install --prefix backend && pip install -r ai-backend/requirements.txt"
+    "install:all": "npm install && npm install --prefix backend && pip install -r ai-backend/requirements.txt",
+    "kill-ports": "npx kill-port 8080 3001 8000",
+    "clean-start": "npm run kill-ports && npm run dev"
   },
   "dependencies": {
     "@google-cloud/local-auth": "^3.0.1",

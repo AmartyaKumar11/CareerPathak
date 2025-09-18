@@ -33,6 +33,9 @@ import SmartStatsCards from '@/components/dashboard/SmartStatsCards';
 import ImprovedQuickActions from '@/components/dashboard/ImprovedQuickActions';
 import OnboardingTour from '@/components/dashboard/OnboardingTour';
 
+// Import AI service
+import { aiPsychometricService } from '@/services/aiPsychometricService';
+
 interface DashboardStats {
   totalRecommendations: number;
   nearbyColleges: number;
@@ -65,6 +68,8 @@ export const PersonalizedDashboard = () => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [loading, setLoading] = useState(true);
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const [streamRecommendations, setStreamRecommendations] = useState<any[]>([]);
+  const [loadingRecommendations, setLoadingRecommendations] = useState(false);
   const [stats, setStats] = useState<DashboardStats>({
     totalRecommendations: 0,
     nearbyColleges: 0,
@@ -87,6 +92,25 @@ export const PersonalizedDashboard = () => {
       return;
     }
   }, [user, navigate]);
+
+  // Fetch stream recommendations
+  const fetchStreamRecommendations = async () => {
+    if (!user?.email) return;
+    
+    try {
+      setLoadingRecommendations(true);
+      const recommendations = await aiPsychometricService.getUserRecommendations(user.email);
+      
+      if (recommendations && recommendations.recommended_streams) {
+        setStreamRecommendations(recommendations.recommended_streams.slice(0, 3)); // Top 3 for dashboard
+      }
+    } catch (error) {
+      console.error('Failed to fetch stream recommendations:', error);
+      // Keep empty array as fallback
+    } finally {
+      setLoadingRecommendations(false);
+    }
+  };
 
   // Initialize dashboard data
   useEffect(() => {
@@ -111,10 +135,15 @@ export const PersonalizedDashboard = () => {
           localStorage.setItem('careerpathak_visited', 'true');
         }
         
+        // Fetch stream recommendations if user has completed quiz
+        if (hasCompletedQuiz) {
+          await fetchStreamRecommendations();
+        }
+        
         // Simulate loading some basic stats
         setTimeout(() => {
           setStats({
-            totalRecommendations: hasCompletedQuiz ? 12 : 0,
+            totalRecommendations: hasCompletedQuiz ? streamRecommendations.length || 12 : 0,
             nearbyColleges: 8,
             unreadNotifications: 3,
             profileCompleteness: hasCompletedQuiz ? 85 : 45
@@ -275,49 +304,117 @@ export const PersonalizedDashboard = () => {
               <TabsContent value="recommendations" className="mt-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>
-                      {userProfile.hasCompletedQuiz ? 'Your Stream Matches' : 'Discover Your Perfect Stream'}
-                    </CardTitle>
-                    <p className="text-sm text-muted-foreground">
-                      {userProfile.hasCompletedQuiz 
-                        ? 'Based on your interests and aptitude'
-                        : 'Take our quiz to get personalized recommendations'
-                      }
-                    </p>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <CardTitle>
+                          {userProfile.hasCompletedQuiz ? 'Your Stream Matches' : 'Discover Your Perfect Stream'}
+                        </CardTitle>
+                        <p className="text-sm text-muted-foreground">
+                          {userProfile.hasCompletedQuiz 
+                            ? 'Based on your interests and aptitude'
+                            : 'Take our quiz to get personalized recommendations'
+                          }
+                        </p>
+                      </div>
+                      {userProfile.hasCompletedQuiz && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={fetchStreamRecommendations}
+                          disabled={loadingRecommendations}
+                        >
+                          <RefreshCw className={`h-4 w-4 ${loadingRecommendations ? 'animate-spin' : ''}`} />
+                        </Button>
+                      )}
+                    </div>
                   </CardHeader>
                   <CardContent>
                     {userProfile.hasCompletedQuiz ? (
                       <div className="space-y-4">
-                        {[
-                          { name: 'Computer Science Engineering', match: 92, icon: 'CS' },
-                          { name: 'Electronics Engineering', match: 87, icon: 'EE' },
-                          { name: 'Mechanical Engineering', match: 79, icon: 'ME' }
-                        ].map((stream, index) => (
-                          <div key={index} className="flex items-center justify-between p-4 border rounded-lg hover:shadow-md transition-shadow">
-                            <div className="flex items-center gap-3">
-                              <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                                <span className="text-xs font-bold text-primary">{stream.icon}</span>
+                        {loadingRecommendations ? (
+                          // Loading state
+                          <div className="space-y-4">
+                            {[1, 2, 3].map((i) => (
+                              <div key={i} className="flex items-center justify-between p-4 border rounded-lg animate-pulse">
+                                <div className="flex items-center gap-3">
+                                  <div className="w-8 h-8 bg-gray-200 rounded-lg"></div>
+                                  <div>
+                                    <div className="h-4 bg-gray-200 rounded w-32 mb-2"></div>
+                                    <div className="h-3 bg-gray-200 rounded w-24"></div>
+                                  </div>
+                                </div>
+                                <div className="text-right">
+                                  <div className="h-6 bg-gray-200 rounded w-12 mb-1"></div>
+                                  <div className="h-3 bg-gray-200 rounded w-8"></div>
+                                </div>
                               </div>
-                              <div>
-                                <h4 className="font-medium">{stream.name}</h4>
-                                <p className="text-sm text-muted-foreground">High growth potential</p>
-                              </div>
-                            </div>
-                            <div className="text-right">
-                              <div className="text-2xl font-bold text-primary">{stream.match}%</div>
-                              <div className="text-xs text-muted-foreground">Match</div>
-                            </div>
+                            ))}
                           </div>
-                        ))}
-                        <div className="mt-6 pt-4 border-t">
-                          <Button 
-                            onClick={() => navigate('/recommendations')} 
-                            variant="outline" 
-                            className="w-full"
-                          >
-                            View All Personalized Recommendations
-                          </Button>
-                        </div>
+                        ) : streamRecommendations.length > 0 ? (
+                          // Real recommendations from AI backend
+                          streamRecommendations.map((stream, index) => {
+                            const getStreamIcon = (streamName: string) => {
+                              if (streamName.toLowerCase().includes('computer')) return 'CS';
+                              if (streamName.toLowerCase().includes('electrical')) return 'EE';
+                              if (streamName.toLowerCase().includes('mechanical')) return 'ME';
+                              if (streamName.toLowerCase().includes('medical')) return 'MD';
+                              if (streamName.toLowerCase().includes('business')) return 'BA';
+                              if (streamName.toLowerCase().includes('arts')) return 'AR';
+                              if (streamName.toLowerCase().includes('science')) return 'SC';
+                              return streamName.substring(0, 2).toUpperCase();
+                            };
+
+                            return (
+                              <div key={index} className="flex items-center justify-between p-4 border rounded-lg hover:shadow-md transition-shadow">
+                                <div className="flex items-center gap-3">
+                                  <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                                    <span className="text-xs font-bold text-primary">
+                                      {getStreamIcon(stream.stream)}
+                                    </span>
+                                  </div>
+                                  <div>
+                                    <h4 className="font-medium">{stream.stream}</h4>
+                                    <p className="text-sm text-muted-foreground">
+                                      {stream.growth_prospects || 'High growth potential'}
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="text-right">
+                                  <div className="text-2xl font-bold text-primary">
+                                    {Math.round(stream.match_percentage)}%
+                                  </div>
+                                  <div className="text-xs text-muted-foreground">Match</div>
+                                </div>
+                              </div>
+                            );
+                          })
+                        ) : (
+                          // Fallback when no recommendations available
+                          <div className="text-center py-8">
+                            <Target className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
+                            <p className="text-muted-foreground">
+                              No recommendations found. Try retaking the assessment.
+                            </p>
+                            <Button 
+                              onClick={() => navigate('/ai-psychometric-test')} 
+                              variant="outline" 
+                              className="mt-3"
+                            >
+                              Retake Assessment
+                            </Button>
+                          </div>
+                        )}
+                        {streamRecommendations.length > 0 && (
+                          <div className="mt-6 pt-4 border-t">
+                            <Button 
+                              onClick={() => navigate('/stream-recommendations')} 
+                              variant="outline" 
+                              className="w-full"
+                            >
+                              View All Personalized Recommendations
+                            </Button>
+                          </div>
+                        )}
                       </div>
                     ) : (
                       <div className="text-center py-12">
@@ -326,9 +423,9 @@ export const PersonalizedDashboard = () => {
                         <p className="text-muted-foreground mb-6">
                           Our 15-minute aptitude quiz analyzes your interests, skills, and preferences to recommend the perfect career streams for you.
                         </p>
-                        <Button onClick={() => navigate('/quiz')} size="lg" className="w-full md:w-auto">
+                        <Button onClick={() => navigate('/ai-psychometric-test')} size="lg" className="w-full md:w-auto">
                           <Target className="h-4 w-4 mr-2" />
-                          Take Aptitude Quiz
+                          Take AI Psychometric Assessment
                         </Button>
                       </div>
                     )}

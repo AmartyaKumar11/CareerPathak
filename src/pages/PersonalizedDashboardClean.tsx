@@ -28,6 +28,11 @@ import {
   Calendar
 } from 'lucide-react';
 
+// Import improved components
+import SmartStatsCards from '@/components/dashboard/SmartStatsCards';
+import ImprovedQuickActions from '@/components/dashboard/ImprovedQuickActions';
+import OnboardingTour from '@/components/dashboard/OnboardingTour';
+
 interface DashboardStats {
   totalRecommendations: number;
   nearbyColleges: number;
@@ -52,84 +57,27 @@ const OfflineIndicator = ({ isOnline, onRefresh }: { isOnline: boolean; onRefres
   );
 };
 
-const QuickActions = () => {
-  const navigate = useNavigate();
 
-  const actions = [
-    { 
-      icon: Target, 
-      label: 'Take Quiz', 
-      description: 'Aptitude Assessment',
-      color: 'bg-blue-500',
-      onClick: () => navigate('/quiz')
-    },
-    { 
-      icon: Map, 
-      label: 'Find Colleges', 
-      description: 'Near You',
-      color: 'bg-green-500',
-      onClick: () => navigate('/nearby-colleges-map')
-    },
-    { 
-      icon: BarChart3, 
-      label: 'Career Paths', 
-      description: 'Explore Options',
-      color: 'bg-purple-500',
-      onClick: () => navigate('/careers')
-    },
-    { 
-      icon: Users, 
-      label: 'Connect', 
-      description: 'Alumni Network',
-      color: 'bg-orange-500',
-      onClick: () => navigate('/network')
-    },
-  ];
-
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Target className="h-5 w-5" />
-          Quick Actions
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-2 gap-3">
-          {actions.map((action, index) => (
-            <Button
-              key={index}
-              variant="outline"
-              className="h-auto p-4 flex flex-col items-start gap-2"
-              onClick={action.onClick}
-            >
-              <div className="flex items-center gap-2">
-                <div className={`p-2 rounded ${action.color} text-white`}>
-                  <action.icon className="h-4 w-4" />
-                </div>
-                <div className="text-left">
-                  <div className="font-medium text-sm">{action.label}</div>
-                  <div className="text-xs text-muted-foreground">{action.description}</div>
-                </div>
-              </div>
-            </Button>
-          ))}
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
 
 export const PersonalizedDashboard = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [loading, setLoading] = useState(true);
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const [stats, setStats] = useState<DashboardStats>({
     totalRecommendations: 0,
     nearbyColleges: 0,
     unreadNotifications: 0,
     profileCompleteness: 0
+  });
+
+  // User profile for smart components
+  const [userProfile, setUserProfile] = useState({
+    hasCompletedQuiz: false,
+    profileCompleteness: 65,
+    lastActivity: new Date(),
+    isFirstVisit: true
   });
 
   // Redirect to auth if not authenticated
@@ -146,13 +94,30 @@ export const PersonalizedDashboard = () => {
       try {
         setLoading(true);
         
+        // Check if this is user's first visit
+        const hasVisitedBefore = localStorage.getItem('careerpathak_visited');
+        const hasCompletedQuiz = localStorage.getItem('careerpathak_quiz_completed');
+        
+        setUserProfile(prev => ({
+          ...prev,
+          isFirstVisit: !hasVisitedBefore,
+          hasCompletedQuiz: !!hasCompletedQuiz,
+          profileCompleteness: hasCompletedQuiz ? 85 : 45
+        }));
+
+        // Show onboarding for first-time users
+        if (!hasVisitedBefore) {
+          setShowOnboarding(true);
+          localStorage.setItem('careerpathak_visited', 'true');
+        }
+        
         // Simulate loading some basic stats
         setTimeout(() => {
           setStats({
-            totalRecommendations: 12,
+            totalRecommendations: hasCompletedQuiz ? 12 : 0,
             nearbyColleges: 8,
             unreadNotifications: 3,
-            profileCompleteness: 85
+            profileCompleteness: hasCompletedQuiz ? 85 : 45
           });
           setLoading(false);
         }, 1000);
@@ -195,6 +160,14 @@ export const PersonalizedDashboard = () => {
     }, 1000);
   };
 
+  const handleOnboardingComplete = () => {
+    setShowOnboarding(false);
+  };
+
+  const handleOnboardingSkip = () => {
+    setShowOnboarding(false);
+  };
+
   if (!user) {
     return null; // Will redirect via useEffect
   }
@@ -213,7 +186,7 @@ export const PersonalizedDashboard = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b bg-card/50 backdrop-blur supports-[backdrop-filter]:bg-card/50">
+      <header className="dashboard-header border-b bg-card/50 backdrop-blur supports-[backdrop-filter]:bg-card/50">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <LayoutDashboard className="h-8 w-8 text-primary" />
@@ -224,7 +197,7 @@ export const PersonalizedDashboard = () => {
           </div>
           
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
+            <div className="hidden md:flex items-center gap-2">
               <User className="h-5 w-5 text-muted-foreground" />
               <div className="text-right">
                 <div className="text-sm font-medium">{user.name}</div>
@@ -232,14 +205,14 @@ export const PersonalizedDashboard = () => {
               </div>
             </div>
             
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" className="hidden md:flex">
               <Settings className="h-4 w-4 mr-2" />
               Settings
             </Button>
             
             <Button variant="outline" size="sm" onClick={handleSignOut}>
               <LogOut className="h-4 w-4 mr-2" />
-              Sign Out
+              <span className="hidden md:inline">Sign Out</span>
             </Button>
           </div>
         </div>
@@ -251,114 +224,49 @@ export const PersonalizedDashboard = () => {
 
         {/* Welcome Section */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold mb-2">
-            Welcome back, {user.name?.split(' ')[0] || 'Student'}! 👋
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">
+            Welcome back, {user.name?.split(' ')[0] || 'Student'}!
           </h2>
           <p className="text-muted-foreground">
-            Ready to explore new opportunities and advance your career journey?
+            {userProfile.isFirstVisit 
+              ? "Let's get you started on your career journey!" 
+              : "Ready to explore new opportunities and advance your career journey?"
+            }
           </p>
+          {!userProfile.hasCompletedQuiz && (
+            <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <p className="text-sm text-blue-800">
+                <strong>New here?</strong> Start with our aptitude quiz to get personalized recommendations!
+              </p>
+            </div>
+          )}
         </div>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card 
-            className="cursor-pointer hover:shadow-lg transition-shadow"
-            onClick={() => navigate('/stream-recommendations')}
-          >
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">
-                    Stream Matches
-                  </p>
-                  <p className="text-3xl font-bold text-primary">
-                    {stats.totalRecommendations}
-                  </p>
-                </div>
-                <TrendingUp className="h-8 w-8 text-blue-500" />
-              </div>
-              <Badge variant="secondary" className="mt-2">
-                Based on your profile
-              </Badge>
-            </CardContent>
-          </Card>
-
-          <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate('/nearby-colleges-map')}>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">
-                    Nearby Colleges
-                  </p>
-                  <p className="text-3xl font-bold text-primary">
-                    {stats.nearbyColleges}
-                  </p>
-                </div>
-                <MapPin className="h-8 w-8 text-green-500" />
-              </div>
-              <Badge variant="secondary" className="mt-2">
-                View on Map
-              </Badge>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">
-                    Notifications
-                  </p>
-                  <p className="text-3xl font-bold text-primary">
-                    {stats.unreadNotifications}
-                  </p>
-                </div>
-                <Bell className="h-8 w-8 text-orange-500" />
-              </div>
-              <Badge variant="secondary" className="mt-2">
-                New updates
-              </Badge>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground mb-1">
-                    Profile Complete
-                  </p>
-                  <p className="text-3xl font-bold text-primary">
-                    {stats.profileCompleteness}%
-                  </p>
-                </div>
-                <Target className="h-8 w-8 text-purple-500" />
-              </div>
-              <Badge variant="secondary" className="mt-2">
-                Almost there!
-              </Badge>
-            </CardContent>
-          </Card>
+        {/* Smart Stats Cards */}
+        <div className="stats-cards">
+          <SmartStatsCards userProfile={userProfile} />
         </div>
 
         {/* Main Dashboard Content */}
         <div className="grid lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
             <Tabs defaultValue="recommendations" className="w-full">
-              <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="recommendations">
-                  <TrendingUp className="h-4 w-4 mr-2" />
-                  Streams
+              <TabsList className="grid w-full grid-cols-2 md:grid-cols-4">
+                <TabsTrigger value="recommendations" className="recommendations-tab">
+                  <TrendingUp className="h-4 w-4 mr-1 md:mr-2" />
+                  <span className="hidden sm:inline">Streams</span>
+                  <span className="sm:hidden">Match</span>
                 </TabsTrigger>
                 <TabsTrigger value="colleges">
-                  <MapPin className="h-4 w-4 mr-2" />
-                  Colleges
+                  <MapPin className="h-4 w-4 mr-1 md:mr-2" />
+                  <span className="hidden sm:inline">Colleges</span>
+                  <span className="sm:hidden">Map</span>
                 </TabsTrigger>
-                <TabsTrigger value="careers">
+                <TabsTrigger value="careers" className="hidden md:flex">
                   <BarChart3 className="h-4 w-4 mr-2" />
                   Careers
                 </TabsTrigger>
-                <TabsTrigger value="timeline">
+                <TabsTrigger value="timeline" className="hidden md:flex">
                   <Calendar className="h-4 w-4 mr-2" />
                   Timeline
                 </TabsTrigger>
@@ -367,42 +275,63 @@ export const PersonalizedDashboard = () => {
               <TabsContent value="recommendations" className="mt-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Recommended Streams</CardTitle>
+                    <CardTitle>
+                      {userProfile.hasCompletedQuiz ? 'Your Stream Matches' : 'Discover Your Perfect Stream'}
+                    </CardTitle>
                     <p className="text-sm text-muted-foreground">
-                      Based on your interests and aptitude
+                      {userProfile.hasCompletedQuiz 
+                        ? 'Based on your interests and aptitude'
+                        : 'Take our quiz to get personalized recommendations'
+                      }
                     </p>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-4">
-                      {[
-                        { name: 'Computer Science Engineering', match: 92, icon: '💻' },
-                        { name: 'Electronics Engineering', match: 87, icon: '⚡' },
-                        { name: 'Mechanical Engineering', match: 79, icon: '⚙️' }
-                      ].map((stream, index) => (
-                        <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
-                          <div className="flex items-center gap-3">
-                            <span className="text-2xl">{stream.icon}</span>
-                            <div>
-                              <h4 className="font-medium">{stream.name}</h4>
-                              <p className="text-sm text-muted-foreground">High growth potential</p>
+                    {userProfile.hasCompletedQuiz ? (
+                      <div className="space-y-4">
+                        {[
+                          { name: 'Computer Science Engineering', match: 92, icon: 'CS' },
+                          { name: 'Electronics Engineering', match: 87, icon: 'EE' },
+                          { name: 'Mechanical Engineering', match: 79, icon: 'ME' }
+                        ].map((stream, index) => (
+                          <div key={index} className="flex items-center justify-between p-4 border rounded-lg hover:shadow-md transition-shadow">
+                            <div className="flex items-center gap-3">
+                              <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                                <span className="text-xs font-bold text-primary">{stream.icon}</span>
+                              </div>
+                              <div>
+                                <h4 className="font-medium">{stream.name}</h4>
+                                <p className="text-sm text-muted-foreground">High growth potential</p>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <div className="text-2xl font-bold text-primary">{stream.match}%</div>
+                              <div className="text-xs text-muted-foreground">Match</div>
                             </div>
                           </div>
-                          <div className="text-right">
-                            <div className="text-2xl font-bold text-primary">{stream.match}%</div>
-                            <div className="text-xs text-muted-foreground">Match</div>
-                          </div>
+                        ))}
+                        <div className="mt-6 pt-4 border-t">
+                          <Button 
+                            onClick={() => navigate('/recommendations')} 
+                            variant="outline" 
+                            className="w-full"
+                          >
+                            View All Personalized Recommendations
+                          </Button>
                         </div>
-                      ))}
-                    </div>
-                    <div className="mt-6 pt-4 border-t">
-                      <Button 
-                        onClick={() => navigate('/recommendations')} 
-                        variant="outline" 
-                        className="w-full"
-                      >
-                        View All Personalized Recommendations
-                      </Button>
-                    </div>
+                      </div>
+                    ) : (
+                      <div className="text-center py-12">
+                        <Target className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+                        <h3 className="text-lg font-semibold mb-2">Ready to discover your ideal career?</h3>
+                        <p className="text-muted-foreground mb-6">
+                          Our 15-minute aptitude quiz analyzes your interests, skills, and preferences to recommend the perfect career streams for you.
+                        </p>
+                        <Button onClick={() => navigate('/quiz')} size="lg" className="w-full md:w-auto">
+                          <Target className="h-4 w-4 mr-2" />
+                          Take Aptitude Quiz
+                        </Button>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -476,9 +405,11 @@ export const PersonalizedDashboard = () => {
 
           {/* Sidebar */}
           <div className="space-y-6">
-            <QuickActions />
+            <div className="quick-actions">
+              <ImprovedQuickActions />
+            </div>
             
-            <Card>
+            <Card className="notifications-section">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Bell className="h-5 w-5" />
@@ -488,24 +419,62 @@ export const PersonalizedDashboard = () => {
               <CardContent>
                 <div className="space-y-3">
                   {[
-                    { title: 'JEE Main 2024 Registration Open', time: '2 hours ago', type: 'exam' },
-                    { title: 'New Scholarship Available', time: '1 day ago', type: 'scholarship' },
-                    { title: 'College Admission Deadline', time: '3 days ago', type: 'deadline' }
+                    { 
+                      title: 'JEE Main 2024 Registration Open', 
+                      time: '2 hours ago', 
+                      type: 'exam',
+                      priority: 'high'
+                    },
+                    { 
+                      title: 'New Scholarship Available', 
+                      time: '1 day ago', 
+                      type: 'scholarship',
+                      priority: 'medium'
+                    },
+                    { 
+                      title: 'College Admission Deadline', 
+                      time: '3 days ago', 
+                      type: 'deadline',
+                      priority: 'high'
+                    }
                   ].map((notification, index) => (
-                    <div key={index} className="flex items-start gap-3 p-3 bg-muted/50 rounded-lg">
-                      <div className="w-2 h-2 rounded-full bg-primary mt-2"></div>
+                    <div key={index} className={`
+                      flex items-start gap-3 p-3 rounded-lg cursor-pointer hover:shadow-sm transition-shadow
+                      ${notification.priority === 'high' ? 'bg-red-50 border border-red-200' : 'bg-muted/50'}
+                    `}>
+                      <div className={`
+                        w-2 h-2 rounded-full mt-2
+                        ${notification.priority === 'high' ? 'bg-red-500' : 'bg-primary'}
+                      `}></div>
                       <div className="flex-1">
                         <p className="text-sm font-medium">{notification.title}</p>
                         <p className="text-xs text-muted-foreground">{notification.time}</p>
+                        {notification.priority === 'high' && (
+                          <Badge variant="destructive" className="mt-1 text-xs">
+                            Urgent
+                          </Badge>
+                        )}
                       </div>
                     </div>
                   ))}
+                </div>
+                <div className="mt-4 pt-3 border-t">
+                  <Button variant="outline" size="sm" className="w-full">
+                    View All Notifications
+                  </Button>
                 </div>
               </CardContent>
             </Card>
           </div>
         </div>
       </main>
+
+      {/* Onboarding Tour */}
+      <OnboardingTour 
+        isVisible={showOnboarding}
+        onComplete={handleOnboardingComplete}
+        onSkip={handleOnboardingSkip}
+      />
     </div>
   );
 };

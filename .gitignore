@@ -29,6 +29,13 @@ backend/.env.development.local
 backend/.env.test.local
 backend/.env.production.local
 
+# AI Backend environment files
+ai-backend/.env
+ai-backend/.env.local
+ai-backend/.env.development.local
+ai-backend/.env.test.local
+ai-backend/.env.production.local
+
 # Sensitive configuration files
 config/secrets.json
 config/private.json

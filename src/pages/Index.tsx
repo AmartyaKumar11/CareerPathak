@@ -90,13 +90,13 @@ const Index = () => {
   };
 
   const handleGetStarted = () => {
-    console.log('🔄 handleGetStarted called');
-    console.log('🔄 Current user:', user);
+    console.log('handleGetStarted called');
+    console.log('Current user:', user);
     if (user) {
-      console.log('✅ User authenticated, navigating to /dashboard');
+      console.log('User authenticated, navigating to /dashboard');
       navigate('/dashboard');
     } else {
-      console.log('❌ No user, navigating to /auth');
+      console.log('No user, navigating to /auth');
       navigate('/auth');
     }
   };

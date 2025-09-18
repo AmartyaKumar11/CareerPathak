@@ -166,10 +166,10 @@ const SimpleDashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-2 text-sm">
-              <p>✅ Authentication: Working</p>
-              <p>✅ Dashboard: Loaded successfully</p>
-              <p>✅ User: {user.email}</p>
-              <p>✅ Timestamp: {new Date().toLocaleString()}</p>
+              <p>Authentication: Working</p>
+              <p>Dashboard: Loaded successfully</p>
+              <p>User: {user.email}</p>
+              <p>Timestamp: {new Date().toLocaleString()}</p>
             </div>
           </CardContent>
         </Card>

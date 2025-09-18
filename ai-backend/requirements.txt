@@ -5,3 +5,10 @@ pillow
 pytesseract
 langchain
 openai
+google-generativeai
+scikit-learn
+numpy
+pandas
+pymongo
+python-multipart
+python-dotenv

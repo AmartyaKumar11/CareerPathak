@@ -1,0 +1,156 @@
+/* Dashboard Improvements CSS */
+
+/* Mobile-first responsive improvements */
+@media (max-width: 768px) {
+  .stats-cards {
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+  
+  .stats-cards > div {
+    display: flex;
+    gap: 1rem;
+    min-width: max-content;
+    padding: 0 1rem;
+  }
+  
+  .stats-cards .grid {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .stats-cards .grid > * {
+    min-width: 280px;
+    flex-shrink: 0;
+  }
+}
+
+/* Improved focus states for accessibility */
+.focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* Enhanced hover states */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Priority indicators */
+.priority-high {
+  position: relative;
+}
+
+.priority-high::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background: hsl(var(--destructive));
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+/* Loading skeleton improvements */
+.skeleton-pulse {
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Smooth transitions for all interactive elements */
+.smooth-transition {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Better spacing for mobile */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .dashboard-header .text-xs {
+    display: none;
+  }
+}
+
+/* Improved notification styles */
+.notification-urgent {
+  border-left: 4px solid hsl(var(--destructive));
+  background: hsl(var(--destructive) / 0.05);
+}
+
+.notification-info {
+  border-left: 4px solid hsl(var(--primary));
+  background: hsl(var(--primary) / 0.05);
+}
+
+/* Better tab navigation on mobile */
+@media (max-width: 768px) {
+  .tabs-list {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .tabs-list::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Accessibility improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only.focus:not(.sr-only) {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: inherit;
+}

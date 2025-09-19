@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { AutoTranslate } from '@/components/AutoTranslate';
 import { 
   LayoutDashboard, 
   TrendingUp, 
@@ -216,7 +217,7 @@ export const PersonalizedDashboard = () => {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading your dashboard...</p>
+          <AutoTranslate as="p" className="text-muted-foreground">Loading your dashboard...</AutoTranslate>
         </div>
       </div>
     );
@@ -230,8 +231,8 @@ export const PersonalizedDashboard = () => {
           <div className="flex items-center gap-4">
             <LayoutDashboard className="h-8 w-8 text-primary" />
             <div>
-              <h1 className="text-2xl font-bold text-primary">CareerPathak</h1>
-              <p className="text-xs text-muted-foreground">Your Career Journey</p>
+              <AutoTranslate as="h1" className="text-2xl font-bold text-primary">CareerPathak</AutoTranslate>
+              <AutoTranslate as="p" className="text-xs text-muted-foreground">Your Career Journey</AutoTranslate>
             </div>
           </div>
           
@@ -261,12 +262,12 @@ export const PersonalizedDashboard = () => {
             
             <Button variant="outline" size="sm" className="hidden md:flex">
               <Settings className="h-4 w-4 mr-2" />
-              Settings
+              <AutoTranslate>Settings</AutoTranslate>
             </Button>
             
             <Button variant="outline" size="sm" onClick={handleSignOut}>
               <LogOut className="h-4 w-4 mr-2" />
-              <span className="hidden md:inline">Sign Out</span>
+              <AutoTranslate as="span" className="hidden md:inline">Sign Out</AutoTranslate>
             </Button>
           </div>
         </div>
@@ -279,12 +280,12 @@ export const PersonalizedDashboard = () => {
         {/* Welcome Section */}
         <div className="mb-8">
           <h2 className="text-2xl md:text-3xl font-bold mb-2">
-            Welcome back, {user.name?.split(' ')[0] || 'Student'}!
+            <AutoTranslate>Welcome back</AutoTranslate>, {user.name?.split(' ')[0] || 'Student'}!
           </h2>
           <p className="text-muted-foreground">
             {userProfile.isFirstVisit 
-              ? "Let's get you started on your career journey!" 
-              : "Ready to explore new opportunities and advance your career journey?"
+              ? <AutoTranslate>Let's get you started on your career journey!</AutoTranslate> 
+              : <AutoTranslate>Ready to explore new opportunities and advance your career journey?</AutoTranslate>
             }
           </p>
           {!userProfile.hasCompletedQuiz && (

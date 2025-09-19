@@ -60,6 +60,7 @@
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.12",
+    "google-translate-api": "^2.3.0",
     "googleapis": "^159.0.0",
     "i18next": "^25.5.2",
     "idb": "^8.0.3",

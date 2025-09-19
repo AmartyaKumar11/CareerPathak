@@ -11,6 +11,7 @@ import CareerInsightsSimple from './pages/CareerInsightsSimple';
 import CareerInsightsPortal from './pages/CareerInsightsPortal';
 import AIPsychometricTest from './pages/AIPsychometricTest';
 import Scholarships from './pages/Scholarships';
+import { TranslationTest } from './pages/TranslationTest';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route path="/scholarships" element={<Scholarships />} />
         <Route path="/quiz" element={<AIPsychometricTest />} />
         <Route path="/ai-assessment" element={<AIPsychometricTest />} />
+        <Route path="/test-translation" element={<TranslationTest />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

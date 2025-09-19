@@ -118,6 +118,10 @@ const CareerInsightsPortal: React.FC = () => {
 
   // Data states
   const [colleges, setColleges] = useState<CollegeData[]>([]);
+  const [allColleges, setAllColleges] = useState<CollegeData[]>([]);
+  const [displayedColleges, setDisplayedColleges] = useState<CollegeData[]>([]);
+  const [collegesPage, setCollegesPage] = useState(1);
+  const COLLEGES_PER_PAGE = 4;
   const [scholarships, setScholarships] = useState<ScholarshipData[]>([]);
   const [alumniStories, setAlumniStories] = useState<AlumniStory[]>([]);
   const [trendingSkills, setTrendingSkills] = useState<TrendingSkill[]>([]);
@@ -191,63 +195,66 @@ const CareerInsightsPortal: React.FC = () => {
       {
         id: '2',
         title: 'INSPIRE Scholarship',
-        provider: 'Department of Science & Technology',
-        amount: '₹80K/year',
-        eligibility: ['Top 1% in Class 12', 'Science Stream', 'Age < 27'],
+        provider: 'DST, Govt. of India',
+        amount: '₹80,000/year',
+        eligibility: ['Top 1% in 12th', 'Pursuing UG in Science'],
         deadline: '2024-07-31',
         category: 'National Scholarship',
-        applicationLink: 'https://inspire-dst.gov.in'
+        applicationLink: 'https://online-inspire.gov.in/'
       }
     ]);
 
-    // Mock Alumni Stories
-    setAlumniStories([
-      {
-        id: '1',
-        name: 'Arjun Sharma',
-        stream: 'Computer Science',
-        currentRole: 'Senior Software Engineer',
-        company: 'Google',
-        graduationYear: 2019,
-        story: 'Started coding in class 11, focused on DSA, got internship at startup, then cracked Google interview.',
-        advice: 'Focus on fundamentals, build projects, contribute to open source, and never stop learning.',
-        linkedinProfile: 'https://linkedin.com/in/arjun-sharma'
-      },
-      {
-        id: '2',
-        name: 'Priya Devi',
-        stream: 'Data Science',
-        currentRole: 'Data Scientist',
-        company: 'Microsoft',
-        graduationYear: 2020,
-        story: 'Switched from traditional engineering to data science, learned Python and ML through online courses.',
-        advice: 'Mathematics is crucial for data science. Practice with real datasets and showcase your work on GitHub.'
-      }
-    ]);
-
-    // Mock Trending Skills
-    setTrendingSkills([
-      {
-        id: '1',
-        name: 'Artificial Intelligence',
-        category: 'Technology',
-        demandGrowth: 35,
-        averageSalary: '₹12-25L',
-        learningResources: ['Coursera AI Course', 'Fast.ai', 'Andrew Ng ML Course'],
-        difficulty: 'Advanced'
-      },
-      {
-        id: '2',
-        name: 'Digital Marketing',
-        category: 'Business',
-        demandGrowth: 28,
-        averageSalary: '₹4-12L',
-        learningResources: ['Google Digital Garage', 'HubSpot Academy', 'Udemy Courses'],
-        difficulty: 'Beginner'
-      }
-    ]);
 
     setLoading(false);
+  };
+
+  // Fetch recommended colleges from backend using selected stream
+  useEffect(() => {
+    async function fetchColleges() {
+      if (!streamData?.name) {
+        console.log('No stream data available');
+        return;
+      }
+      console.log('Fetching colleges for stream:', streamData.name);
+      setLoadingColleges(true);
+      // Clear previous results
+      setDisplayedColleges([]);
+      setAllColleges([]);
+      setColleges([]);
+      setCollegesPage(1);
+      try {
+        const url = `http://localhost:3001/api/ai-recommended-colleges?stream=${encodeURIComponent(streamData.name)}`;
+        console.log('Fetching from URL:', url);
+        const res = await fetch(url);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const data = await res.json();
+        console.log('Received data:', data);
+        const receivedColleges = data.colleges || [];
+        setAllColleges(receivedColleges);
+        setColleges(receivedColleges);
+        // Show only first 4 colleges initially
+        setDisplayedColleges(receivedColleges.slice(0, COLLEGES_PER_PAGE));
+        setCollegesPage(1);
+        console.log('Set colleges:', receivedColleges.length, 'showing:', Math.min(4, receivedColleges.length));
+      } catch (err) {
+        console.error('Error fetching colleges:', err);
+        setColleges([]);
+      } finally {
+        setLoadingColleges(false);
+      }
+    }
+    fetchColleges();
+  }, [streamData]);
+
+  const loadMoreColleges = () => {
+    const nextPage = collegesPage + 1;
+    const startIndex = 0;
+    const endIndex = nextPage * COLLEGES_PER_PAGE;
+    const newDisplayedColleges = allColleges.slice(startIndex, endIndex);
+    setDisplayedColleges(newDisplayedColleges);
+    setCollegesPage(nextPage);
   };
 
   const handleBookmark = () => {
@@ -529,7 +536,12 @@ const CareerInsightsPortal: React.FC = () => {
               <div className="flex justify-between items-center">
                 <div>
                   <h3 className="text-2xl font-bold">Recommended Colleges</h3>
-                  <p className="text-muted-foreground">Best colleges for {streamData.name} based on your profile</p>
+                  <p className="text-muted-foreground">
+                    {allColleges.length > 0 
+                      ? `Found ${allColleges.length} colleges for ${streamData.name} • Showing ${displayedColleges.length}`
+                      : `Best colleges for ${streamData.name} based on your profile`
+                    }
+                  </p>
                 </div>
                 <div className="flex gap-2">
                   <Button variant="outline" size="sm">
@@ -543,8 +555,15 @@ const CareerInsightsPortal: React.FC = () => {
                 </div>
               </div>
 
-              <div className="grid lg:grid-cols-2 gap-6">
-                {colleges.map((college) => (
+              {loadingColleges ? (
+                <div className="text-center py-12">
+                  <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-primary" />
+                  <h3 className="text-lg font-medium mb-2">Finding Best Colleges</h3>
+                  <p className="text-muted-foreground">AI is analyzing colleges that match your stream...</p>
+                </div>
+              ) : displayedColleges.length > 0 ? (
+                <div className="grid lg:grid-cols-2 gap-6">
+                  {displayedColleges.map((college) => (
                   <Card key={college.id} className="hover:shadow-lg transition-shadow">
                     <CardHeader>
                       <div className="flex justify-between items-start">
@@ -616,13 +635,28 @@ const CareerInsightsPortal: React.FC = () => {
                     </CardContent>
                   </Card>
                 ))}
-              </div>
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <Building className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold mb-2">No Colleges Found</h3>
+                  <p className="text-muted-foreground mb-4">
+                    We couldn't find colleges matching your stream. Try a different stream or check back later.
+                  </p>
+                  <Button variant="outline">
+                    <ArrowLeft className="h-4 w-4 mr-2" />
+                    Back to Streams
+                  </Button>
+                </div>
+              )}
 
-              <div className="text-center">
-                <Button variant="outline">
-                  Load More Colleges
-                </Button>
-              </div>
+              {displayedColleges.length < allColleges.length && (
+                <div className="text-center">
+                  <Button variant="outline" onClick={loadMoreColleges}>
+                    Load More Colleges ({allColleges.length - displayedColleges.length} remaining)
+                  </Button>
+                </div>
+              )}
             </div>
           </TabsContent>
 
@@ -814,118 +848,21 @@ const CareerInsightsPortal: React.FC = () => {
               </div>
             </div>
           </TabsContent>
-
-          {/* AI Insights Tab */}
-          <TabsContent value="insights">
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-2xl font-bold">AI-Powered Insights</h3>
-                <p className="text-muted-foreground">Personalized analysis based on your profile</p>
-              </div>
-
-              <div className="grid lg:grid-cols-2 gap-6">
-                {streamData.ai_insights && (
-                  <>
-                    {streamData.ai_insights.personality_fit && (
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className="flex items-center gap-2">
-                            <Brain className="h-5 w-5" />
-                            Personality Fit Analysis
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            {streamData.ai_insights.personality_fit}
-                          </p>
-                        </CardContent>
-                      </Card>
-                    )}
-
-                    {streamData.ai_insights.jk_opportunities && (
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className="flex items-center gap-2">
-                            <MapPin className="h-5 w-5" />
-                            J&K Opportunities
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            {streamData.ai_insights.jk_opportunities}
-                          </p>
-                        </CardContent>
-                      </Card>
-                    )}
-
-                    {streamData.ai_insights.challenges && (
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className="flex items-center gap-2">
-                            <AlertCircle className="h-5 w-5" />
-                            Challenges & Solutions
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            {streamData.ai_insights.challenges}
-                          </p>
-                        </CardContent>
-                      </Card>
-                    )}
-
-                    {streamData.ai_insights.next_steps && (
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className="flex items-center gap-2">
-                            <Target className="h-5 w-5" />
-                            Recommended Next Steps
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            {streamData.ai_insights.next_steps}
-                          </p>
-                        </CardContent>
-                      </Card>
-                    )}
-                  </>
-                )}
-              </div>
-
-              {!streamData.ai_insights && (
-                <Card>
-                  <CardContent className="text-center py-12">
-                    <Brain className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold mb-2">AI Analysis Coming Soon</h3>
-                    <p className="text-muted-foreground mb-6">
-                      Our AI is analyzing your profile to provide personalized insights.
-                    </p>
-                    <Button>
-                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                      Generate AI Insights
-                    </Button>
-                  </CardContent>
-                </Card>
-              )}
-            </div>
-          </TabsContent>
         </Tabs>
+        {/* Footer */}
+        <footer className="border-t bg-muted/50 py-6">
+          <div className="container mx-auto px-4 text-center">
+            <p className="text-sm text-muted-foreground">
+              Career insights powered by AI • Data updated regularly • 
+              <Button variant="link" size="sm" className="p-0 ml-2">
+                Report an issue
+              </Button>
+            </p>
+          </div>
+        </footer>
       </main>
-
-      {/* Footer */}
-      <footer className="border-t bg-muted/50 py-6">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-sm text-muted-foreground">
-            Career insights powered by AI • Data updated regularly • 
-            <Button variant="link" size="sm" className="p-0 ml-2">
-              Report an issue
-            </Button>
-          </p>
-        </div>
-      </footer>
     </div>
   );
-};
+}
 
 export default CareerInsightsPortal;

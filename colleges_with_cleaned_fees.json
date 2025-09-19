@@ -1,0 +1,446 @@
+[
+  {
+    "College Name":"Government Degree College, Udhampur",
+    "Course":"Bachelor of Arts (B.A.)",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Government Degree College, Rajouri",
+    "Course":"Bachelor of Arts (B.A.)",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Government Degree College, Rajouri",
+    "Course":"Bachelor of Science (B.Sc.)",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"Government Degree College, Rajouri",
+    "Course":"Bachelor of Commerce (B.Com.)",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"12,000 - 25,000"
+  },
+  {
+    "College Name":"Government Degree College, Rajouri",
+    "Course":"Master of Computer Applications (MCA)",
+    "Eligibility":"Bachelor's degree in relevant field",
+    "Fees (Annual)":"40,000 - 60,000"
+  },
+  {
+    "College Name":"New Government Degree College for Women, Hyderabad",
+    "Course":"Bachelor of Arts (B.A.) - Multiple specializations",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"New Government Degree College for Women, Hyderabad",
+    "Course":"Bachelor of Science (B.Sc.) - Multiple specializations",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"New Government Degree College for Women, Hyderabad",
+    "Course":"Bachelor of Commerce (B.Com)",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"12,000 - 25,000"
+  },
+  {
+    "College Name":"Government Degree College, Bhaderwah",
+    "Course":"BBA",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"20,000 - 35,000"
+  },
+  {
+    "College Name":"Government Degree College, Bhaderwah",
+    "Course":"B.Com",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"12,000 - 25,000"
+  },
+  {
+    "College Name":"Government Degree College, Bhaderwah",
+    "Course":"B.Ed",
+    "Eligibility":"Graduation",
+    "Fees (Annual)":"20,000 - 35,000"
+  },
+  {
+    "College Name":"Government Degree College, Bhaderwah",
+    "Course":"M.A.",
+    "Eligibility":"Graduation",
+    "Fees (Annual)":"25,000 - 40,000"
+  },
+  {
+    "College Name":"Government Degree College, Bhaderwah",
+    "Course":"MCA",
+    "Eligibility":"Graduation",
+    "Fees (Annual)":"40,000 - 60,000"
+  },
+  {
+    "College Name":"Government Degree College, Billawar",
+    "Course":"BCA",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"20,000 - 35,000"
+  },
+  {
+    "College Name":"Government Degree College, Billawar",
+    "Course":"B.Sc.",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"Government Degree College, Billawar",
+    "Course":"B.A.",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Government Degree College, Billawar",
+    "Course":"B.Com",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"12,000 - 25,000"
+  },
+  {
+    "College Name":"Government Degree College, Kathua",
+    "Course":"BCA",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"20,000 - 35,000"
+  },
+  {
+    "College Name":"Government Degree College, Kathua",
+    "Course":"B.Sc. (4 courses)",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"Government Degree College, Kathua",
+    "Course":"B.A. (2 courses)",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Government Degree College, Kathua",
+    "Course":"B.Com",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"12,000 - 25,000"
+  },
+  {
+    "College Name":"Government Degree College, Poonch",
+    "Course":"BCA",
+    "Eligibility":"12th CBSE\/ISC\/Equivalent",
+    "Fees (Annual)":"20,000 - 35,000"
+  },
+  {
+    "College Name":"Government Degree College, Poonch",
+    "Course":"B.Sc.",
+    "Eligibility":"12th CBSE\/ISC\/Equivalent",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"Government Degree College, Poonch",
+    "Course":"B.A.",
+    "Eligibility":"12th CBSE\/ISC\/Equivalent",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Government Degree College, Poonch",
+    "Course":"B.Com",
+    "Eligibility":"12th CBSE\/ISC\/Equivalent",
+    "Fees (Annual)":"12,000 - 25,000"
+  },
+  {
+    "College Name":"Government Degree College, Ramban",
+    "Course":"B.Sc.",
+    "Eligibility":"12th CBSE\/ISC\/Equivalent",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"Government Degree College, Ramban",
+    "Course":"B.Com",
+    "Eligibility":"12th CBSE\/ISC\/Equivalent",
+    "Fees (Annual)":"12,000 - 25,000"
+  },
+  {
+    "College Name":"Government Degree College, Ramban",
+    "Course":"B.A.",
+    "Eligibility":"12th CBSE\/ISC\/Equivalent",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Government Degree College, Doda",
+    "Course":"B.Ed",
+    "Eligibility":"Graduation",
+    "Fees (Annual)":"20,000 - 35,000"
+  },
+  {
+    "College Name":"Government Degree College, Doda",
+    "Course":"B.Sc.",
+    "Eligibility":"12th with Science subjects, min 50% aggregate",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"Government Degree College, Doda",
+    "Course":"B.A.",
+    "Eligibility":"12th CBSE\/ISC\/Equivalent",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Kishtwar College",
+    "Course":"M.Sc.",
+    "Eligibility":"Graduation in relevant subject",
+    "Fees (Annual)":"30,000 - 45,000"
+  },
+  {
+    "College Name":"Kishtwar College",
+    "Course":"M.A.",
+    "Eligibility":"Graduation in relevant subject",
+    "Fees (Annual)":"25,000 - 40,000"
+  },
+  {
+    "College Name":"Govt. College For Women, Gandhi Nagar",
+    "Course":"B.A. (11 courses)",
+    "Eligibility":"12th CBSE\/ISC or equivalent",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Govt. College For Women, Gandhi Nagar",
+    "Course":"B.Sc. (10 courses)",
+    "Eligibility":"12th CBSE\/ISC or equivalent",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"Govt. College For Women, Gandhi Nagar",
+    "Course":"B.Com",
+    "Eligibility":"12th CBSE\/ISC or equivalent",
+    "Fees (Annual)":"12,000 - 25,000"
+  },
+  {
+    "College Name":"Government College for Women, Udhampur",
+    "Course":"B.A. and B.A. (Hons)",
+    "Eligibility":"12th CBSE\/ISC or equivalent",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Government College for Women, Udhampur",
+    "Course":"B.Com",
+    "Eligibility":"12th CBSE\/ISC or equivalent",
+    "Fees (Annual)":"12,000 - 25,000"
+  },
+  {
+    "College Name":"Government College for Women, Udhampur",
+    "Course":"B.Sc. in various combinations",
+    "Eligibility":"12th CBSE\/ISC or equivalent",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"Government Degree College, Kishtwar",
+    "Course":"B.A.",
+    "Eligibility":"12th CBSE\/JKBOSE or equivalent",
+    "Fees (Annual)":"25,000 - 40,000"
+  },
+  {
+    "College Name":"Government Degree College, Kishtwar",
+    "Course":"B.Sc.",
+    "Eligibility":"12th with Science subjects",
+    "Fees (Annual)":"30,000 - 50,000"
+  },
+  {
+    "College Name":"Government Degree College, Kishtwar",
+    "Course":"B.Com",
+    "Eligibility":"12th with Commerce\/Economics",
+    "Fees (Annual)":"12,000 - 25,000"
+  },
+  {
+    "College Name":"Government Girdari Lal Dogra Memorial Degree College, Hiranagar",
+    "Course":"B.A.",
+    "Eligibility":"SSC\/HSC + CUET",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Government Girdari Lal Dogra Memorial Degree College, Hiranagar",
+    "Course":"B.Sc.",
+    "Eligibility":"SSC\/HSC + CUET",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"Government Degree College, Basohli",
+    "Course":"B.Sc.",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"Government Degree College, Basohli",
+    "Course":"B.A.",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Government Degree College, Samba",
+    "Course":"B.A.",
+    "Eligibility":"12th (any stream)",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Government Degree College, Samba",
+    "Course":"B.Sc.",
+    "Eligibility":"12th Science",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"Government Degree College, Samba",
+    "Course":"B.Com",
+    "Eligibility":"12th Commerce\/Economics",
+    "Fees (Annual)":"12,000 - 25,000"
+  },
+  {
+    "College Name":"Government Degree College, Akhnoor",
+    "Course":"B.A.",
+    "Eligibility":"12th (min 50%)",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Government Degree College, Akhnoor",
+    "Course":"B.Sc.",
+    "Eligibility":"12th Science (min 50%)",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"Government Degree College, Ramnagar",
+    "Course":"BCA",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"20,000 - 35,000"
+  },
+  {
+    "College Name":"Government Degree College, Ramnagar",
+    "Course":"B.A.",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Government Degree College, Ramnagar",
+    "Course":"BBA",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"20,000 - 35,000"
+  },
+  {
+    "College Name":"Government Degree College, Ramnagar",
+    "Course":"B.Sc.",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"Government Degree College, Ramnagar",
+    "Course":"B.Com",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"12,000 - 25,000"
+  },
+  {
+    "College Name":"Government Degree College, Mendhar",
+    "Course":"B.A.",
+    "Eligibility":"CBSE 12th\/JKBOSE 12th",
+    "Fees (Annual)":"25,000 - 40,000"
+  },
+  {
+    "College Name":"Government Degree College, Mendhar",
+    "Course":"B.Sc.",
+    "Eligibility":"CBSE 12th\/JKBOSE 12th (Science)",
+    "Fees (Annual)":"30,000 - 50,000"
+  },
+  {
+    "College Name":"Government Degree College, Mendhar",
+    "Course":"B.Com",
+    "Eligibility":"CBSE 12th\/JKBOSE 12th",
+    "Fees (Annual)":"28,000 - 45,000"
+  },
+  {
+    "College Name":"Government Degree College, Mendhar",
+    "Course":"M.A.",
+    "Eligibility":"Graduation in Arts",
+    "Fees (Annual)":"35,000 - 55,000"
+  },
+  {
+    "College Name":"Government Degree College, Mendhar",
+    "Course":"M.Sc.",
+    "Eligibility":"Graduation in Science",
+    "Fees (Annual)":"40,000 - 65,000"
+  },
+  {
+    "College Name":"Government Degree College, Thanamandi",
+    "Course":"B.A.",
+    "Eligibility":"CBSE 12th\/JKBOSE 12th",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Government Degree College, Thanamandi",
+    "Course":"B.Sc.",
+    "Eligibility":"CBSE 12th\/JKBOSE 12th",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"Government Degree College, R.S. Pura",
+    "Course":"B.A.",
+    "Eligibility":"CBSE 12th\/JKBOSE 12th",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Government Degree College, R.S. Pura",
+    "Course":"B.Sc.",
+    "Eligibility":"CBSE 12th\/JKBOSE\/ISC 12th",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"Government Degree College, Basholi",
+    "Course":"B.Sc.",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"Government Degree College, Basholi",
+    "Course":"B.A.",
+    "Eligibility":"12th CBSE\/ISC",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Government Degree College, Hiranagar",
+    "Course":"B.A., B.Sc.",
+    "Eligibility":"SSC\/HSC + CUET\/JKBOSE",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Govt Women Degree College, Kathua",
+    "Course":"B.A.",
+    "Eligibility":"10+2 or equivalent",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"Govt Women Degree College, Kathua",
+    "Course":"B.Sc.",
+    "Eligibility":"10+2 or equivalent",
+    "Fees (Annual)":"15,000 - 30,000"
+  },
+  {
+    "College Name":"Government Degree College, Reasi",
+    "Course":"Diploma, UG & PG degrees",
+    "Eligibility":"10+2\/Graduation as per course",
+    "Fees (Annual)":"10,000 - 15,000"
+  },
+  {
+    "College Name":"Government Degree College, Ganderbal",
+    "Course":"After 10th Diploma (Civil, Electrical, Computer Engg.)",
+    "Eligibility":"Passed 10th with Science & Math, 40% PCM",
+    "Fees (Annual)":"20,000 - 35,000"
+  },
+  {
+    "College Name":"Govt College for Women, Parade Ground",
+    "Course":"B.A., B.Sc., B.Com",
+    "Eligibility":"10+2\/CBSE\/JKBOSE",
+    "Fees (Annual)":"10,000 - 20,000"
+  },
+  {
+    "College Name":"G.G.M. Science College, Jammu",
+    "Course":"B.Sc.",
+    "Eligibility":"10+2 in Science",
+    "Fees (Annual)":"30,000 - 50,000"
+  }
+]

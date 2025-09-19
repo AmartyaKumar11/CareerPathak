@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import scholarshipsJson from '../../all_scholarships.json';
 import { useAuth } from '@/contexts/SimpleAuthContext';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -122,7 +123,7 @@ const CareerInsightsPortal: React.FC = () => {
   const [displayedColleges, setDisplayedColleges] = useState<CollegeData[]>([]);
   const [collegesPage, setCollegesPage] = useState(1);
   const COLLEGES_PER_PAGE = 4;
-  const [scholarships, setScholarships] = useState<ScholarshipData[]>([]);
+  const [scholarships, setScholarships] = useState<any[]>([]);
   const [alumniStories, setAlumniStories] = useState<AlumniStory[]>([]);
   const [trendingSkills, setTrendingSkills] = useState<TrendingSkill[]>([]);
 
@@ -144,12 +145,10 @@ const CareerInsightsPortal: React.FC = () => {
     }
   }, [user, navigate]);
 
-  // Load mock data for demonstration
+  // Load scholarships from JSON
   useEffect(() => {
-    if (streamData) {
-      loadMockData();
-    }
-  }, [streamData]);
+    setScholarships(scholarshipsJson);
+  }, []);
 
   const loadMockData = () => {
     // Mock Colleges Data
@@ -669,16 +668,16 @@ const CareerInsightsPortal: React.FC = () => {
               </div>
 
               <div className="grid lg:grid-cols-2 gap-6">
-                {scholarships.map((scholarship) => (
-                  <Card key={scholarship.id} className="hover:shadow-lg transition-shadow">
+                {scholarships.map((scholarship, idx) => (
+                  <Card key={idx} className="hover:shadow-lg transition-shadow">
                     <CardHeader>
                       <div className="flex justify-between items-start">
                         <div>
-                          <CardTitle className="text-lg">{scholarship.title}</CardTitle>
+                          <CardTitle className="text-lg">{scholarship.name}</CardTitle>
                           <p className="text-sm text-muted-foreground">{scholarship.provider}</p>
                         </div>
                         <Badge className="bg-green-100 text-green-800">
-                          {scholarship.amount}
+                          {scholarship.benefits}
                         </Badge>
                       </div>
                     </CardHeader>
@@ -686,26 +685,17 @@ const CareerInsightsPortal: React.FC = () => {
                       <div className="space-y-4">
                         <div>
                           <p className="text-sm font-medium mb-2">Eligibility Criteria</p>
-                          <ul className="space-y-1">
-                            {scholarship.eligibility.map((criteria, index) => (
-                              <li key={index} className="text-sm text-muted-foreground flex items-start gap-2">
-                                <div className="w-1 h-1 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                                {criteria}
-                              </li>
-                            ))}
-                          </ul>
+                          <p className="text-sm text-muted-foreground">{scholarship.eligibility}</p>
                         </div>
-
                         <div className="flex justify-between items-center p-3 bg-muted/50 rounded">
                           <div>
-                            <p className="text-xs text-muted-foreground">Application Deadline</p>
-                            <p className="font-semibold text-sm">{scholarship.deadline}</p>
+                            <p className="text-xs text-muted-foreground">Application Period</p>
+                            <p className="font-semibold text-sm">{scholarship.application_period}</p>
                           </div>
-                          <Badge variant="outline">{scholarship.category}</Badge>
+                          <Badge variant="outline">{scholarship.applicable_region}</Badge>
                         </div>
-
                         <Button className="w-full" asChild>
-                          <a href={scholarship.applicationLink} target="_blank" rel="noopener noreferrer">
+                          <a href={scholarship.links[0]} target="_blank" rel="noopener noreferrer">
                             <ExternalLink className="h-4 w-4 mr-2" />
                             Apply Now
                           </a>

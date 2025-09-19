@@ -11,6 +11,26 @@ import L from 'leaflet';
 
 // Fix for default markers in react-leaflet
 delete (L.Icon.Default.prototype as any)._getIconUrl;
+
+// Create custom icons for different college types
+const jkIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+const allIndiaIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
   iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
@@ -21,6 +41,7 @@ interface College {
   name: string;
   latitude: number;
   longitude: number;
+  source?: string; // Track which dataset the college comes from
 }
 
 export default function NearbyCollegesMap() {
@@ -29,15 +50,38 @@ export default function NearbyCollegesMap() {
   const [filteredColleges, setFilteredColleges] = useState<College[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
+  const [jkCollegeCount, setJkCollegeCount] = useState(0);
+  const [allIndiaCollegeCount, setAllIndiaCollegeCount] = useState(0);
 
   useEffect(() => {
-    // Load colleges data
+    // Load both college datasets
     const loadColleges = async () => {
       try {
-        const response = await fetch('/colleges_latlong_all.json');
-        const data = await response.json();
-        setColleges(data);
-        setFilteredColleges(data);
+        // Load J&K specific colleges
+        const jkResponse = await fetch('/colleges_jk.json');
+        const jkData = await jkResponse.json();
+        const jkColleges = jkData.map((college: College) => ({
+          ...college,
+          source: 'J&K'
+        }));
+        
+        // Load all India colleges
+        const allIndiaResponse = await fetch('/colleges_latlong_all.json');
+        const allIndiaData = await allIndiaResponse.json();
+        const allIndiaColleges = allIndiaData.map((college: College) => ({
+          ...college,
+          source: 'All India'
+        }));
+        
+        // Combine both datasets, prioritizing J&K colleges at the beginning
+        const combinedColleges = [...jkColleges, ...allIndiaColleges];
+        
+        setJkCollegeCount(jkColleges.length);
+        setAllIndiaCollegeCount(allIndiaColleges.length);
+        setColleges(combinedColleges);
+        setFilteredColleges(combinedColleges);
+        
+        console.log(`Loaded ${jkColleges.length} J&K colleges and ${allIndiaColleges.length} All India colleges`);
       } catch (error) {
         console.error('Failed to load colleges data:', error);
       } finally {
@@ -97,7 +141,7 @@ export default function NearbyCollegesMap() {
         </Button>
         <div>
           <h1 className="text-3xl font-bold">Nearby Colleges</h1>
-          <p className="text-muted-foreground">Explore colleges across India</p>
+          <p className="text-muted-foreground">Explore colleges in J&K and across India</p>
         </div>
       </div>
 
@@ -114,9 +158,17 @@ export default function NearbyCollegesMap() {
                 className="pl-10"
               />
             </div>
-            <Badge variant="secondary">
-              {filteredColleges.length} colleges found
-            </Badge>
+            <div className="flex gap-2">
+              <Badge variant="secondary">
+                {filteredColleges.length} total
+              </Badge>
+              <Badge variant="destructive" className="bg-red-500">
+                {filteredColleges.filter(c => c.source === 'J&K').length} J&K
+              </Badge>
+              <Badge variant="default" className="bg-blue-500">
+                {filteredColleges.filter(c => c.source === 'All India').length} All India
+              </Badge>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -129,14 +181,26 @@ export default function NearbyCollegesMap() {
             Colleges Map
           </CardTitle>
           <CardDescription>
-            Click on any marker to see college details
+            <div className="space-y-1">
+              <div>Click on any marker to see college details</div>
+              <div className="flex items-center gap-4 text-sm">
+                <span className="flex items-center gap-1">
+                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                  J&K Colleges
+                </span>
+                <span className="flex items-center gap-1">
+                  <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                  All India Colleges
+                </span>
+              </div>
+            </div>
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div style={{ height: '600px', width: '100%' }}>
             <MapContainer
-              center={[20.5937, 78.9629]} // Center of India
-              zoom={5}
+              center={[33.7782, 76.5762]} // Jammu & Kashmir center
+              zoom={6}
               style={{ height: '100%', width: '100%' }}
             >
               <TileLayer
@@ -147,6 +211,7 @@ export default function NearbyCollegesMap() {
                 <Marker
                   key={index}
                   position={[college.latitude, college.longitude]}
+                  icon={college.source === 'J&K' ? jkIcon : allIndiaIcon}
                 >
                   <Popup>
                     <div className="p-2">
@@ -156,9 +221,17 @@ export default function NearbyCollegesMap() {
                           <MapPin className="w-3 h-3" />
                           {getCollegeLocation(college.name)}
                         </div>
-                        <Badge variant="outline" className="text-xs">
-                          {getCollegeType(college.name)}
-                        </Badge>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="text-xs">
+                            {getCollegeType(college.name)}
+                          </Badge>
+                          <Badge 
+                            variant={college.source === 'J&K' ? 'destructive' : 'default'}
+                            className="text-xs"
+                          >
+                            {college.source}
+                          </Badge>
+                        </div>
                       </div>
                       <div className="mt-2 text-xs text-muted-foreground">
                         Lat: {college.latitude.toFixed(4)}, Lng: {college.longitude.toFixed(4)}
@@ -173,7 +246,7 @@ export default function NearbyCollegesMap() {
       </Card>
 
       {/* Statistics */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
         <Card>
           <CardContent className="p-4">
             <div className="text-2xl font-bold">{colleges.length}</div>
@@ -182,8 +255,14 @@ export default function NearbyCollegesMap() {
         </Card>
         <Card>
           <CardContent className="p-4">
-            <div className="text-2xl font-bold">{filteredColleges.length}</div>
-            <div className="text-sm text-muted-foreground">Filtered Results</div>
+            <div className="text-2xl font-bold text-red-600">{jkCollegeCount}</div>
+            <div className="text-sm text-muted-foreground">J&K Colleges</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-4">
+            <div className="text-2xl font-bold text-blue-600">{allIndiaCollegeCount}</div>
+            <div className="text-sm text-muted-foreground">All India Colleges</div>
           </CardContent>
         </Card>
         <Card>

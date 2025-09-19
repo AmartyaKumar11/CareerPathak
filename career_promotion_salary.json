@@ -1,0 +1,170 @@
+[
+    {
+        "Role": "Graphic Designer",
+        "Promotion_Time_Years": "3-5",
+        "Entry_Salary_LPA": "3-6",
+        "Senior_Salary_LPA": "7-15",
+        "Salary_Gain_Percent": "20-40"
+    },
+    {
+        "Role": "UI/UX Designer",
+        "Promotion_Time_Years": "3-5",
+        "Entry_Salary_LPA": "5-8",
+        "Senior_Salary_LPA": "12-18",
+        "Salary_Gain_Percent": "30-60"
+    },
+    {
+        "Role": "Art Director",
+        "Promotion_Time_Years": "5-8",
+        "Entry_Salary_LPA": "8-10",
+        "Senior_Salary_LPA": "18-25",
+        "Salary_Gain_Percent": "40-80"
+    },
+    {
+        "Role": "Illustrator",
+        "Promotion_Time_Years": "4-6",
+        "Entry_Salary_LPA": "3-5",
+        "Senior_Salary_LPA": "8-12",
+        "Salary_Gain_Percent": "30-50"
+    },
+    {
+        "Role": "Animator",
+        "Promotion_Time_Years": "3-6",
+        "Entry_Salary_LPA": "4-8",
+        "Senior_Salary_LPA": "12-20",
+        "Salary_Gain_Percent": "40-70"
+    },
+    {
+        "Role": "Interior Designer",
+        "Promotion_Time_Years": "4-7",
+        "Entry_Salary_LPA": "3-5",
+        "Senior_Salary_LPA": "9-18",
+        "Salary_Gain_Percent": "40-60"
+    },
+    {
+        "Role": "Journalist",
+        "Promotion_Time_Years": "3-5",
+        "Entry_Salary_LPA": "2.5-4",
+        "Senior_Salary_LPA": "10-15",
+        "Salary_Gain_Percent": "200-300"
+    },
+    {
+        "Role": "News Anchor",
+        "Promotion_Time_Years": "4-7",
+        "Entry_Salary_LPA": "4-6",
+        "Senior_Salary_LPA": "12-30",
+        "Salary_Gain_Percent": "200-400"
+    },
+    {
+        "Role": "Content Writer",
+        "Promotion_Time_Years": "2-4",
+        "Entry_Salary_LPA": "2-3",
+        "Senior_Salary_LPA": "6-10",
+        "Salary_Gain_Percent": "100-200"
+    },
+    {
+        "Role": "Digital Marketer",
+        "Promotion_Time_Years": "3-5",
+        "Entry_Salary_LPA": "3-4",
+        "Senior_Salary_LPA": "10-20",
+        "Salary_Gain_Percent": "200-400"
+    },
+    {
+        "Role": "Public Relations Officer",
+        "Promotion_Time_Years": "4-6",
+        "Entry_Salary_LPA": "3-5",
+        "Senior_Salary_LPA": "15-30",
+        "Salary_Gain_Percent": "200-400"
+    },
+    {
+        "Role": "Social Media Manager",
+        "Promotion_Time_Years": "3-5",
+        "Entry_Salary_LPA": "3-4.5",
+        "Senior_Salary_LPA": "10-18",
+        "Salary_Gain_Percent": "200-400"
+    },
+    {
+        "Role": "Clinical Psychologist",
+        "Promotion_Time_Years": "5-8",
+        "Entry_Salary_LPA": "2-4",
+        "Senior_Salary_LPA": "12-30",
+        "Salary_Gain_Percent": "300-700"
+    },
+    {
+        "Role": "Counseling Psychologist",
+        "Promotion_Time_Years": "3-5",
+        "Entry_Salary_LPA": "1.5-3",
+        "Senior_Salary_LPA": "7-15",
+        "Salary_Gain_Percent": "300-500"
+    },
+    {
+        "Role": "School Psychologist",
+        "Promotion_Time_Years": "3-5",
+        "Entry_Salary_LPA": "2.4-4",
+        "Senior_Salary_LPA": "15-24",
+        "Salary_Gain_Percent": "300-500"
+    },
+    {
+        "Role": "Industrial Psychologist",
+        "Promotion_Time_Years": "4-7",
+        "Entry_Salary_LPA": "4-7",
+        "Senior_Salary_LPA": "15-30",
+        "Salary_Gain_Percent": "100-300"
+    },
+    {
+        "Role": "Research Psychologist",
+        "Promotion_Time_Years": "4-8",
+        "Entry_Salary_LPA": "6-8",
+        "Senior_Salary_LPA": "18-25",
+        "Salary_Gain_Percent": "150-300"
+    },
+    {
+        "Role": "Therapist",
+        "Promotion_Time_Years": "3-6",
+        "Entry_Salary_LPA": "2-5",
+        "Senior_Salary_LPA": "8-15",
+        "Salary_Gain_Percent": "100-250"
+    },
+    {
+        "Role": "Business Manager",
+        "Promotion_Time_Years": "4-6",
+        "Entry_Salary_LPA": "5-8",
+        "Senior_Salary_LPA": "16-30",
+        "Salary_Gain_Percent": "200-400"
+    },
+    {
+        "Role": "Management Consultant",
+        "Promotion_Time_Years": "4-7",
+        "Entry_Salary_LPA": "8-12",
+        "Senior_Salary_LPA": "25-45",
+        "Salary_Gain_Percent": "200-400"
+    },
+    {
+        "Role": "Financial Analyst",
+        "Promotion_Time_Years": "3-5",
+        "Entry_Salary_LPA": "5-8",
+        "Senior_Salary_LPA": "12-20",
+        "Salary_Gain_Percent": "100-300"
+    },
+    {
+        "Role": "Marketing Manager",
+        "Promotion_Time_Years": "3-5",
+        "Entry_Salary_LPA": "5-8",
+        "Senior_Salary_LPA": "15-30",
+        "Salary_Gain_Percent": "150-400"
+    },
+    {
+        "Role": "Operations Manager",
+        "Promotion_Time_Years": "4-7",
+        "Entry_Salary_LPA": "6-8",
+        "Senior_Salary_LPA": "15-24",
+        "Salary_Gain_Percent": "100-300"
+    },
+    {
+        "Role": "HR Manager",
+        "Promotion_Time_Years": "3-5",
+        "Entry_Salary_LPA": "4-8",
+        "Senior_Salary_LPA": "14-22",
+        "Salary_Gain_Percent": "150-300"
+    }
+]

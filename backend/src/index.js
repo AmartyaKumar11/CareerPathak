@@ -44,6 +44,7 @@ app.use('/api/applications', require('./routes/applications'));
 app.use('/api/scholarships', require('./routes/scholarships'));
 app.use('/api/streams', require('./routes/streams'));
 app.use('/api/ai-recommended-colleges', require('./routes/ai-college-recommendations'));
+app.use('/api/career-path', require('./routes/careerPath'));
 
 // Error handling
 app.use((error, req, res, next) => {

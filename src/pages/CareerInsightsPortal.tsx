@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import CareerChatbot from '@/components/chatbot/CareerChatbot';
 import scholarshipsJson from '../../all_scholarships.json';
 import { useAuth } from '@/contexts/SimpleAuthContext';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
@@ -36,7 +37,8 @@ import {
   Calendar,
   TrendingDown,
   Filter,
-  Search
+  Search,
+  MessageCircle
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -48,11 +50,14 @@ interface StreamData {
   category: string;
   career_paths: string[];
   salary_range: string;
-  description: string;
+  description?: string;
   eligibility?: string;
   entrance_exams?: string[];
   top_colleges?: string[];
   ai_insights?: any;
+  growth_prospects?: string;
+  required_skills?: string[];
+  education_requirements?: string;
 }
 
 interface CollegeData {
@@ -144,6 +149,57 @@ const CareerInsightsPortal: React.FC = () => {
       return;
     }
   }, [user, navigate]);
+
+  // Load stream data if not available from navigation state
+  useEffect(() => {
+    if (!streamData && streamId) {
+      // Create mock stream data based on streamId
+      const streamMap: { [key: string]: StreamData } = {
+        '0': {
+          id: '0',
+          stream: 'Computer Science & Engineering',
+          name: 'Computer Science & Engineering',
+          match_percentage: 92,
+          category: 'Engineering',
+          career_paths: ['Software Engineer', 'Data Scientist', 'Machine Learning Engineer', 'Web Developer', 'Mobile App Developer', 'DevOps Engineer'],
+          growth_prospects: 'Excellent growth with high demand in IT sector',
+          salary_range: '₹6-50 LPA',
+          required_skills: ['Programming', 'Problem Solving', 'Algorithms', 'System Design'],
+          education_requirements: 'B.Tech/B.E. in Computer Science, BCA, MCA'
+        },
+        '1': {
+          id: '1',
+          stream: 'Engineering',
+          name: 'Engineering',
+          match_percentage: 88,
+          category: 'Engineering',
+          career_paths: ['Civil Engineer', 'Mechanical Engineer', 'Electrical Engineer', 'Chemical Engineer', 'Aerospace Engineer'],
+          growth_prospects: 'Stable growth with good opportunities',
+          salary_range: '₹4-25 LPA',
+          required_skills: ['Technical Skills', 'Problem Solving', 'Project Management'],
+          education_requirements: 'B.Tech/B.E. in respective engineering fields'
+        },
+        '2': {
+          id: '2',
+          stream: 'Medical Sciences',
+          name: 'Medical Sciences',
+          match_percentage: 85,
+          category: 'Healthcare',
+          career_paths: ['Doctor', 'Surgeon', 'Specialist', 'Medical Researcher', 'Healthcare Administrator'],
+          growth_prospects: 'High demand with excellent job security',
+          salary_range: '₹5-100 LPA',
+          required_skills: ['Medical Knowledge', 'Patient Care', 'Decision Making'],
+          education_requirements: 'MBBS, MD, MS, or other medical degrees'
+        }
+      };
+      
+      const stream = streamMap[streamId];
+      if (stream) {
+        setStreamData(stream);
+      }
+      setLoading(false);
+    }
+  }, [streamId, streamData]);
 
   // Load scholarships from JSON
   useEffect(() => {
@@ -835,6 +891,107 @@ const CareerInsightsPortal: React.FC = () => {
                     </CardContent>
                   </Card>
                 ))}
+              </div>
+            </div>
+          </TabsContent>
+
+          {/* AI Insights Tab */}
+          <TabsContent value="insights">
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-2xl font-bold">AI Career Advisor</h3>
+                <p className="text-muted-foreground">
+                  Get personalized advice about your career path, education decisions, and alternatives
+                </p>
+              </div>
+
+              <div className="grid lg:grid-cols-3 gap-6">
+                {/* Chatbot */}
+                <div className="lg:col-span-2">
+                  <CareerChatbot 
+                    streamName={streamData?.stream || streamData?.name}
+                  />
+                </div>
+
+                {/* Quick Stats & Info */}
+                <div className="space-y-4">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <Brain className="h-5 w-5" />
+                        Quick Insights
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="p-3 bg-blue-50 rounded-lg">
+                        <div className="flex items-center gap-2 mb-2">
+                          <GraduationCap className="h-4 w-4 text-blue-600" />
+                          <span className="text-sm font-medium">Degree ROI</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          Average 3-5 year payback period for {streamData?.stream || 'this field'}
+                        </p>
+                      </div>
+
+                      <div className="p-3 bg-green-50 rounded-lg">
+                        <div className="flex items-center gap-2 mb-2">
+                          <TrendingUp className="h-4 w-4 text-green-600" />
+                          <span className="text-sm font-medium">Market Growth</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          15-20% expected growth in next 5 years
+                        </p>
+                      </div>
+
+                      <div className="p-3 bg-orange-50 rounded-lg">
+                        <div className="flex items-center gap-2 mb-2">
+                          <DollarSign className="h-4 w-4 text-orange-600" />
+                          <span className="text-sm font-medium">Salary Range</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          {streamData?.salary_range || '₹3-12 LPA based on experience'}
+                        </p>
+                      </div>
+
+                      <div className="p-3 bg-purple-50 rounded-lg">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Lightbulb className="h-4 w-4 text-purple-600" />
+                          <span className="text-sm font-medium">Alternative Paths</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          Skill-based certifications, bootcamps, freelancing
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-sm">Popular Questions</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        {[
+                          "Is graduation worth the cost?",
+                          "What are my alternatives?",
+                          "How long to see ROI?",
+                          "Skill-based vs degree jobs?",
+                          "Short-term earning options?"
+                        ].map((question, index) => (
+                          <Button
+                            key={index}
+                            variant="ghost"
+                            size="sm"
+                            className="w-full justify-start text-xs h-auto p-2"
+                          >
+                            <MessageCircle className="h-3 w-3 mr-2" />
+                            {question}
+                          </Button>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             </div>
           </TabsContent>

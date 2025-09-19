@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { 
   LayoutDashboard, 
   TrendingUp, 
@@ -19,7 +21,8 @@ import {
   Settings,
   AlertCircle,
   LogOut,
-  GraduationCap
+  GraduationCap,
+  Globe
 } from 'lucide-react';
 import { StreamRecommendations } from '@/components/dashboard/StreamRecommendations';
 import { NearbyColleges } from '@/components/dashboard/NearbyColleges';
@@ -34,6 +37,8 @@ interface OfflineIndicatorProps {
 }
 
 const OfflineIndicator = ({ isOnline, onRefresh }: OfflineIndicatorProps) => {
+  const { t } = useTranslation();
+  
   if (isOnline) return null;
 
   return (
@@ -41,12 +46,12 @@ const OfflineIndicator = ({ isOnline, onRefresh }: OfflineIndicatorProps) => {
       <WifiOff className="h-4 w-4" />
       <AlertDescription className="flex items-center justify-between">
         <span className="text-orange-700">
-          You're offline. Showing cached data from your last sync.
+          {t('dashboard.offline')}
         </span>
         {onRefresh && (
           <Button variant="outline" size="sm" onClick={onRefresh}>
             <RefreshCw className="w-3 h-3 mr-1" />
-            Retry
+            {t('dashboard.retry')}
           </Button>
         )}
       </AlertDescription>
@@ -59,110 +64,125 @@ interface DashboardStatsProps {
   isOnline: boolean;
 }
 
-const DashboardStats = ({ unreadCount, isOnline }: DashboardStatsProps) => (
-  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">Stream Match</CardTitle>
-        <TrendingUp className="h-4 w-4 text-muted-foreground" />
-      </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold text-blue-600">95%</div>
-        <p className="text-xs text-muted-foreground">CS & Engineering</p>
-      </CardContent>
-    </Card>
-    
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">Nearby Colleges</CardTitle>
-        <MapPin className="h-4 w-4 text-muted-foreground" />
-      </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold text-green-600">24</div>
-        <p className="text-xs text-muted-foreground">Within 50km</p>
-      </CardContent>
-    </Card>
-    
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">Notifications</CardTitle>
-        <Bell className="h-4 w-4 text-muted-foreground" />
-      </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold text-red-600">{unreadCount}</div>
-        <p className="text-xs text-muted-foreground">Unread alerts</p>
-      </CardContent>
-    </Card>
-    
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">Connection</CardTitle>
-        {isOnline ? 
-          <Wifi className="h-4 w-4 text-green-500" /> : 
-          <WifiOff className="h-4 w-4 text-red-500" />
-        }
-      </CardHeader>
-      <CardContent>
-        <div className={`text-2xl font-bold ${isOnline ? 'text-green-600' : 'text-red-600'}`}>
-          {isOnline ? 'Online' : 'Offline'}
-        </div>
-        <p className="text-xs text-muted-foreground">
-          {isOnline ? 'Real-time data' : 'Cached data'}
-        </p>
-      </CardContent>
-    </Card>
-  </div>
-);
+const DashboardStats = ({ unreadCount, isOnline }: DashboardStatsProps) => {
+  const { t } = useTranslation();
+  
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">{t('dashboard.stats.stream_match')}</CardTitle>
+          <TrendingUp className="h-4 w-4 text-muted-foreground" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold text-blue-600">95%</div>
+          <p className="text-xs text-muted-foreground">CS & Engineering</p>
+        </CardContent>
+      </Card>
+      
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">{t('dashboard.stats.nearby_colleges')}</CardTitle>
+          <MapPin className="h-4 w-4 text-muted-foreground" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold text-green-600">24</div>
+          <p className="text-xs text-muted-foreground">{t('dashboard.stats.within_km')}</p>
+        </CardContent>
+      </Card>
+      
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">{t('dashboard.stats.notifications')}</CardTitle>
+          <Bell className="h-4 w-4 text-muted-foreground" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold text-red-600">{unreadCount}</div>
+          <p className="text-xs text-muted-foreground">{t('dashboard.stats.unread_alerts')}</p>
+        </CardContent>
+      </Card>
+      
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">{t('dashboard.stats.connection')}</CardTitle>
+          {isOnline ? 
+            <Wifi className="h-4 w-4 text-green-500" /> : 
+            <WifiOff className="h-4 w-4 text-red-500" />
+          }
+        </CardHeader>
+        <CardContent>
+          <div className={`text-2xl font-bold ${isOnline ? 'text-green-600' : 'text-red-600'}`}>
+            {isOnline ? t('dashboard.stats.online') : t('dashboard.stats.offline')}
+          </div>
+          <p className="text-xs text-muted-foreground">
+            {isOnline ? t('dashboard.stats.real_time') : t('dashboard.stats.cached_data')}
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
 
 interface QuickActionsProps {
   onViewProfile: () => void;
   onOpenSettings: () => void;
 }
 
-const QuickActions = ({ onViewProfile, onOpenSettings }: QuickActionsProps) => (
-  <Card className="mb-6">
-    <CardHeader>
-      <CardTitle className="text-lg">Quick Actions</CardTitle>
-    </CardHeader>
-    <CardContent>
-      <div className="flex flex-wrap gap-3">
-        <Button variant="outline" onClick={onViewProfile}>
-          <User className="w-4 h-4 mr-2" />
-          View Profile
-        </Button>
-        <Button variant="outline" onClick={onOpenSettings}>
-          <Settings className="w-4 h-4 mr-2" />
-          Settings
-        </Button>
-        <Button variant="outline">
-          <BookOpen className="w-4 h-4 mr-2" />
-          Take Assessment
-        </Button>
-        <Button variant="outline">
-          <MapPin className="w-4 h-4 mr-2" />
-          Find Colleges
-        </Button>
-      </div>
-    </CardContent>
-  </Card>
-);
+const QuickActions = ({ onViewProfile, onOpenSettings }: QuickActionsProps) => {
+  const { t } = useTranslation();
+  
+  return (
+    <Card className="mb-6">
+      <CardHeader>
+        <CardTitle className="text-lg">{t('dashboard.quick_actions.title')}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="flex flex-wrap gap-3">
+          <Button variant="outline" onClick={onViewProfile}>
+            <User className="w-4 h-4 mr-2" />
+            {t('dashboard.quick_actions.view_profile')}
+          </Button>
+          <Button variant="outline" onClick={onOpenSettings}>
+            <Settings className="w-4 h-4 mr-2" />
+            {t('dashboard.quick_actions.settings')}
+          </Button>
+          <Button variant="outline">
+            <BookOpen className="w-4 h-4 mr-2" />
+            {t('dashboard.quick_actions.take_assessment')}
+          </Button>
+          <Button variant="outline">
+            <MapPin className="w-4 h-4 mr-2" />
+            {t('dashboard.quick_actions.find_colleges')}
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 
 export const Dashboard = () => {
   const { user, signOut } = useAuth();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [activeTab, setActiveTab] = useState('overview');
   const [error, setError] = useState<string | null>(null);
-  const [showDebugInfo, setShowDebugInfo] = useState(false); // Changed to false by default
+  const [showDebugInfo, setShowDebugInfo] = useState(false);
+  const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
 
   // Debug: Log successful dashboard render
   console.log('Dashboard component rendered successfully!');
   console.log('User:', user);
   console.log('Current path:', location.pathname);
+  console.log('Current language:', currentLanguage);
+  console.log('i18n language:', i18n.language);
   
   if (!user) {
-    return null;
+    console.log('Dashboard: No user found, rendering null');
+    return <div style={{backgroundColor: 'red', color: 'white', padding: '20px'}}>
+      NO USER - This should not show if you're logged in
+    </div>;
   }
 
   const handleSignOut = () => {
@@ -215,8 +235,21 @@ export const Dashboard = () => {
     console.log('Open settings');
   };
 
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    setCurrentLanguage(lng);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <div style={{backgroundColor: 'red', padding: '20px', fontSize: '24px', color: 'white', border: '5px solid black'}}>
+        TEST: Dashboard is rendering! User: {user?.name}
+        <br/>
+        Current Language: {currentLanguage}
+      </div>
+
+      {/* Debug Information Panel */}
+
       {/* Debug Information Panel */}
       {showDebugInfo && (
         <Alert className="m-4 border-green-200 bg-green-50">
@@ -245,14 +278,14 @@ export const Dashboard = () => {
             <div>
               <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
                 <LayoutDashboard className="w-8 h-8 text-blue-600" />
-                Dashboard
+                {t('dashboard.title')}
               </h1>
               <p className="text-gray-600 mt-1">
-                Your personalized career guidance hub
+                {t('dashboard.subtitle')}
               </p>
             </div>
-            <div className="flex items-center space-x-4">
-              <Badge variant="outline" className="text-sm px-3 py-1">
+            <div className="flex items-center space-x-2 md:space-x-4">
+              <Badge variant="outline" className="text-sm px-3 py-1 hidden md:block">
                 {new Date().toLocaleDateString('en-US', { 
                   weekday: 'long', 
                   year: 'numeric', 
@@ -260,25 +293,44 @@ export const Dashboard = () => {
                   day: 'numeric' 
                 })}
               </Badge>
+              
+              {/* Language Switcher */}
+              <div className="flex items-center">
+                <Select value={currentLanguage} onValueChange={changeLanguage}>
+                  <SelectTrigger className="w-32 md:w-40 border-2 border-blue-300 bg-white">
+                    <Globe className="mr-2 h-4 w-4 text-blue-600" />
+                    <SelectValue placeholder="Language" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="en">{t('languages.english')}</SelectItem>
+                    <SelectItem value="hi">{t('languages.hindi')}</SelectItem>
+                    <SelectItem value="ur">{t('languages.urdu')}</SelectItem>
+                    <SelectItem value="ks">{t('languages.kashmiri')}</SelectItem>
+                    <SelectItem value="dg">{t('languages.dogri')}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
               <div className="flex items-center space-x-2">
                 {user?.picture ? (
                   <img 
                     src={user.picture} 
                     alt={user.name}
-                    className="w-8 h-8 rounded-full"
+                    className="w-6 h-6 md:w-8 md:h-8 rounded-full"
                   />
                 ) : (
-                  <User className="h-8 w-8 text-muted-foreground" />
+                  <User className="h-6 w-6 md:h-8 md:w-8 text-muted-foreground" />
                 )}
-                <span className="text-sm font-medium">{user?.name}</span>
+                <span className="text-sm font-medium hidden md:inline">{user?.name}</span>
               </div>
-              <Button variant="outline" size="sm" onClick={() => navigate('/profile')}>
+              <Button variant="outline" size="sm" onClick={() => navigate('/profile')} className="hidden md:flex">
                 <Settings className="mr-2 h-4 w-4" />
-                Profile
+                {t('dashboard.profile')}
               </Button>
               <Button variant="outline" size="sm" onClick={handleSignOut}>
                 <LogOut className="mr-2 h-4 w-4" />
-                Sign Out
+                <span className="hidden md:inline">{t('dashboard.sign_out')}</span>
+                <LogOut className="h-4 w-4 md:hidden" />
               </Button>
             </div>
           </div>
@@ -308,11 +360,11 @@ export const Dashboard = () => {
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="colleges">Colleges</TabsTrigger>
-            <TabsTrigger value="career-paths">Career Paths</TabsTrigger>
+            <TabsTrigger value="overview">{t('dashboard.tabs.overview')}</TabsTrigger>
+            <TabsTrigger value="colleges">{t('dashboard.tabs.colleges')}</TabsTrigger>
+            <TabsTrigger value="career-paths">{t('dashboard.tabs.career_paths')}</TabsTrigger>
             <TabsTrigger value="notifications" className="relative">
-              Notifications
+              {t('dashboard.tabs.notifications')}
               {unreadCount > 0 && (
                 <Badge className="absolute -top-2 -right-2 h-4 w-4 p-0 text-xs bg-red-500">
                   {unreadCount > 9 ? '9+' : unreadCount}
@@ -325,24 +377,23 @@ export const Dashboard = () => {
             <StreamRecommendations />
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div>
-                <h3 className="text-lg font-semibold mb-4">Recent Notifications</h3>
+                <h3 className="text-lg font-semibold mb-4">{t('dashboard.recent_notifications')}</h3>
                 <div className="space-y-4">
                   <NotificationCenter />
                 </div>
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-4">Career Insights</h3>
+                <h3 className="text-lg font-semibold mb-4">{t('dashboard.career_insights')}</h3>
                 <Card>
                   <CardContent className="p-6">
                     <div className="text-center space-y-2">
                       <TrendingUp className="w-12 h-12 text-blue-500 mx-auto" />
-                      <h4 className="font-semibold">Career Growth Projection</h4>
+                      <h4 className="font-semibold">{t('dashboard.career_growth')}</h4>
                       <p className="text-sm text-gray-600">
-                        Based on your profile, the Computer Science field shows 
-                        120% growth potential over the next 5 years.
+                        {t('dashboard.growth_description')}
                       </p>
                       <Button variant="outline" size="sm">
-                        View Full Analysis
+                        {t('dashboard.view_full_analysis')}
                       </Button>
                     </div>
                   </CardContent>

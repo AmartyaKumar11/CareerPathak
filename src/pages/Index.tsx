@@ -131,7 +131,7 @@ const Index = () => {
                 <SelectItem value="dg">{t('languages.dogri')}</SelectItem>
               </SelectContent>
             </Select>
-            <Button variant="outline" onClick={handleAuthenticate} className="ml-2">Authenticate</Button>
+            <Button variant="outline" onClick={handleAuthenticate} className="ml-2">{t('buttons.authenticate')}</Button>
           </div>
         </div>
       </header>
@@ -205,13 +205,13 @@ const Index = () => {
             <Card>
               <CardContent className="p-8 flex flex-col items-center justify-center">
                 <Building className="h-12 w-12 text-primary mb-4" />
-                <h2 className="text-3xl font-bold mb-4 text-center">Explore Scholarships</h2>
+                <h2 className="text-3xl font-bold mb-4 text-center">{t('scholarships.explore_title')}</h2>
                 <p className="text-muted-foreground mb-6 text-center">
-                  Discover scholarships tailored for you. Filter by gender, amount, and eligibility to find the best opportunities for your education journey.
+                  {t('scholarships.explore_subtitle')}
                 </p>
                 <Button size="lg" className="text-lg px-8 py-4" asChild>
                   <Link to="/scholarships">
-                    Explore Scholarships
+                    {t('scholarships.explore_button')}
                   </Link>
                 </Button>
               </CardContent>
@@ -224,7 +224,7 @@ const Index = () => {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
-            Success Stories from J&K
+            {t('alumni.title')}
           </h2>
           
           <div className="max-w-4xl mx-auto">
@@ -248,7 +248,7 @@ const Index = () => {
                         </p>
                         <div className="flex items-center gap-2 text-muted-foreground mt-1">
                           <MapPin className="h-4 w-4" />
-                          <span>{alumniData[currentAlumni].hometown} → {alumniData[currentAlumni].location}</span>
+                          <span>{alumniData[currentAlumni].hometown} {t('alumni.to')} {alumniData[currentAlumni].location}</span>
                         </div>
                       </div>
                       
@@ -291,10 +291,10 @@ const Index = () => {
       <section className="py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-6">
-            Ready to Start Your Journey?
+            {t('cta.ready_title')}
           </h2>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Join thousands of J&K students who have found their perfect career path
+            {t('cta.ready_subtitle')}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -304,7 +304,7 @@ const Index = () => {
               onClick={handleGetStarted}
             >
               <TrendingUp className="mr-2 h-5 w-5" />
-              Take Aptitude Quiz
+              {t('cta.take_quiz')}
             </Button>
             <Button 
               variant="outline" 
@@ -313,7 +313,7 @@ const Index = () => {
               onClick={handleGetStarted}
             >
               <Building className="mr-2 h-5 w-5" />
-              Explore Colleges
+              {t('cta.explore_colleges')}
             </Button>
           </div>
         </div>
@@ -329,36 +329,36 @@ const Index = () => {
                 <span className="text-2xl font-bold text-primary">CareerPathak</span>
               </div>
               <p className="text-muted-foreground mb-4">
-                Empowering J&K students with personalized career guidance and opportunities.
+                {t('footer.description')}
               </p>
               <div className="flex space-x-2">
                 <Heart className="h-5 w-5 text-red-500" />
-                <span className="text-sm text-muted-foreground">Made with love for J&K</span>
+                <span className="text-sm text-muted-foreground">{t('footer.made_with_love')}</span>
               </div>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
+              <h4 className="font-semibold mb-4">{t('footer.quick_links')}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><button onClick={handleGetStarted} className="hover:text-primary">Colleges</button></li>
-                <li><button onClick={handleGetStarted} className="hover:text-primary">Aptitude Quiz</button></li>
-                <li><button onClick={handleGetStarted} className="hover:text-primary">Timeline</button></li>
-                <li><button onClick={handleGetStarted} className="hover:text-primary">Resources</button></li>
+                <li><button onClick={handleGetStarted} className="hover:text-primary">{t('footer.colleges')}</button></li>
+                <li><button onClick={handleGetStarted} className="hover:text-primary">{t('footer.aptitude_quiz')}</button></li>
+                <li><button onClick={handleGetStarted} className="hover:text-primary">{t('footer.timeline')}</button></li>
+                <li><button onClick={handleGetStarted} className="hover:text-primary">{t('footer.resources')}</button></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Support</h4>
+              <h4 className="font-semibold mb-4">{t('support.title')}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><button onClick={handleGetStarted} className="hover:text-primary">Help Center</button></li>
-                <li><a href="#" className="hover:text-primary">Contact Us</a></li>
-                <li><a href="#" className="hover:text-primary">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-primary">Terms of Service</a></li>
+                <li><button onClick={handleGetStarted} className="hover:text-primary">{t('footer.help_center')}</button></li>
+                <li><a href="#" className="hover:text-primary">{t('footer.contact_us')}</a></li>
+                <li><a href="#" className="hover:text-primary">{t('footer.privacy_policy')}</a></li>
+                <li><a href="#" className="hover:text-primary">{t('footer.terms_of_service')}</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Languages</h4>
+              <h4 className="font-semibold mb-4">{t('footer.languages')}</h4>
               <div className="flex flex-wrap gap-2">
                 {['en', 'hi', 'ur', 'ks', 'dg'].map((lang) => (
                   <button
@@ -378,7 +378,7 @@ const Index = () => {
           </div>
           
           <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2024 CareerPathak. All rights reserved. Built for the students of Jammu & Kashmir.</p>
+            <p>&copy; {t('footer.copyright')}</p>
           </div>
         </div>
       </footer>

@@ -81,7 +81,43 @@
     "nearby_colleges": "Top Colleges Near You",
     "upcoming_deadlines": "Upcoming Deadlines",
     "notifications": "Notifications",
-    "view_all": "View All"
+    "view_all": "View All",
+    "title": "Dashboard",
+    "subtitle": "Your personalized career guidance hub",
+    "offline": "You're offline. Showing cached data from your last sync.",
+    "retry": "Retry",
+    "stats": {
+      "stream_match": "Stream Match",
+      "nearby_colleges": "Nearby Colleges",
+      "notifications": "Notifications",
+      "connection": "Connection",
+      "within_km": "Within 50km",
+      "unread_alerts": "Unread alerts",
+      "online": "Online",
+      "offline": "Offline",
+      "real_time": "Real-time data",
+      "cached_data": "Cached data"
+    },
+    "quick_actions": {
+      "title": "Quick Actions",
+      "view_profile": "View Profile",
+      "settings": "Settings",
+      "take_assessment": "Take Assessment",
+      "find_colleges": "Find Colleges"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "colleges": "Colleges",
+      "career_paths": "Career Paths",
+      "notifications": "Notifications"
+    },
+    "profile": "Profile",
+    "sign_out": "Sign Out",
+    "recent_notifications": "Recent Notifications",
+    "career_insights": "Career Insights",
+    "career_growth": "Career Growth Projection",
+    "growth_description": "Based on your profile, the Computer Science field shows 120% growth potential over the next 5 years.",
+    "view_full_analysis": "View Full Analysis"
   },
   "colleges": {
     "title": "College Explorer",
@@ -130,5 +166,72 @@
     "feedback": "Send Feedback",
     "feedback_placeholder": "Share your experience or suggestions...",
     "send_feedback": "Send Feedback"
+  },
+  "scholarships": {
+    "explore_title": "Explore Scholarships",
+    "explore_subtitle": "Discover scholarships tailored for you. Filter by gender, amount, and eligibility to find the best opportunities for your education journey.",
+    "explore_button": "Explore Scholarships"
+  },
+  "alumni": {
+    "title": "Success Stories from J&K",
+    "from": "from",
+    "to": "to"
+  },
+  "cta": {
+    "ready_title": "Ready to Start Your Journey?",
+    "ready_subtitle": "Join thousands of J&K students who have found their perfect career path",
+    "take_quiz": "Take Aptitude Quiz",
+    "explore_colleges": "Explore Colleges"
+  },
+  "footer": {
+    "description": "Empowering J&K students with personalized career guidance and opportunities.",
+    "made_with_love": "Made with love for J&K",
+    "quick_links": "Quick Links",
+    "colleges": "Colleges",
+    "aptitude_quiz": "Aptitude Quiz",
+    "timeline": "Timeline",
+    "resources": "Resources",
+    "help_center": "Help Center",
+    "contact_us": "Contact Us",
+    "privacy_policy": "Privacy Policy",
+    "terms_of_service": "Terms of Service",
+    "languages": "Languages",
+    "copyright": "2024 CareerPathak. All rights reserved. Built for the students of Jammu & Kashmir."
+  },
+  "buttons": {
+    "authenticate": "Authenticate"
+  },
+  "chatbot": {
+    "title": "Career Advisor Bot",
+    "beta": "Beta",
+    "subtitle": "Get personalized advice about your career path and education decisions",
+    "greeting": "Hi! I'm your AI career advisor. I can help you with career planning, salary comparisons, and educational decisions",
+    "greeting_stream": " in ",
+    "ask_about": "Ask me about:",
+    "career_paths": "🎯 Career paths and growth opportunities",
+    "salary_comparisons": "💰 Salary comparisons and expectations",
+    "education_vs_skills": "🎓 Education vs skill-based alternatives",
+    "industry_trends": "📈 Industry trends and job market insights",
+    "try_asking": "Try asking about specific roles or career decisions!",
+    "thinking": "Thinking...",
+    "quick_suggestions": "Try asking:",
+    "placeholder": "Ask about career paths, salaries, alternatives...",
+    "enter_to_send": "Press Enter to send • Powered by AI • Data updated regularly",
+    "copied": "Copied!",
+    "copy": "Copy",
+    "suggestions": {
+      "career_path_graphic": "Show career path for Graphic Designer",
+      "compare_salaries": "Compare career salaries", 
+      "graduation_worth": "Is graduation worth it?",
+      "high_growth": "High-growth careers",
+      "show_roles": "Show me available career roles",
+      "alternative_paths": "What are alternative career paths?",
+      "choose_between": "Help me choose between two careers"
+    }
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "goHome": "Go Home"
   }
 }

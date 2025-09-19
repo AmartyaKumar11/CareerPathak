@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -77,6 +78,7 @@ const MarkdownRenderer: React.FC<{ content: string; isAnimated?: boolean }> = ({
   content, 
   isAnimated = false 
 }) => {
+  const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = (text: string) => {
@@ -200,12 +202,12 @@ const MarkdownRenderer: React.FC<{ content: string; isAnimated?: boolean }> = ({
             {copied ? (
               <>
                 <Check className="h-3 w-3 mr-1" />
-                Copied!
+                {t('chatbot.copied')}
               </>
             ) : (
               <>
                 <Copy className="h-3 w-3 mr-1" />
-                Copy
+                {t('chatbot.copy')}
               </>
             )}
           </Button>
@@ -216,25 +218,26 @@ const MarkdownRenderer: React.FC<{ content: string; isAnimated?: boolean }> = ({
 };
 
 const CareerChatbot: React.FC<CareerChatbotProps> = ({ streamName, userProfile }) => {
+  const { t, i18n } = useTranslation();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: `Hi! I'm your AI career advisor. I can help you with career planning, salary comparisons, and educational decisions${streamName ? ` in ${streamName}` : ''}. 
+      text: `${t('chatbot.greeting')}${streamName ? `${t('chatbot.greeting_stream')}${streamName}` : ''}. 
 
-Ask me about:
-🎯 Career paths and growth opportunities  
-💰 Salary comparisons and expectations
-🎓 Education vs skill-based alternatives
-📈 Industry trends and job market insights
+${t('chatbot.ask_about')}
+${t('chatbot.career_paths')}  
+${t('chatbot.salary_comparisons')}
+${t('chatbot.education_vs_skills')}
+${t('chatbot.industry_trends')}
 
-Try asking about specific roles or career decisions!`,
+${t('chatbot.try_asking')}`,
       sender: 'bot',
       timestamp: new Date(),
       suggestions: [
-        "Show me career path for UI/UX Designer",
-        "Is graduation worth it?",
-        "Compare software engineer vs data analyst",
-        "What are high-growth careers in 2025?"
+        t('chatbot.suggestions.career_path_graphic'),
+        t('chatbot.suggestions.graduation_worth'),
+        t('chatbot.suggestions.compare_salaries'),
+        t('chatbot.suggestions.high_growth')
       ]
     }
   ]);
@@ -247,10 +250,10 @@ Try asking about specific roles or career decisions!`,
 
   // Quick suggestion buttons
   const quickSuggestions = [
-    { text: "Show career path for Graphic Designer", icon: Map },
-    { text: "Compare career salaries", icon: BarChart3 },
-    { text: "Is graduation worth it?", icon: GraduationCap },
-    { text: "High-growth careers", icon: TrendingUp }
+    { text: t('chatbot.suggestions.career_path_graphic'), icon: Map },
+    { text: t('chatbot.suggestions.compare_salaries'), icon: BarChart3 },
+    { text: t('chatbot.suggestions.graduation_worth'), icon: GraduationCap },
+    { text: t('chatbot.suggestions.high_growth'), icon: TrendingUp }
   ];
 
   // Fetch available roles on component mount
@@ -300,7 +303,8 @@ Try asking about specific roles or career decisions!`,
         },
         body: JSON.stringify({ 
           question: question,
-          userProfile: userProfile 
+          userProfile: userProfile,
+          language: i18n.language
         })
       });
 
@@ -422,10 +426,10 @@ I'm still here to help with other career questions!`,
           sender: 'bot',
           timestamp: new Date(),
           suggestions: [
-            "Is graduation worth it?",
-            "Show me available career roles",
-            "What are alternative career paths?",
-            "Help me choose between two careers"
+            t('chatbot.suggestions.graduation_worth'),
+            t('chatbot.suggestions.show_roles'),
+            t('chatbot.suggestions.alternative_paths'),
+            t('chatbot.suggestions.choose_between')
           ]
         };
         setMessages(prev => [...prev, errorMessage]);
@@ -757,11 +761,11 @@ What specific aspect would you like to explore?`,
       <CardHeader className="flex-shrink-0 border-b">
         <CardTitle className="flex items-center gap-2">
           <Bot className="h-5 w-5 text-primary" />
-          Career Advisor Bot
-          <Badge variant="secondary" className="ml-2">Beta</Badge>
+          {t('chatbot.title')}
+          <Badge variant="secondary" className="ml-2">{t('chatbot.beta')}</Badge>
         </CardTitle>
         <p className="text-sm text-muted-foreground">
-          Get personalized advice about your career path and education decisions
+          {t('chatbot.subtitle')}
         </p>
       </CardHeader>
 
@@ -796,7 +800,7 @@ What specific aspect would you like to explore?`,
                     <div className="flex items-center gap-2">
                       <Loader2 className="h-4 w-4 animate-spin" />
                       <span className="text-sm text-muted-foreground">
-                        Thinking...
+                        {t('chatbot.thinking')}
                       </span>
                     </div>
                   ) : (
@@ -966,7 +970,7 @@ What specific aspect would you like to explore?`,
         {/* Quick Suggestions */}
         {messages.length === 1 && (
           <div className="p-4 border-t bg-muted/20">
-            <p className="text-xs text-muted-foreground mb-3">Try asking:</p>
+            <p className="text-xs text-muted-foreground mb-3">{t('chatbot.quick_suggestions')}</p>
             <div className="grid grid-cols-2 gap-2">
               {quickSuggestions.map((suggestion, index) => {
                 const Icon = suggestion.icon;
@@ -995,7 +999,7 @@ What specific aspect would you like to explore?`,
               value={currentMessage}
               onChange={(e) => setCurrentMessage(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Ask about career paths, salaries, alternatives..."
+              placeholder={t('chatbot.placeholder')}
               disabled={isTyping}
               className="flex-1"
             />
@@ -1008,7 +1012,7 @@ What specific aspect would you like to explore?`,
             </Button>
           </div>
           <p className="text-xs text-muted-foreground mt-2">
-            Press Enter to send • Powered by AI • Data updated regularly
+            {t('chatbot.enter_to_send')}
           </p>
         </div>
       </CardContent>

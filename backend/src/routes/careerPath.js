@@ -379,13 +379,23 @@ Provide comparison in this JSON format:
 // Get career advice for any question using AI
 router.post('/ask', async (req, res) => {
   try {
-    const { question, userProfile } = req.body;
+    const { question, userProfile, language = 'en' } = req.body;
 
     if (!question) {
       return res.status(400).json({ error: 'Question is required' });
     }
 
     console.log('🤖 Answering career question:', question);
+    console.log('🌐 User language:', language);
+
+    // Language-specific instructions
+    const languageInstructions = {
+      'en': 'Respond in clear, professional English.',
+      'hi': 'कृपया अपना उत्तर हिंदी में दें। व्यावसायिक और स्पष्ट भाषा का उपयोग करें।',
+      'ur': 'براہ کرم اپنا جواب اردو میں دیں۔ پیشہ ورانہ اور واضح زبان استعمال کریں۔',
+      'ks': 'مہربانی کرتؠ پننہٕ جواب کٲشُر زبانؠ مؠ دیو۔ پیشہ ورانہ تؠ واضح زبان استعمال کریو۔',
+      'dg': 'कृपया अपणा जवाब डोगरी भाषा मी दिया करो। पेशेवर ते साफ भाषा दा इस्तेमाल करो।'
+    };
 
     // Create a comprehensive prompt for AI
     const prompt = `
@@ -393,20 +403,23 @@ You are an expert career advisor. Answer this career-related question with detai
 
 Question: "${question}"
 
-Context: You have access to comprehensive career data including salary ranges, promotion timelines, and industry insights for various roles in the Indian job market.
+Language Instructions: ${languageInstructions[language] || languageInstructions['en']}
+
+Context: You have access to comprehensive career data including salary ranges, promotion timelines, and industry insights for various roles in the Indian job market, specifically focusing on opportunities in Jammu & Kashmir region.
 
 Please provide a helpful, detailed response that:
 - Directly answers the user's question
-- Provides specific examples and data where relevant
+- Provides specific examples and data where relevant  
 - Offers actionable advice
 - Uses clear formatting with bullet points and sections
 - Includes salary figures in LPA (Lakhs Per Annum) for Indian market
 - Suggests next steps or follow-up questions
+- Considers opportunities and resources available in Jammu & Kashmir
 
 Format your response in a conversational, helpful tone similar to a professional career counselor.
 `;
 
-    console.log('🤖 Calling AI for general question');
+    console.log('🤖 Calling AI for general question in language:', language);
     
     // Query OpenRouter AI
     const aiResponse = await queryOpenRouter(prompt);
@@ -418,6 +431,7 @@ Format your response in a conversational, helpful tone similar to a professional
       data: {
         question: question,
         answer: aiResponse,
+        language: language,
         generated_at: new Date().toISOString()
       }
     });
@@ -426,13 +440,14 @@ Format your response in a conversational, helpful tone similar to a professional
     console.error('Career Question Error:', error);
     
     // Provide a fallback response for common questions
-    const fallbackResponse = generateFallbackResponse(req.body.question);
+    const fallbackResponse = generateFallbackResponse(req.body.question, req.body.language);
     
     res.json({
       success: true,
       data: {
         question: req.body.question,
         answer: fallbackResponse,
+        language: req.body.language || 'en',
         generated_at: new Date().toISOString(),
         note: 'AI service temporarily unavailable - providing data-based response'
       }
@@ -441,7 +456,7 @@ Format your response in a conversational, helpful tone similar to a professional
 });
 
 // Fallback response generator for common questions
-function generateFallbackResponse(question) {
+function generateFallbackResponse(question, language = 'en') {
   const lowerQuestion = question.toLowerCase();
   
   if (lowerQuestion.includes('skills') && lowerQuestion.includes('pay')) {

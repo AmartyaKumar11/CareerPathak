@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/contexts/SimpleAuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { 
   LayoutDashboard, 
   TrendingUp, 
@@ -25,7 +27,8 @@ import {
   Map,
   BarChart3,
   Users,
-  Calendar
+  Calendar,
+  Globe
 } from 'lucide-react';
 
 // Import improved components
@@ -64,12 +67,14 @@ const OfflineIndicator = ({ isOnline, onRefresh }: { isOnline: boolean; onRefres
 
 export const PersonalizedDashboard = () => {
   const { user, signOut } = useAuth();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [loading, setLoading] = useState(true);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [streamRecommendations, setStreamRecommendations] = useState<any[]>([]);
   const [loadingRecommendations, setLoadingRecommendations] = useState(false);
+  const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
   const [stats, setStats] = useState<DashboardStats>({
     totalRecommendations: 0,
     nearbyColleges: 0,
@@ -181,6 +186,11 @@ export const PersonalizedDashboard = () => {
     navigate('/');
   };
 
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    setCurrentLanguage(lng);
+  };
+
   const refreshData = async () => {
     setLoading(true);
     // Simulate refresh
@@ -233,6 +243,21 @@ export const PersonalizedDashboard = () => {
                 <div className="text-xs text-muted-foreground">{user.email}</div>
               </div>
             </div>
+            
+            {/* Language Switcher */}
+            <Select value={currentLanguage} onValueChange={changeLanguage}>
+              <SelectTrigger className="w-36 border-2 border-primary/20">
+                <Globe className="mr-2 h-4 w-4 text-primary" />
+                <SelectValue placeholder="Language" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="en">{t('languages.english')}</SelectItem>
+                <SelectItem value="hi">{t('languages.hindi')}</SelectItem>
+                <SelectItem value="ur">{t('languages.urdu')}</SelectItem>
+                <SelectItem value="ks">{t('languages.kashmiri')}</SelectItem>
+                <SelectItem value="dg">{t('languages.dogri')}</SelectItem>
+              </SelectContent>
+            </Select>
             
             <Button variant="outline" size="sm" className="hidden md:flex">
               <Settings className="h-4 w-4 mr-2" />

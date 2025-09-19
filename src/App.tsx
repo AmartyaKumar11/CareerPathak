@@ -7,6 +7,8 @@ import CareersPage from './pages/CareersPage';
 import Recommendations from './pages/Recommendations';
 import StreamRecommendations from './pages/StreamRecommendations';
 import NearbyCollegesMap from './pages/NearbyCollegesMap';
+import CareerInsightsSimple from './pages/CareerInsightsSimple';
+import CareerInsightsPortal from './pages/CareerInsightsPortal';
 import AIPsychometricTest from './pages/AIPsychometricTest';
 import NotFound from './pages/NotFound';
 
@@ -21,6 +23,8 @@ function App() {
         <Route path="/recommendations" element={<Recommendations />} />
         <Route path="/stream-recommendations" element={<StreamRecommendations />} />
         <Route path="/nearby-colleges-map" element={<NearbyCollegesMap />} />
+        <Route path="/career-insights" element={<CareerInsightsSimple />} />
+        <Route path="/career-insights-portal/:streamId" element={<CareerInsightsPortal />} />
         <Route path="/quiz" element={<AIPsychometricTest />} />
         <Route path="/ai-assessment" element={<AIPsychometricTest />} />
         <Route path="*" element={<NotFound />} />

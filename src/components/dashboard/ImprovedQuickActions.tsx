@@ -60,12 +60,12 @@ const ImprovedQuickActions = () => {
       id: 'careers',
       icon: BarChart3, 
       label: 'Career Insights', 
-      description: 'Explore job markets',
+      description: 'Get AI-powered analysis',
       color: 'bg-purple-500',
-      route: '/careers',
+      route: '/career-insights',
       priority: 'medium',
       estimatedTime: '20 min',
-      tooltip: 'Learn about salary trends and job opportunities'
+      tooltip: 'Get personalized career insights based on your stream recommendations'
     },
     { 
       id: 'network',

@@ -9,7 +9,7 @@ import {
   TrendingUp, 
   MapPin, 
   Bell, 
-  Target,
+  Award,
   ArrowUpRight,
   Info,
   AlertCircle,
@@ -100,20 +100,22 @@ const SmartStatsCards = ({ userProfile }: SmartStatsCardsProps) => {
         }
       },
       {
-        id: 'profile',
-        title: 'Profile Complete',
-        value: `${userProfile?.profileCompleteness || 65}%`,
-        subtitle: userProfile?.profileCompleteness === 100 ? 'All done!' : 'Almost there!',
-        icon: Target,
+        id: 'scholarships',
+        title: 'Scholarships',
+        value: 20,
+        subtitle: 'Available opportunities',
+        icon: Award,
         color: 'text-purple-600',
-        route: '/profile/edit',
-        priority: userProfile?.profileCompleteness && userProfile.profileCompleteness < 80 ? 'high' : 'low',
-        actionable: userProfile?.profileCompleteness !== 100,
-        tooltip: 'Complete your profile to get better recommendations',
-        alert: userProfile?.profileCompleteness && userProfile.profileCompleteness < 50 ? {
-          type: 'warning',
-          message: 'Complete for better matches'
-        } : undefined
+        route: '/scholarships',
+        priority: 'medium',
+        actionable: true,
+        trend: 'up',
+        trendValue: '+5 this month',
+        tooltip: 'Explore scholarships based on your profile and eligibility',
+        alert: {
+          type: 'info',
+          message: 'New scholarships added!'
+        }
       }
     ];
 
@@ -218,12 +220,6 @@ const SmartStatsCards = ({ userProfile }: SmartStatsCardsProps) => {
                       )}
 
                       {/* Progress bar for profile completion */}
-                      {card.id === 'profile' && typeof card.value === 'string' && card.value.includes('%') && (
-                        <Progress 
-                          value={parseInt(card.value)} 
-                          className="h-1"
-                        />
-                      )}
 
                       {/* Alert message */}
                       {card.alert && (

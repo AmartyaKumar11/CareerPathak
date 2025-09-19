@@ -198,64 +198,22 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Government Advantage Calculator */}
+      {/* Explore Scholarships Card */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">
-              Government College Advantage Calculator
-            </h2>
-            
+          <div className="max-w-2xl mx-auto">
             <Card>
-              <CardContent className="p-8">
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className="space-y-6">
-                    <div>
-                      <Label htmlFor="income" className="text-base font-medium mb-3 block">
-                        Family Annual Income: ₹{income[0].toLocaleString()}
-                      </Label>
-                      <Slider
-                        id="income"
-                        min={100000}
-                        max={2000000}
-                        step={50000}
-                        value={income}
-                        onValueChange={setIncome}
-                        className="w-full"
-                      />
-                    </div>
-                    
-                    <div>
-                      <Label htmlFor="duration" className="text-base font-medium mb-3 block">
-                        Course Duration: {studyDuration[0]} years
-                      </Label>
-                      <Slider
-                        id="duration"
-                        min={1}
-                        max={6}
-                        step={1}
-                        value={studyDuration}
-                        onValueChange={setStudyDuration}
-                        className="w-full"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center justify-center">
-                    <div className="text-center p-6 bg-primary/10 rounded-lg">
-                      <Calculator className="h-12 w-12 text-primary mx-auto mb-4" />
-                      <h3 className="text-2xl font-bold text-primary mb-2">
-                        ₹{calculateSavings()}
-                      </h3>
-                      <p className="text-muted-foreground">
-                        Total Savings with Government College
-                      </p>
-                      <Badge variant="secondary" className="mt-2">
-                        vs Private Colleges
-                      </Badge>
-                    </div>
-                  </div>
-                </div>
+              <CardContent className="p-8 flex flex-col items-center justify-center">
+                <Building className="h-12 w-12 text-primary mb-4" />
+                <h2 className="text-3xl font-bold mb-4 text-center">Explore Scholarships</h2>
+                <p className="text-muted-foreground mb-6 text-center">
+                  Discover scholarships tailored for you. Filter by gender, amount, and eligibility to find the best opportunities for your education journey.
+                </p>
+                <Button size="lg" className="text-lg px-8 py-4" asChild>
+                  <Link to="/scholarships">
+                    Explore Scholarships
+                  </Link>
+                </Button>
               </CardContent>
             </Card>
           </div>

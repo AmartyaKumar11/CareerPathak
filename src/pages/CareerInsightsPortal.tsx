@@ -6,6 +6,7 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -141,6 +142,10 @@ const CareerInsightsPortal: React.FC = () => {
   // User interaction states
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [userRating, setUserRating] = useState<'up' | 'down' | null>(null);
+
+  // College comparison states
+  const [selectedColleges, setSelectedColleges] = useState<CollegeData[]>([]);
+  const [isComparisonMode, setIsComparisonMode] = useState(false);
 
   // Redirect to auth if not authenticated
   useEffect(() => {
@@ -334,6 +339,43 @@ const CareerInsightsPortal: React.FC = () => {
       title: 'Link copied!',
       description: 'Career insight link copied to clipboard'
     });
+  };
+
+  // College comparison handlers
+  const toggleCollegeSelection = (college: CollegeData) => {
+    setSelectedColleges(prev => {
+      const isAlreadySelected = prev.some(c => c.id === college.id);
+      if (isAlreadySelected) {
+        return prev.filter(c => c.id !== college.id);
+      } else if (prev.length >= 3) {
+        toast({
+          title: 'Maximum colleges selected',
+          description: 'You can compare up to 3 colleges at once'
+        });
+        return prev;
+      } else {
+        return [...prev, college];
+      }
+    });
+  };
+
+  const handleCompareColleges = () => {
+    if (selectedColleges.length < 2) {
+      toast({
+        title: 'Select at least 2 colleges',
+        description: 'Choose at least 2 colleges to compare them'
+      });
+      return;
+    }
+    
+    navigate('/college-comparison', { 
+      state: { colleges: selectedColleges } 
+    });
+  };
+
+  const clearSelection = () => {
+    setSelectedColleges([]);
+    setIsComparisonMode(false);
   };
 
   if (!user) return null;
@@ -619,7 +661,14 @@ const CareerInsightsPortal: React.FC = () => {
               ) : displayedColleges.length > 0 ? (
                 <div className="grid lg:grid-cols-2 gap-6">
                   {displayedColleges.map((college) => (
-                  <Card key={college.id} className="hover:shadow-lg transition-shadow">
+                  <Card 
+                    key={college.id} 
+                    className={`hover:shadow-lg transition-all duration-300 ${
+                      selectedColleges.some(c => c.id === college.id) 
+                        ? 'bg-blue-50 border-blue-200 shadow-md ring-2 ring-blue-100' 
+                        : ''
+                    }`}
+                  >
                     <CardHeader>
                       <div className="flex justify-between items-start">
                         <div>
@@ -677,6 +726,22 @@ const CareerInsightsPortal: React.FC = () => {
                           </div>
                         </div>
 
+                        {/* Comparison checkbox */}
+                        <div className="flex items-center space-x-2 py-2">
+                          <Checkbox 
+                            id={`compare-${college.id}`}
+                            checked={selectedColleges.some(c => c.id === college.id)}
+                            onCheckedChange={() => toggleCollegeSelection(college)}
+                            disabled={selectedColleges.length >= 3 && !selectedColleges.some(c => c.id === college.id)}
+                          />
+                          <label 
+                            htmlFor={`compare-${college.id}`}
+                            className="text-sm cursor-pointer select-none"
+                          >
+                            Select for comparison
+                          </label>
+                        </div>
+
                         <div className="flex gap-2">
                           <Button size="sm" className="flex-1">
                             <ExternalLink className="h-4 w-4 mr-2" />
@@ -714,6 +779,40 @@ const CareerInsightsPortal: React.FC = () => {
               )}
             </div>
           </TabsContent>
+
+          {/* Floating comparison button */}
+          {selectedColleges.length > 0 && (
+            <div className="fixed bottom-6 right-6 z-50">
+              <Card className="p-4 shadow-lg border-2 border-primary/20 bg-background/95 backdrop-blur">
+                <div className="flex items-center gap-4">
+                  <div className="text-sm">
+                    <p className="font-semibold">
+                      {selectedColleges.length} college{selectedColleges.length !== 1 ? 's' : ''} selected
+                    </p>
+                    <p className="text-muted-foreground text-xs">
+                      {selectedColleges.map(c => c.name).join(', ')}
+                    </p>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={clearSelection}
+                    >
+                      Clear
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={handleCompareColleges}
+                      disabled={selectedColleges.length < 2}
+                    >
+                      Compare ({selectedColleges.length})
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          )}
 
           {/* Scholarships Tab */}
           <TabsContent value="scholarships">

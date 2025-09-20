@@ -11,6 +11,7 @@ import CareerInsightsSimple from './pages/CareerInsightsSimple';
 import CareerInsightsPortal from './pages/CareerInsightsPortal';
 import AIPsychometricTest from './pages/AIPsychometricTest';
 import Scholarships from './pages/Scholarships';
+import { CollegeComparison } from './pages/CollegeComparison';
 import { TranslationTest } from './pages/TranslationTest';
 import NotFound from './pages/NotFound';
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/nearby-colleges-map" element={<NearbyCollegesMap />} />
         <Route path="/career-insights" element={<CareerInsightsSimple />} />
         <Route path="/career-insights-portal/:streamId" element={<CareerInsightsPortal />} />
+        <Route path="/college-comparison" element={<CollegeComparison />} />
         <Route path="/scholarships" element={<Scholarships />} />
         <Route path="/quiz" element={<AIPsychometricTest />} />
         <Route path="/ai-assessment" element={<AIPsychometricTest />} />

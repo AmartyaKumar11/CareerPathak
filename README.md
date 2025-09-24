@@ -1,5 +1,4 @@
-# CareerPathak
-
+# CareerPathak (SIH 2025)
 **Your Career Guidance Platform for Jammu & Kashmir Students**
 
 CareerPathak is a comprehensive web application designed to help students in Jammu & Kashmir discover their ideal career paths through personalized guidance, college recommendations, and localized content.
